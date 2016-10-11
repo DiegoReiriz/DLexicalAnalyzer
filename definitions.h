@@ -1,0 +1,20 @@
+//
+// Created by diegoreiriz on 10/10/16.
+//
+
+#ifndef ANALIZADORLEXICO_DEFINITIONS_H
+#define ANALIZADORLEXICO_DEFINITIONS_H
+
+#define RESERVED_WORD 0
+#define IDENTIFIER 1
+#define END_OF_FILE 2
+#define END_OF_LINE 3
+#define WHITE_SPACE 4
+#define CHAR_LITERAL 5
+#define COMMENT 6
+#define TOKEN 7
+#define ESCAPE_CHARACTERS 8
+#define INTEGERS 9
+#define FLOATING_POING_NUmBER 10
+
+#endif //ANALIZADORLEXICO_DEFINITIONS_H
