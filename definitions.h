@@ -130,14 +130,14 @@
 //define RESERVED_WORD 0 -- TODO: it is really needed?
 
 #define IDENTIFIER 387
-#define END_OF_FILE 388
-#define END_OF_LINE 389
+#define END_OF_FILE $ //original value 388, changed by convention
+#define END_OF_LINE $ //original value 389, changed by convention
 #define WHITE_SPACE 390
 #define CHAR_LITERAL 391
 #define COMMENT 392
 #define TOKEN 393
 #define ESCAPE_CHARACTERS 394
 #define INTEGERS 395
-#define FLOATING_POING_NUmBER 396
+#define FLOATING_POINT_NUMBER 396
 
 #endif //ANALIZADORLEXICO_DEFINITIONS_H
