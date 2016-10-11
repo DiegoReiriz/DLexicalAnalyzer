@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
 #include "LexicalAnalyzer/GrapghRegEx.h"
+#include "LexicalAnalyzer/lexeme.h"
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
@@ -21,6 +22,7 @@ int main() {
     work(&test);
 
     iosystemDestroyBuffer(&test);
+
 
     return 0;
 }

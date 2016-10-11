@@ -7,6 +7,8 @@
 
 #define LEXEM_FRAGMENT_SIZE 10
 
+//IT WORKS
+
 typedef struct _lexeme{
     char valor[LEXEM_FRAGMENT_SIZE];
     struct _lexeme* siguiente;
