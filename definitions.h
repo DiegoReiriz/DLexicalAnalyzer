@@ -2,9 +2,6 @@
 // Created by diegoreiriz on 10/10/16.
 //
 
-#ifndef ANALIZADORLEXICO_DEFINITIONS_H
-#define ANALIZADORLEXICO_DEFINITIONS_H
-
 /*Symbols*/
 
 #define abstract 273
@@ -125,19 +122,75 @@
 #define size_t 385
 #define ptrdiff_t 386
 
-//check if all this is needed
+/*check if all this is needed*/
 
-//define RESERVED_WORD 0 -- TODO: it is really needed?
+/*define RESERVED_WORD 0 -- TODO: it is really needed?*/
 
-#define IDENTIFIER 387
 #define END_OF_FILE $ //original value 388, changed by convention
 #define END_OF_LINE $ //original value 389, changed by convention
 #define WHITE_SPACE 390
-#define CHAR_LITERAL 391
-#define COMMENT 392
-#define TOKEN 393
-#define ESCAPE_CHARACTERS 394
-#define INTEGERS 395
-#define FLOATING_POINT_NUMBER 396
 
-#endif //ANALIZADORLEXICO_DEFINITIONS_H
+/*TOKENS*/
+#define /
+#define /=
+#define .
+#define ..
+#define ...
+#define &
+#define &=
+#define &&
+#define |
+#define |=
+#define ||
+#define -
+#define -=
+#define --
+#define +
+#define +=
+#define ++
+#define <
+#define <=
+#define <<
+#define <<=
+#define <>
+#define <>=
+#define >
+#define >=
+#define >>=
+#define >>>=
+#define >>
+#define >>>
+#define !
+#define !=
+#define !<>
+#define !<>=
+#define !<
+#define !<=
+#define !>
+#define !>=
+#define (
+#define )
+#define [
+#define ]
+#define {
+#define }
+#define ?
+#define ,
+#define ;
+#define :
+#define $
+#define =
+#define ==
+#define *
+#define *=
+#define %
+#define %=
+#define ^
+#define ^=
+#define ^^
+#define ^^=
+#define ~
+#define ~=
+#define @
+#define =>
+#define #

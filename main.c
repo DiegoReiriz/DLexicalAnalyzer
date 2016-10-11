@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include "SistemaDeEntrada/iosystem.h"
+#include "InputSystem/iosystem.h"
+#include "LexicalAnalyzer/GrapghRegEx.h"
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
@@ -8,13 +9,16 @@ int main() {
     IOSystem test;
 
     iosystemInitializeBuffer(&test);
-    iosystemSetFile(&test,"/home/diegoreiriz/Documentos/haskell2entrega.hs");
+//    iosystemSetFile(&test,"/home/diegoreiriz/Descargas/regression.d");
+//
+//    char c=0;
+//    while( c != EOF ){
+//        c=iosystemNextToken(&test);
+//        printf("%c",c);
+//    }
 
-    char c=0;
-    while( c != EOF ){
-        c=iosystemNextToken(&test);
-        printf("%c",c);
-    }
+    iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
+    work(&test);
 
     iosystemDestroyBuffer(&test);
 

@@ -62,7 +62,7 @@ char iosystemNextToken(IOSystem *ioSystem){
         ioSystem->current = &ioSystem->buffers[ioSystem->currentBuffer][0];
 
         }else{
-            printf("FIN");
+            //printf("FIN");
             return EOF;
         }
 
