@@ -7,14 +7,14 @@
 
 #include "lexeme.h"
 
-#define HASH_TABLE_DEFAULT_SIZE 100
+#define HASH_TABLE_DEFAULT_SIZE 150
 
 typedef struct {
     Lexeme lexeme;
 }Register;
 
 Register* hashTable();
-int hash(Lexeme lexeme);
+int hash(Lexeme *lexeme);
 void hashTableDestroy(Register registe);
 
 #endif //ANALIZADORLEXICO_HASHTABLE_H

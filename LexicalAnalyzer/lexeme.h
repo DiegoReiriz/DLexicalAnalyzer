@@ -5,10 +5,14 @@
 #ifndef ANALIZADORLEXICO_LEXEM_H
 #define ANALIZADORLEXICO_LEXEM_H
 
-#define LEXEM_FRAGMENT_SIZE 5
+#define LEXEM_FRAGMENT_SIZE 10
 
 typedef struct _lexeme{
-    char[LEXEM_FRAGMENT_SIZE];
+    char valor[LEXEM_FRAGMENT_SIZE];
+    struct _lexeme* siguiente;
 }Lexeme;
+
+Lexeme* lexemeCreate(char* string);
+void lexemeDestroy(Lexeme *lexeme);
 
 #endif //ANALIZADORLEXICO_LEXEM_H
