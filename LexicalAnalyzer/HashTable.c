@@ -13,6 +13,16 @@ Register* hashTable(){
     return hashTable;
 }
 
+void hashTableDestroy(Register *registe){
+
+    for (int i = 0; i < HASH_TABLE_DEFAULT_SIZE; i++) {
+        //TODO:liberar cada un dos registros da tabla
+    }
+
+    free(registe);
+
+}
+
 //    while (*cp)
 //        hash = 33 * hash ^ (unsigned char) *cp++;
 int hash(Lexeme lexeme){
@@ -31,10 +41,6 @@ int hash(Lexeme lexeme){
     return hash;
 }
 
-void hashTableDestroy(Register *registe){
-
-}
-
 void hashTableInsert(Lexeme lexeme);
-Register hashTableGet(Lexeme lexeme);
+Register* hashTableGet(Lexeme lexeme);
 void hashTableDelete(Lexeme lexeme);
