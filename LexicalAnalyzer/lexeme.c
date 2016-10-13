@@ -6,25 +6,29 @@
 #include "lexeme.h"
 
 Lexeme* lexemeCreate(char* string){
-    Lexeme* lexeme = (Lexeme*) malloc(sizeof(Lexeme));
+    Lexeme* lexeme = (Lexeme*) calloc(1,sizeof(Lexeme));
+    lexeme->hasMore=false;
     Lexeme* aux = lexeme;
 
     int i = 0;
     while(string[i]){
-        aux->valor[i] = string[i];
-
-        if(i == LEXEM_FRAGMENT_SIZE-1){
-            aux->siguiente = (Lexeme*) malloc(sizeof(Lexeme));
+        if(i == LEXEM_FRAGMENT_SIZE){
+            aux->hasMore=true;
+            aux->siguiente = (Lexeme*) calloc(1,sizeof(Lexeme));
             aux = aux->siguiente;
         }
 
-        i = (i+1) % LEXEM_FRAGMENT_SIZE;
+        aux->valor[i%LEXEM_FRAGMENT_SIZE] = string[i];
+
+        i++;
     }
+
+    return lexeme;
 }
 
 void lexemeDestroy(Lexeme *lexeme){
 
-    if(lexeme->siguiente)
+    if(lexeme->hasMore)
         lexemeDestroy(lexeme->siguiente);
 
     free(lexeme);

@@ -2,6 +2,7 @@
 #include "InputSystem/iosystem.h"
 #include "LexicalAnalyzer/GrapghRegEx.h"
 #include "LexicalAnalyzer/lexeme.h"
+#include "LexicalAnalyzer/HashTable.h"
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
@@ -19,10 +20,15 @@ int main() {
 //    }
 
     iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
-    work(&test);
+    //work(&test);
 
     iosystemDestroyBuffer(&test);
 
+    Lexeme *lexeme = lexemeCreate("churrascos");
+
+    printf("hash para abstract %d\n",hash(*lexeme));
+
+    lexemeDestroy(lexeme);
 
     return 0;
 }

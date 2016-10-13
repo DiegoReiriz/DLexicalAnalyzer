@@ -14,7 +14,9 @@ typedef struct {
 }Register;
 
 Register* hashTable();
-int hash(Lexeme *lexeme);
-void hashTableDestroy(Register registe);
-
+int hash(Lexeme lexeme);
+void hashTableDestroy(Register *registe);
+void hashTableInsert(Lexeme lexeme);
+Register hashTableGet(Lexeme lexeme);
+void hashTableDelete(Lexeme lexeme);
 #endif //ANALIZADORLEXICO_HASHTABLE_H
