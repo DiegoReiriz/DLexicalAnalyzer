@@ -51,16 +51,100 @@ int hash(Lexeme lexeme){
     return hash;
 }
 
-void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme){
-    HashTableTree* bucket = &hashTableTree[hash(lexeme)];
+Register* createRegister(){
+    return malloc(sizeof(Register));
+}
 
+HashTableTree* createNode(){
+    HashTableTree *node = malloc(sizeof(HashTableTree));
+
+    node->hashRight = node->hasLeft = node->hasRegister = false;
+
+    return node;
+}
+
+void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
     if(bucket->hasRegister){
+
+        switch (lexemeCompare(lexeme,*bucket->registe->lexeme)){
+            case -1:
+
+                if(!bucket->hasLeft){
+                    bucket->left = createNode();
+                    bucket->hasLeft = bucket->left->hasRegister= true;
+                    bucket->left->registe->lexeme = lexemeDuplicate(lexeme);
+                }else
+                    insertIntoBucket(bucket->left,lexeme);
+
+                break;
+            case 0:
+
+                bucket->registe->count++;
+
+                break;
+            case 1:
+
+                if(!bucket->hashRight){
+                    bucket->right = createNode();
+                    bucket->hashRight = bucket->right->hasRegister= true;
+                    bucket->right->registe->lexeme = lexemeDuplicate(lexeme);
+                }else
+                    insertIntoBucket(bucket->right,lexeme);
+
+                break;
+        }
 
     }else{
         //crear registro
+        bucket->hasRegister = true;
+        bucket->registe = createRegister();
+
         //insertar lexema no registro
+        bucket->registe->lexeme = lexemeDuplicate(lexeme);
+
     }
 }
 
-HashTableTree* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
+void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme){
+    HashTableTree* bucket = &hashTableTree[hash(lexeme)];
+
+    insertIntoBucket(bucket,lexeme);
+}
+
+Register* getLexeme(HashTableTree *hashTableTree,Lexeme lexeme){
+    if (hashTableTree->hasRegister){
+
+        switch (lexemeCompare(lexeme,*hashTableTree->registe->lexeme)){
+            case -1:
+
+                if(hashTableTree->hasLeft)
+                    return getLexeme(hashTableTree->left,lexeme);
+                else
+                    return NULL;
+
+                break;
+            case 0:
+                return hashTableTree->registe;
+                break;
+
+            case 1:
+
+                if(hashTableTree->hashRight)
+                    return getLexeme(hashTableTree->right,lexeme);
+                else
+                    return NULL;
+
+                break;
+        }
+
+    }else
+        return NULL;
+}
+
+Register* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme){
+    HashTableTree* bucket = &hashTableTree[hash(lexeme)];
+
+    return getLexeme(bucket,lexeme);
+
+}
 void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);

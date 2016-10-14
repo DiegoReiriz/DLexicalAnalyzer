@@ -28,6 +28,6 @@ HashTableTree* hashTable();
 int hash(Lexeme lexeme);
 void hashTableDestroy(HashTableTree *hashTableTree);
 void hashTableInsert(HashTableTree *hashTableTreeLexeme,Lexeme lexeme);
-HashTableTree* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
+Register* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
 void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);
 #endif //ANALIZADORLEXICO_HASHTABLE_H

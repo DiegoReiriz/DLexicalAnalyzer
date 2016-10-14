@@ -3,6 +3,8 @@
 //
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <memory.h>
 #include "lexeme.h"
 
 Lexeme* lexemeCreate(char* string){
@@ -57,4 +59,32 @@ char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
         }
     }
 
+}
+
+Lexeme* lexemeDuplicate(Lexeme lexeme){
+    Lexeme* copy = malloc(sizeof(Lexeme));
+    memcpy(copy->valor,lexeme.valor,LEXEM_FRAGMENT_SIZE);
+    copy->hasMore = lexeme.hasMore;
+
+    if (copy->hasMore)
+        copy->siguiente = lexemeDuplicate(*lexeme.siguiente);
+
+    return copy;
+}
+
+void lexemePrint(Lexeme lexeme){
+
+    Lexeme *lex = &lexeme;
+
+    for(int i = 0; true; i++){
+
+        printf("%c",lexeme.valor[i]);
+
+        if(i == LEXEM_FRAGMENT_SIZE-1) {
+            if (lex->hasMore)
+                lex = lex->siguiente;
+            else
+                return;
+        }
+    }
 }

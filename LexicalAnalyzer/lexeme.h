@@ -18,7 +18,9 @@ typedef struct _lexeme{
 }Lexeme;
 
 Lexeme* lexemeCreate(char* string);
+Lexeme* lexemeDuplicate(Lexeme lexeme);
 void lexemeDestroy(Lexeme *lexeme);
 char lexemeCompare(Lexeme lexeme,Lexeme lexeme2);
+void lexemePrint(Lexeme lexeme);
 
 #endif //ANALIZADORLEXICO_LEXEM_H

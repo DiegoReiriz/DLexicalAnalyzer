@@ -31,7 +31,18 @@ int main() {
     Lexeme *lexeme2 = lexemeCreate(b);
 
     printf("hash para abstract %d\n",hash(*lexeme));
-    printf("Resultado de comparar %s y %s : %d",a,b,lexemeCompare(*lexeme,*lexeme2));
+    HashTableTree *table =hashTable();
+    hashTableInsert(table,*lexeme);
+    hashTableInsert(table,*lexeme);
+
+
+
+    Register* registe = hashTableGet(table,*lexeme);
+
+    printf("Registro recuperado: ");
+    lexemePrint(*registe->lexeme);
+    printf(", Con valor de contador: %d",registe->count);
+    printf("\n");
 
     lexemeDestroy(lexeme);
     lexemeDestroy(lexeme2);
