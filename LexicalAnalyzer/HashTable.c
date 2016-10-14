@@ -63,6 +63,32 @@ HashTableTree* createNode(){
     return node;
 }
 
+bool destroyNode(HashTableTree **bucket){
+
+    if((*bucket)->hasRegister){
+
+        if((*bucket)->registe->count)
+            (*bucket)->registe->count--;
+        else {
+
+            lexemeDestroy((*bucket)->registe->lexeme);
+            free((*bucket)->registe);
+
+            if ((*bucket)->hasLeft){
+                *bucket = (*bucket)->left;
+                return false;
+            }else if ((*bucket)->hashRight){
+                *bucket = (*bucket)->right;
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }else{
+        free(bucket);
+    }
+}
+
 void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
     if(bucket->hasRegister){
 
@@ -147,4 +173,43 @@ Register* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme){
     return getLexeme(bucket,lexeme);
 
 }
-void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);
+
+bool destroyLexeme(HashTableTree *hashTableTree,Lexeme lexeme){
+    if (hashTableTree->hasRegister){
+
+        switch (lexemeCompare(lexeme,*hashTableTree->registe->lexeme)){
+            case -1:
+
+                if(hashTableTree->hasLeft)
+                    if(destroyLexeme(hashTableTree->left,lexeme))
+                        hashTableTree->hasLeft=false;
+                else
+                    return false;
+
+                break;
+            case 0:
+
+                return destroyNode(&hashTableTree);
+
+                break;
+
+            case 1:
+
+                if(hashTableTree->hashRight)
+                    if(destroyLexeme(hashTableTree->right,lexeme))
+                        hashTableTree->hashRight=false;
+                else
+                    return false;
+
+                break;
+        }
+
+    }else
+        return false;
+}
+
+void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme){
+    HashTableTree* bucket = &hashTableTree[hash(lexeme)];
+
+    destroyLexeme(bucket,lexeme);
+}

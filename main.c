@@ -41,8 +41,17 @@ int main() {
 
     printf("Registro recuperado: ");
     lexemePrint(*registe->lexeme);
+    printf(", Con valor de contador: %d\n",registe->count);
+
+    hashTableDelete(table,*lexeme);
+
+    printf("Registro recuperado: ");
+    lexemePrint(*registe->lexeme);
     printf(", Con valor de contador: %d",registe->count);
+
     printf("\n");
+
+    hashTableDelete(table,*lexeme);
 
     lexemeDestroy(lexeme);
     lexemeDestroy(lexeme2);
