@@ -7,19 +7,28 @@
 /* D. J. Bernstein hash function */
 
 
-Register* hashTable(){
-    Register *hashTable = malloc(sizeof(Register) * HASH_TABLE_DEFAULT_SIZE);
+HashTableTree* hashTable(){
+    HashTableTree *hashTable = malloc(sizeof(HashTableTree) * HASH_TABLE_DEFAULT_SIZE);
+
+    for (int i = 0; i < HASH_TABLE_DEFAULT_SIZE; ++i) {
+        hashTable[i].hashRight = hashTable[i].hasLeft = hashTable[i].hasRegister = false;
+    }
 
     return hashTable;
 }
 
-void hashTableDestroy(Register *registe){
+void hashTableDestroy(HashTableTree *hashTableTree){
 
     for (int i = 0; i < HASH_TABLE_DEFAULT_SIZE; i++) {
         //TODO:liberar cada un dos registros da tabla
+
+        //si existe o registro significa que a cubeta ten contenido para liberar
+        if(hashTableTree[i].hasRegister){
+            //lexemeDestroy(hashTableTree[i].registe);
+        }
     }
 
-    free(registe);
+    free(hashTableTree);
 
 }
 
@@ -34,13 +43,24 @@ int hash(Lexeme lexeme){
         hash = (33 * hash ^ lexeme.valor[current])% HASH_TABLE_DEFAULT_SIZE;
 
         current++;
-        if(current == lexeme.hasMore)
-            lexeme = *lexeme.siguiente;
+        if(current == lexeme.hasMore){
+            //lexeme = *lexeme.siguiente;
+        }
     }
 
     return hash;
 }
 
-void hashTableInsert(Lexeme lexeme);
-Register* hashTableGet(Lexeme lexeme);
-void hashTableDelete(Lexeme lexeme);
+void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme){
+    HashTableTree* bucket = &hashTableTree[hash(lexeme)];
+
+    if(bucket->hasRegister){
+
+    }else{
+        //crear registro
+        //insertar lexema no registro
+    }
+}
+
+HashTableTree* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
+void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);

@@ -33,3 +33,28 @@ void lexemeDestroy(Lexeme *lexeme){
 
     free(lexeme);
 }
+
+char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
+    Lexeme* lex = &lexeme;
+    Lexeme* lex2 = &lexeme2;
+
+    for(int i = 0;true;i++){
+        if (lex->valor[i] == lex2->valor[i]){
+            if(i == LEXEM_FRAGMENT_SIZE - 1 ){
+                   if (lex->hasMore && lex2->hasMore){
+                       lex = lex->siguiente;
+                       lex2 = lex2->siguiente;
+                       i -= LEXEM_FRAGMENT_SIZE;
+                   }else if (lex->hasMore)
+                       return -1;
+                   else if (lex2->hasMore)
+                       return 1;
+                   else
+                       return 0;
+            }
+        }else{
+            return (char) (lex->valor[i] < lex2->valor[i] ? -1 : 1);
+        }
+    }
+
+}

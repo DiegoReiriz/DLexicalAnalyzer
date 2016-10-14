@@ -24,11 +24,17 @@ int main() {
 
     iosystemDestroyBuffer(&test);
 
-    Lexeme *lexeme = lexemeCreate("churrascos");
+    char *a = "churrascos";
+    char *b = "churrascos";
+
+    Lexeme *lexeme = lexemeCreate(a);
+    Lexeme *lexeme2 = lexemeCreate(b);
 
     printf("hash para abstract %d\n",hash(*lexeme));
+    printf("Resultado de comparar %s y %s : %d",a,b,lexemeCompare(*lexeme,*lexeme2));
 
     lexemeDestroy(lexeme);
+    lexemeDestroy(lexeme2);
 
     return 0;
 }

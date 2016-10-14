@@ -9,20 +9,25 @@
 
 #define HASH_TABLE_DEFAULT_SIZE 150
 
-typedef struct {
-    Lexeme lexeme;
-}Register;
+typedef struct _Registe{
+    Lexeme* lexeme;
+    int count;
+} Register;
 
-typedef struct {
+
+typedef struct _HashTableTree{
+    bool hasRegister;
     Register *registe;
-    Register *left;
-    Register *right;
-}HashTableTreeNode;
+    bool hasLeft;
+    struct _HashTableTree *left;
+    bool hashRight;
+    struct _HashTableTree *right;
+}HashTableTree;
 
-Register* hashTable();
+HashTableTree* hashTable();
 int hash(Lexeme lexeme);
-void hashTableDestroy(Register *registe);
-void hashTableInsert(Lexeme lexeme);
-Register* hashTableGet(Lexeme lexeme);
-void hashTableDelete(Lexeme lexeme);
+void hashTableDestroy(HashTableTree *hashTableTree);
+void hashTableInsert(HashTableTree *hashTableTreeLexeme,Lexeme lexeme);
+HashTableTree* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
+void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);
 #endif //ANALIZADORLEXICO_HASHTABLE_H
