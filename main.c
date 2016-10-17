@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
-#include "LexicalAnalyzer/GrapghRegEx.h"
 #include "LexicalAnalyzer/lexeme.h"
 #include "LexicalAnalyzer/HashTable.h"
 
@@ -19,21 +18,24 @@ int main() {
 //        printf("%c",c);
 //    }
 
-    iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
-    //work(&test);
+    //iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
+    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
+
 
     iosystemDestroyBuffer(&test);
 
     char *a = "churrascos";
-    char *b = "churrascos";
+    char *b = "charmander";
 
     Lexeme *lexeme = lexemeCreate(a);
     Lexeme *lexeme2 = lexemeCreate(b);
 
-    printf("hash para abstract %d\n",hash(*lexeme));
+    printf("hash para %s %d\n",a,hash(*lexeme));
+    printf("hash para %s %d\n",b,hash(*lexeme2));
     HashTableTree *table =hashTable();
     hashTableInsert(table,*lexeme);
     hashTableInsert(table,*lexeme);
+    hashTableInsert(table,*lexeme2);
 
 
 
@@ -51,10 +53,9 @@ int main() {
 
     printf("\n");
 
-    hashTableDelete(table,*lexeme);
+//    hashTableDelete(table,*lexeme);
 
-    lexemeDestroy(lexeme);
-    lexemeDestroy(lexeme2);
+    hashTableDestroy(table);
 
     return 0;
 }
