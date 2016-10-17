@@ -6,10 +6,11 @@
 #include "HashTable.h"
 /* D. J. Bernstein hash function */
 
-Register* createRegister(Lexeme lexeme){
+Register* createRegister(Lexeme lexeme,enum LexicalComponents lexicalComponents){
     Register* registe = malloc(sizeof(Register));
 
     registe->lexeme = lexemeDuplicate(lexeme);
+    registe->lexicalComponents = lexicalComponents;
 
     return registe;
 }
@@ -104,7 +105,7 @@ int hash(Lexeme lexeme){
 }
 
 
-void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
+void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme,enum LexicalComponents lexicalComponent){
     if(bucket->hasRegister){
 
         switch (lexemeCompare(lexeme,*bucket->registe->lexeme)){
@@ -113,9 +114,9 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
                 if(!bucket->hasLeft){
                     bucket->left = createNode();
                     bucket->hasLeft = bucket->left->hasRegister= true;
-                    bucket->left->registe=createRegister(lexeme);
+                    bucket->left->registe=createRegister(lexeme,lexicalComponent);
                 }else
-                    insertIntoBucket(bucket->left,lexeme);
+                    insertIntoBucket(bucket->left,lexeme,lexicalComponent);
 
                 break;
             case 0:
@@ -128,9 +129,9 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
                 if(!bucket->hashRight){
                     bucket->right = createNode();
                     bucket->hashRight = bucket->right->hasRegister= true;
-                    bucket->right->registe=createRegister(lexeme);
+                    bucket->right->registe=createRegister(lexeme,lexicalComponent);
                 }else
-                    insertIntoBucket(bucket->right,lexeme);
+                    insertIntoBucket(bucket->right,lexeme,lexicalComponent);
 
                 break;
         }
@@ -138,15 +139,15 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
     }else{
         //crear registro co lexema
         bucket->hasRegister = true;
-        bucket->registe = createRegister(lexeme);
+        bucket->registe = createRegister(lexeme,lexicalComponent);
 
     }
 }
 
-void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme){
+void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme,enum LexicalComponents lexicalComponent){
     HashTableTree* bucket = &hashTableTree[hash(lexeme)];
 
-    insertIntoBucket(bucket,lexeme);
+    insertIntoBucket(bucket,lexeme,lexicalComponent);
 }
 
 Register* getLexeme(HashTableTree *hashTableTree,Lexeme lexeme){
@@ -242,8 +243,18 @@ void printTree(HashTableTree* hashTableTree){
     if(hashTableTree->hashRight)
         printTree(hashTableTree->right);
 
-    if(hashTableTree->hasRegister)
-        printf("%s\n",hashTableTree->registe->lexeme->valor);
+    if(hashTableTree->hasRegister){
+        printf("%s",hashTableTree->registe->lexeme->valor);
+        switch (hashTableTree->registe->lexicalComponents){
+            case RESERVED_WORD:
+                printf(" - RESERVED WORD");
+                break;
+            case IDENTIFIER:
+                printf(" - IDENTIFIER");
+                break;
+        }
+        printf("\n");
+    }
 
 }
 

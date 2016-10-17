@@ -31,15 +31,18 @@ void loadReservedWord(HashTableTree *hashTableTree){
                 printf("%c", c);
 
                 if (c == '\r' || c == '\n'){
-                    hashTableInsert(hashTableTree,*lexemeCreate(buffer));
+                    hashTableInsert(hashTableTree,*lexemeCreate(buffer),RESERVED_WORD);
                     state = 1;
                     for(int j =0;j<50;j++)
                         buffer[j]=0;
-                }else if(buffer[i]=='/' && i == 0){
+
+                }else if(c=='/'){
                     state=2;
                     buffer[i] = c;
+
                 }else{
                     buffer[i] = c;
+
                 }
 
                 i++;
@@ -63,8 +66,8 @@ void loadReservedWord(HashTableTree *hashTableTree){
                 if(buffer[i]=='*')
                     state=3;
                 else {
+                    i++;
                     state = 0;
-                    hashTableInsert(hashTableTree,*lexemeCreate(buffer));
                 }
 
                 break;

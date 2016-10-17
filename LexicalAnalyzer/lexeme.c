@@ -61,7 +61,7 @@ Lexeme* lexemeDuplicate(Lexeme lexeme){
 
 void lexemePrint(Lexeme lexeme){
 
-    for(int i = 0; i<lexeme.size; i++)
-        printf("%c",lexeme.valor[i]);
+    printf("%s ",lexeme.valor);
+
 
 }
