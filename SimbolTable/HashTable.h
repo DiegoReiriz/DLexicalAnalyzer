@@ -5,6 +5,7 @@
 #ifndef ANALIZADORLEXICO_HASHTABLE_H
 #define ANALIZADORLEXICO_HASHTABLE_H
 
+#include <stdio.h>
 #include <stdbool.h>
 #include "../LexicalAnalyzer/lexeme.h"
 
@@ -31,4 +32,5 @@ void hashTableDestroy(HashTableTree *hashTableTree);
 void hashTableInsert(HashTableTree *hashTableTreeLexeme,Lexeme lexeme);
 Register* hashTableGet(HashTableTree *hashTableTree,Lexeme lexeme);
 void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme);
+void hashTablePrint(HashTableTree* hashTableTree);
 #endif //ANALIZADORLEXICO_HASHTABLE_H

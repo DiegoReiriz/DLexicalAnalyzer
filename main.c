@@ -57,6 +57,7 @@ int main() {
 
 //    hashTableDelete(table,*lexeme);
 
+    hashTablePrint(table);
     hashTableDestroy(table);
 
     return 0;

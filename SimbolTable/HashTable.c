@@ -98,9 +98,6 @@ int hash(Lexeme lexeme){
         hash = (33 * hash ^ lexeme.valor[current])% HASH_TABLE_DEFAULT_SIZE;
 
         current++;
-        if(current == lexeme.hasMore){
-            //lexeme = *lexeme.siguiente;
-        }
     }
 
     return hash;
@@ -116,7 +113,7 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
                 if(!bucket->hasLeft){
                     bucket->left = createNode();
                     bucket->hasLeft = bucket->left->hasRegister= true;
-                    bucket->left->registe->lexeme = lexemeDuplicate(lexeme);
+                    bucket->left->registe=createRegister(lexeme);
                 }else
                     insertIntoBucket(bucket->left,lexeme);
 
@@ -131,7 +128,7 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme){
                 if(!bucket->hashRight){
                     bucket->right = createNode();
                     bucket->hashRight = bucket->right->hasRegister= true;
-                    bucket->right->registe->lexeme = lexemeDuplicate(lexeme);
+                    bucket->right->registe=createRegister(lexeme);
                 }else
                     insertIntoBucket(bucket->right,lexeme);
 
@@ -235,4 +232,30 @@ void hashTableDelete(HashTableTree *hashTableTree,Lexeme lexeme){
     HashTableTree* bucket = &hashTableTree[hash(lexeme)];
 
     deleteLexeme(bucket, lexeme);
+}
+
+void printTree(HashTableTree* hashTableTree){
+
+    if(hashTableTree->hasLeft)
+        printTree(hashTableTree->left);
+
+    if(hashTableTree->hashRight)
+        printTree(hashTableTree->right);
+
+    if(hashTableTree->hasRegister)
+        printf("%s\n",hashTableTree->registe->lexeme->valor);
+
+}
+
+void hashTablePrint(HashTableTree* hashTableTree){
+
+
+    printf("TABLA HASH\n");
+    printf("==========\n");
+    for (int i = 0; i < HASH_TABLE_DEFAULT_SIZE; ++i) {
+        printf("CUBETA %d\n",i);
+        printf("==========\n");
+        printTree(&hashTableTree[i]);
+    }
+
 }

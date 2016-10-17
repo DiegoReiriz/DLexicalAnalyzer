@@ -9,7 +9,7 @@
 
 typedef struct _lexeme{
     char *valor;
-    size_t size;
+    short size;
 }Lexeme;
 
 Lexeme* lexemeCreate(char* string);

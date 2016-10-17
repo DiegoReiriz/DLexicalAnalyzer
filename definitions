@@ -1,8 +1,3 @@
-//
-// Created by diegoreiriz on/10/16.
-//
-/*Symbols*/
-
 abstract
 alias
 align
@@ -112,13 +107,13 @@ __gshared
 __traits
 __vector
 __parameters
-string /*(alias to immutable(char)[])*/
-wstring /*(alias to immutable(wchar)[])*/
-dstring /*(alias to immutable(dchar)[])*/
+string
+wstring
+dstring
 size_t
 ptrdiff_t
 
-/*TOKENS DELIMITADORES*/
+/*DELIM*/
 END_OF_FILE
 END_OF_LINE
 WHITE_SPACE

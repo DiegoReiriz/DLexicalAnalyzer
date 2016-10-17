@@ -13,8 +13,9 @@ Lexeme* lexemeCreate(char* string){
     //TODO: tal vez a estructura actual lexema teña que estar contida noutra estructura que conteña o tamaño total do lexema
     size_t size = strlen(string);
 
-    Lexeme* lexeme = (Lexeme*) malloc(sizeof(char)*size);
+    Lexeme* lexeme = (Lexeme*) malloc(sizeof(Lexeme));
     lexeme->size=size;
+    lexeme->valor = malloc(sizeof(char)*size);
 
     for(int i = 0;i<size;i++)
         lexeme->valor[i] = string[i];
@@ -51,7 +52,8 @@ char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
 
 Lexeme* lexemeDuplicate(Lexeme lexeme){
     Lexeme* copy = malloc(sizeof(Lexeme));
-
+    copy->valor = malloc(sizeof(char) * lexeme.size);
+    copy->size = lexeme.size;
     memcpy(copy->valor,lexeme.valor,lexeme.size);
 
     return copy;
