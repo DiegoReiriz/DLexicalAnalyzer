@@ -5,7 +5,8 @@
 #ifndef ANALIZADORLEXICO_HASHTABLE_H
 #define ANALIZADORLEXICO_HASHTABLE_H
 
-#include "lexeme.h"
+#include <stdbool.h>
+#include "../LexicalAnalyzer/lexeme.h"
 
 #define HASH_TABLE_DEFAULT_SIZE 150
 

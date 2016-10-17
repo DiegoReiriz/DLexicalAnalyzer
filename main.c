@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
 #include "LexicalAnalyzer/lexeme.h"
-#include "LexicalAnalyzer/HashTable.h"
+#include "SimbolTable/HashTable.h"
+#include "SimbolTable/Loader.h"
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
@@ -33,25 +34,26 @@ int main() {
     printf("hash para %s %d\n",a,hash(*lexeme));
     printf("hash para %s %d\n",b,hash(*lexeme2));
     HashTableTree *table =hashTable();
-    hashTableInsert(table,*lexeme);
-    hashTableInsert(table,*lexeme);
-    hashTableInsert(table,*lexeme2);
-
-
-
-    Register* registe = hashTableGet(table,*lexeme);
-
-    printf("Registro recuperado: ");
-    lexemePrint(*registe->lexeme);
-    printf(", Con valor de contador: %d\n",registe->count);
+    loadReservedWord(table);
+//    hashTableInsert(table,*lexeme);
+//    hashTableInsert(table,*lexeme);
+//    hashTableInsert(table,*lexeme2);
+//
+//
+//
+//    Register* registe = hashTableGet(table,*lexeme);
+//
+//    printf("Registro recuperado: ");
+//    lexemePrint(*registe->lexeme);
+//    printf(", Con valor de contador: %d\n",registe->count);
 
     hashTableDelete(table,*lexeme);
 
-    printf("Registro recuperado: ");
-    lexemePrint(*registe->lexeme);
-    printf(", Con valor de contador: %d",registe->count);
-
-    printf("\n");
+//    printf("Registro recuperado: ");
+//    lexemePrint(*registe->lexeme);
+//    printf(", Con valor de contador: %d",registe->count);
+//
+//    printf("\n");
 
 //    hashTableDelete(table,*lexeme);
 
