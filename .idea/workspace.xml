@@ -13,10 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="14f7db03-6a08-47ab-9982-359e78272b29" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LexicalAnalyzer/lexeme.c" afterPath="$PROJECT_DIR$/LexicalAnalyzer/lexeme.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SimbolTable/HashTable.c" afterPath="$PROJECT_DIR$/SimbolTable/HashTable.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SimbolTable/HashTable.h" afterPath="$PROJECT_DIR$/SimbolTable/HashTable.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InputSystem/iosystem.c" afterPath="$PROJECT_DIR$/InputSystem/iosystem.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InputSystem/iosystem.h" afterPath="$PROJECT_DIR$/InputSystem/iosystem.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SimbolTable/Loader.c" afterPath="$PROJECT_DIR$/SimbolTable/Loader.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SimbolTable/Loader.h" afterPath="$PROJECT_DIR$/SimbolTable/Loader.h" />
     </list>
     <ignored path="analizadorLexico.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,132 +36,28 @@
     <favorites_list name="analizadorLexico" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="HashTable.c" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/SimbolTable/HashTable.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="398">
-                  <caret line="252" column="37" selection-start-line="252" selection-start-column="37" selection-end-line="252" selection-end-column="37" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="iosystem.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Loader.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SimbolTable/Loader.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="486">
-                  <caret line="66" column="85" selection-start-line="66" selection-start-column="85" selection-end-line="66" selection-end-column="85" />
-                  <folding>
-                    <element signature="e#44#63#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Loader.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SimbolTable/Loader.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="126">
-                  <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="lexeme.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/LexicalAnalyzer/lexeme.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1026">
-                  <caret line="61" column="16" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/main.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="461">
-                  <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-                  <folding>
-                    <element signature="e#0#19#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="regression.d" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/regression.d">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="810">
-                  <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="iosystem.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="252">
-                  <caret line="15" column="51" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="51" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="lexeme.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/LexicalAnalyzer/lexeme.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="162">
-                  <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="definitions" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/definitions">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="36">
-                  <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="HashTable.h" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/SimbolTable/HashTable.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="234">
-                  <caret line="13" column="22" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#121#139#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="iosystem.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iosystem.c" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="84" column="26" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -172,7 +68,6 @@
         <option value="$PROJECT_DIR$/SistemaDeEntrada/iosystem.h" />
         <option value="$PROJECT_DIR$/SistemaDeEntrada/iosystem.c" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/InputSystem/iosystem.c" />
         <option value="$PROJECT_DIR$/LexicalAnalyzer/LexicalAnalyzer.c" />
         <option value="$PROJECT_DIR$/LexicalAnalyzer/GrapghRegEx.h" />
         <option value="$PROJECT_DIR$/LexicalAnalyzer/GrapghRegEx.c" />
@@ -188,9 +83,11 @@
         <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/definitions" />
         <option value="$PROJECT_DIR$/SimbolTable/HashTable.h" />
-        <option value="$PROJECT_DIR$/SimbolTable/Loader.c" />
         <option value="$PROJECT_DIR$/LexicalAnalyzer/lexeme.c" />
         <option value="$PROJECT_DIR$/SimbolTable/HashTable.c" />
+        <option value="$PROJECT_DIR$/SimbolTable/Loader.c" />
+        <option value="$PROJECT_DIR$/InputSystem/iosystem.h" />
+        <option value="$PROJECT_DIR$/InputSystem/iosystem.c" />
       </list>
     </option>
   </component>
@@ -511,9 +408,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3545946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3545946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36432433" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -562,18 +459,12 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <condition expression="i == 62" language="ObjectiveC" />
-          <url>file://$PROJECT_DIR$/SimbolTable/HashTable.c</url>
-          <line>83</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.c</url>
-          <line>60</line>
-          <option name="timeStamp" value="32" />
+          <url>file://$PROJECT_DIR$/SimbolTable/Loader.c</url>
+          <line>42</line>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="36" />
+      <option name="time" value="37" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -827,52 +718,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LexicalAnalyzer/lexeme.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/regression.d">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="15" column="51" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/definitions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -887,13 +736,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SimbolTable/Loader.c">
+    <entry file="file://$PROJECT_DIR$/definitions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="66" column="85" selection-start-line="66" selection-start-column="85" selection-end-line="66" selection-end-column="85" />
-          <folding>
-            <element signature="e#44#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="179">
+          <caret line="88" column="5" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LexicalAnalyzer/lexeme.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -915,8 +770,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimbolTable/HashTable.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="252" column="37" selection-start-line="252" selection-start-column="37" selection-end-line="252" selection-end-column="37" />
+        <state relative-caret-position="176">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimbolTable/Loader.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1058">
+          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+          <folding>
+            <element signature="e#44#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InputSystem/iosystem.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="84" column="26" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
           <folding />
         </state>
       </provider>

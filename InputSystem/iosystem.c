@@ -16,8 +16,8 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
         ioSystem->buffers[i][BUFFER_SIZE - 1] = EOF;
     }
 
-    ioSystem->currentBuffer = BUFFER_PARTS-1;
-    ioSystem->current = ioSystem->head = &(ioSystem->buffers[ioSystem->currentBuffer][BUFFER_SIZE-1]);
+    ioSystem->tailPointerBuffer = ioSystem->headPointerBuffer = BUFFER_PARTS-1;
+    ioSystem->tail = ioSystem->head = &(ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-1]);
     ioSystem->filePosition = 0;
 
 }
@@ -37,29 +37,29 @@ void iosystemSetFile(IOSystem *ioSystem,char* path){
 char iosystemNextToken(IOSystem *ioSystem){
 
     //comprobamos si estamos nun centinela
-    if (*ioSystem->current == EOF){
+    if (*ioSystem->head == EOF){
 
-        if(ioSystem->current == &(ioSystem->buffers[ioSystem->currentBuffer][BUFFER_SIZE-1]) ){
+        if(ioSystem->head == &(ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-1]) ){
 
         //cambiamos de buffer
-        ioSystem->currentBuffer = (ioSystem->currentBuffer + 1) % BUFFER_PARTS;
+        ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer + 1) % BUFFER_PARTS;
 
         //cargamos datos no novo buffer
         FILE *fp;
         fp = fopen(ioSystem->filePath, "r");
 
         fseek(fp,ioSystem->filePosition,0);
-        size_t readed=fread(ioSystem->buffers[ioSystem->currentBuffer], 1, BUFFER_SIZE-1, fp);
+        size_t readed=fread(ioSystem->buffers[ioSystem->headPointerBuffer], 1, BUFFER_SIZE-1, fp);
         ioSystem->filePosition+=readed;
 
         fclose(fp);
 
         //forzase un EOF ao final do archivo, porque non todos os archivos teñen EOF
         if (readed < BUFFER_SIZE-1)
-            ioSystem->buffers[ioSystem->currentBuffer][readed] = EOF;
+            ioSystem->buffers[ioSystem->headPointerBuffer][readed] = EOF;
 
         //colocamos actual  ao principio do novo buffer
-        ioSystem->current = &ioSystem->buffers[ioSystem->currentBuffer][0];
+        ioSystem->head = &ioSystem->buffers[ioSystem->headPointerBuffer][0];
 
         }else{
             //printf("FIN");
@@ -68,12 +68,58 @@ char iosystemNextToken(IOSystem *ioSystem){
 
     }
 
-    char valor = (*ioSystem->current);
-    ioSystem->current++;
+    char valor = (*ioSystem->head);
+    ioSystem->head++;
 
     return valor;
 
 }
+
+char iosystemNextTailToken(IOSystem *ioSystem){
+    //comprobamos si estamos nun centinela
+    if (*ioSystem->tail == EOF){
+
+        if(ioSystem->tail == &(ioSystem->buffers[ioSystem->tailPointerBuffer][BUFFER_SIZE-1]) ){
+
+            //cambiamos de buffer
+            ioSystem->tailPointerBuffer = (ioSystem->tailPointerBuffer + 1) % BUFFER_PARTS;
+
+            //colocamos actual  ao principio do novo buffer
+            ioSystem->tail = &ioSystem->buffers[ioSystem->tailPointerBuffer][0];
+
+        }else{
+            //printf("FIN");
+            return EOF;
+        }
+
+    }
+
+    char valor = (*ioSystem->tail);
+    ioSystem->tail++;
+
+    return valor;
+}
+
+int iosystemRange(IOSystem ioSystem){
+    int range = 0;
+    char* pointer = ioSystem.tail;
+
+    while(pointer != ioSystem.head){
+
+        for(int i = 0; i < BUFFER_PARTS;i++){
+            if(pointer == &ioSystem.buffers[i][BUFFER_SIZE]){
+                pointer = &ioSystem.buffers[(i+1)%BUFFER_PARTS][0];
+                pointer++;
+            }
+        }
+
+        pointer++;
+        range++;
+    }
+
+    return range;
+}
+
 //
 //char iosystemNextTokenStandardInput(IOSystem *ioSystem){
 //    printf("Introduzca un caracter:\n");

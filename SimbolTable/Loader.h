@@ -7,6 +7,6 @@
 
 #include "HashTable.h"
 
-void loadReservedWord(HashTableTree *hashTableTree);
+void loadReservedWord(HashTableTree *tablaDeSimbolos);
 
 #endif //ANALIZADORLEXICO_LOADER_H

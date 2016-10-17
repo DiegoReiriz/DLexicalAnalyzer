@@ -17,16 +17,19 @@ typedef struct {
     FILE *file;
     int filePosition;
     char **buffers;
-    char *current;
+    char *tail;
+    int tailPointerBuffer;
     char *head;
-    int currentBuffer;
+    int headPointerBuffer;
 } IOSystem;
 
 
 void iosystemSetFile(IOSystem *ioSystem,char* path);
 char iosystemNextToken(IOSystem *ioSystem);
+char iosystemNextTailToken(IOSystem *ioSystem);
 void iosystemInitializeBuffer(IOSystem *ioSystem);
 void iosystemDestroyBuffer(IOSystem *ioSystem);
+int iosystemRange(IOSystem ioSystem);
 
 
 #endif //ANALIZADORLEXICO_IOSYSTEM_H

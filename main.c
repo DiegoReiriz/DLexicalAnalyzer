@@ -11,6 +11,23 @@ int main() {
     IOSystem test;
 
     iosystemInitializeBuffer(&test);
+    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
+
+    char c=0;
+    while( c != '\n'){
+        c=iosystemNextToken(&test);
+        printf("%c",c);
+    }
+
+    printf("\n");
+    int range = iosystemRange(test);
+    while(range){
+        c=iosystemNextTailToken(&test);
+        printf("%c",c);
+
+        range--;
+    }
+    printf("\n");
 //    iosystemSetFile(&test,"/home/diegoreiriz/Descargas/regression.d");
 //
 //    char c=0;
@@ -20,8 +37,9 @@ int main() {
 //    }
 
     //iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
-    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
+//    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
 
+    printf("Rango entre punteros: %d\n",iosystemRange(test));
 
     iosystemDestroyBuffer(&test);
 
@@ -57,7 +75,7 @@ int main() {
 
 //    hashTableDelete(table,*lexeme);
 
-    hashTablePrint(table);
+    //hashTablePrint(table);
     hashTableDestroy(table);
 
     return 0;

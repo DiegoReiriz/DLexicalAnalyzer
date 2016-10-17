@@ -5,7 +5,9 @@
 #include "Loader.h"
 #include "../InputSystem/iosystem.h"
 
-void loadReservedWord(HashTableTree *hashTableTree){
+void loadReservedWord(HashTableTree *tablaDeSimbolos){
+
+    //TODO: convertir esto en algo humano
 
     IOSystem test;
 
@@ -26,12 +28,12 @@ void loadReservedWord(HashTableTree *hashTableTree){
         c=iosystemNextToken(&test);
 
         switch(state) {
-            case 0:
+            case 0: //leer unha palabra reservada
 
-                printf("%c", c);
+//                printf("%c", c);
 
                 if (c == '\r' || c == '\n'){
-                    hashTableInsert(hashTableTree,*lexemeCreate(buffer),RESERVED_WORD);
+                    hashTableInsert(tablaDeSimbolos,*lexemeCreate(buffer),RESERVED_WORD);
                     state = 1;
                     for(int j =0;j<50;j++)
                         buffer[j]=0;
@@ -48,20 +50,20 @@ void loadReservedWord(HashTableTree *hashTableTree){
                 i++;
                 break;
 
-            case 1:
+            case 1: //detección de saltos de línea
 
                 i = 0;
 
                 if(buffer[i] != '\r' && buffer[i] != '\n'){
                     state = 0;
-                    printf("%c", c);
+//                    printf("%c", c);
                     buffer[i]=c;
                     i++;
                 }
 
                 break;
 
-            case 2:
+            case 2: //detección de comentario delimitador
                 buffer[i] = c;
                 if(buffer[i]=='*')
                     state=3;
@@ -72,7 +74,7 @@ void loadReservedWord(HashTableTree *hashTableTree){
 
                 break;
 
-            case 3:
+            case 3: //fin de comentario delimitador
                 i=0;
                 buffer[i] = c;
                 if(buffer[i] == '*')
@@ -80,7 +82,7 @@ void loadReservedWord(HashTableTree *hashTableTree){
 
                 break;
 
-            case 4:
+            case 4: //fin de comentario delimitador
                 buffer[i] = c;
                 if(buffer[i] == '/'){
                     state=0;
