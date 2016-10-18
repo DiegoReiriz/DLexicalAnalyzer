@@ -42,7 +42,7 @@ void loadReservedWord(HashTableTree *tablaDeSimbolos){
                     state=2;
                     buffer[i] = c;
 
-                }else{
+                }else {
                     buffer[i] = c;
 
                 }

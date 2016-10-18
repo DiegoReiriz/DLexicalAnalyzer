@@ -14,7 +14,7 @@ double beta1(double[] x, double[] y, double x_bar, double y_bar)
     while (whilectr < x.length)
     {
         num += (x[whilectr] - x_bar) * (y[whilectr] - y_bar);
-        whilectr++;
+        whilectr++;/+ "+/" +/
     }
     foreach (xval; x)
         denom += ((xval-x_bar)*(xval-x_bar));

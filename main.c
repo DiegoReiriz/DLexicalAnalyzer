@@ -3,56 +3,62 @@
 #include "LexicalAnalyzer/lexeme.h"
 #include "SimbolTable/HashTable.h"
 #include "SimbolTable/Loader.h"
+#include "LexicalAnalyzer/lexicalAnalyzer.h"
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
 
     //ejemplo de uso do módulo de entrada
-    IOSystem test;
+    IOSystem input;
 
-    iosystemInitializeBuffer(&test);
-    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
+    iosystemInitializeBuffer(&input);
+    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
 
-    char c=0;
-    while( c != '\n'){
-        c=iosystemNextToken(&test);
-        printf("%c",c);
-    }
+    HashTableTree *table =hashTable();
+    loadReservedWord(table);
 
-    printf("\n");
-    int range = iosystemRange(test);
-    while(range){
-        c=iosystemNextTailToken(&test);
-        printf("%c",c);
+    LexycalAnalizer* lexycalAnalizer = lexycalAnalyzerInitialize(&input,table);
+    doTheThing(lexycalAnalizer);
 
-        range--;
-    }
-    printf("\n");
-//    iosystemSetFile(&test,"/home/diegoreiriz/Descargas/regression.d");
+//    char c=0;
+//    while( c != '\n'){
+//        c=iosystemNextToken(&input);
+//        printf("%c",c);
+//    }
+//
+//    printf("\n");
+//    int range = iosystemRange(input);
+//    while(range){
+//        c=iosystemNextTailToken(&input);
+//        printf("%c",c);
+//
+//        range--;
+//    }
+//    printf("\n");
+//    iosystemSetFile(&input,"/home/diegoreiriz/Descargas/regression.d");
 //
 //    char c=0;
 //    while( c != EOF ){
-//        c=iosystemNextToken(&test);
+//        c=iosystemNextToken(&input);
 //        printf("%c",c);
 //    }
 
-    //iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
-//    iosystemSetFile(&test,"/home/entakitos/Descargas/regression.d");
+    //iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
+//    iosystemSetFile(&input,"/home/entakitos/Descargas/regression.d");
 
-    printf("Rango entre punteros: %d\n",iosystemRange(test));
+//    printf("Rango entre punteros: %d\n",iosystemRange(input));
 
-    iosystemDestroyBuffer(&test);
 
-    char *a = "churrascos";
-    char *b = "charmander";
 
-    Lexeme *lexeme = lexemeCreate(a);
-    Lexeme *lexeme2 = lexemeCreate(b);
+//    char *a = "churrascos";
+//    char *b = "charmander";
+//
+//    Lexeme *lexeme = lexemeCreate(a);
+//    Lexeme *lexeme2 = lexemeCreate(b);
+//
+//    printf("hash para %s %d\n",a,hash(*lexeme));
+//    printf("hash para %s %d\n",b,hash(*lexeme2));
 
-    printf("hash para %s %d\n",a,hash(*lexeme));
-    printf("hash para %s %d\n",b,hash(*lexeme2));
-    HashTableTree *table =hashTable();
-    loadReservedWord(table);
 //    hashTableInsert(table,*lexeme);
 //    hashTableInsert(table,*lexeme);
 //    hashTableInsert(table,*lexeme2);
@@ -65,7 +71,7 @@ int main() {
 //    lexemePrint(*registe->lexeme);
 //    printf(", Con valor de contador: %d\n",registe->count);
 
-    hashTableDelete(table,*lexeme);
+//    hashTableDelete(table,*lexeme);
 
 //    printf("Registro recuperado: ");
 //    lexemePrint(*registe->lexeme);
@@ -77,6 +83,7 @@ int main() {
 
     //hashTablePrint(table);
     hashTableDestroy(table);
+    iosystemDestroyBuffer(&input);
 
     return 0;
 }
