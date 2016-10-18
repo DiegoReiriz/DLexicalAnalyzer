@@ -5,14 +5,16 @@
 #include "Loader.h"
 #include "../InputSystem/iosystem.h"
 
-void loadReservedWord(HashTableTree *tablaDeSimbolos){
+void loadReservedWords(HashTableTree *tablaDeSimbolos){
 
     //TODO: convertir esto en algo humano
 
     IOSystem test;
 
     iosystemInitializeBuffer(&test);
-    iosystemSetFile(&test,"/home/entakitos/repositorios/DLexicalAnalyzer/definitions");
+//    iosystemSetFile(&test,"/home/entakitos/repositorios/DLexicalAnalyzer/definitions");
+
+    iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions");
 
     char buffer[50];
     for(int j =0;j<50;j++)

@@ -42,6 +42,7 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
     // 2 - dentro de bloque comentarios
     // 3 - dentro de comentarios anidados
     // 4 - literal - strings  --> "
+    bool token=false;
     int comentariosAnidados=0;
 
     while( c != EOF){
@@ -50,13 +51,37 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
         switch(state){
             case 0:
                 if(!isalnum(c)){
-                    if(c == '\n' || c == '\r')
-                        printf("    <---- SALTO \n");
-                    else if (c == ' ')
-                        printf(" ");
-                    else if (c=='\t')
-                        printf("\tTAB\t");
-                    else if (c =='/'){
+
+                    //
+
+                    int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                    if(!token){
+                        token = true;
+                        int i = 0;
+                        char *buffer = malloc(sizeof(char)*range);
+                        while (range-1>i){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                            i++;
+                        }
+
+                        printf("\nLEXEMA: ");
+                        for(int j = 0; j < i;j++)
+                            printf("%c",buffer[j]);
+                        printf("\n");
+
+                        //TODO: tratar o caracter que queda e vai ser un delimitador
+                        c=iosystemNextTailToken(lexycalAnalizer->ioSystem);//por ahora tiro o token
+                        token++;
+                        getchar();
+                    }
+
+                    if((c == '\n' || c == '\r') && token){
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);//por ahora tiro o token
+                    }else if (c == ' '){
+                        //printf(" ");
+                    }else if (c=='\t'){
+                        //printf("\tTAB\t");
+                    }else if (c =='/'){
 
                         c=iosystemNextToken(lexycalAnalizer->ioSystem);
 
@@ -67,20 +92,22 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
                         }else if(c =='+'){
                             state = 3;
                             comentariosAnidados++;
-                        }else
+                        }/*else
                             printf("/%c",c);
-
+                        */
 
                     }else if (c=='"'){
                         state = 4;
                     }else{
-//                        printf("¤");
-                        printf("%c",c);
+                        //printf("¤");
+//                        printf("%c",c);
+                        printf("LEXEMA SIN TRATAR -->%c",c);
                     }
 
                 }
                 else
-                    printf("%c",c);
+                    token=false;
+                    //printf("%c",c);
 
                 break;
             case 1: //comentarios de linea
@@ -112,7 +139,7 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
                     state = 0;
                 }else if( c == '\n'){ //TODO: preguntar a felix caso raro
                     state = 0;
-                    printf("\n");
+                    //printf("\n");
                 }
                 break;
         }

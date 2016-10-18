@@ -12,10 +12,11 @@ int main() {
     IOSystem input;
 
     iosystemInitializeBuffer(&input);
-    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
+//    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
+    iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/regression.d");
 
     HashTableTree *table =hashTable();
-    loadReservedWord(table);
+    loadReservedWords(table);
 
     LexycalAnalizer* lexycalAnalizer = lexycalAnalyzerInitialize(&input,table);
     doTheThing(lexycalAnalizer);
