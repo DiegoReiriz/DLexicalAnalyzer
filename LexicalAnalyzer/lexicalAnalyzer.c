@@ -64,67 +64,124 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
                             i++;
                         }
 
-                        printf("\nLEXEMA: ");
+                        //41,42,46
+                        printf("\x1b[6;30;42m");
                         for(int j = 0; j < i;j++)
                             printf("%c",buffer[j]);
-                        printf("\n");
+                        printf("\x1b[0m");
 
                         //TODO: tratar o caracter que queda e vai ser un delimitador
-                        c=iosystemNextTailToken(lexycalAnalizer->ioSystem);//por ahora tiro o token
-                        token++;
-                        getchar();
+
+                        //iosystemNextTailToken(lexycalAnalizer->ioSystem);//descartase porque é o mismo caracter que está almacenado en C actualmente
+
+                        //getchar();
                     }
 
-                    if((c == '\n' || c == '\r') && token){
-                        iosystemNextTailToken(lexycalAnalizer->ioSystem);//por ahora tiro o token
+                    if(c == '\n' || c == '\r'){
+                        printf("\n");
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);//descartanse saltos de linea
                     }else if (c == ' '){
-                        //printf(" ");
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);//descartanse espacios
                     }else if (c=='\t'){
-                        //printf("\tTAB\t");
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);//descartanse espacios
                     }else if (c =='/'){
 
                         c=iosystemNextToken(lexycalAnalizer->ioSystem);
 
                         if(c =='/'){
+
                             state = 1;
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
                         }else if(c =='*'){
+
                             state = 2;
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
                         }else if(c =='+'){
+
                             state = 3;
                             comentariosAnidados++;
-                        }/*else
-                            printf("/%c",c);
-                        */
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }else { //ERROR
+                            iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                            //printf("ERROR-->%c", c);
+                        }
+
 
                     }else if (c=='"'){
                         state = 4;
-                    }else{
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                    }/*else if(!token){
                         //printf("¤");
 //                        printf("%c",c);
-                        printf("LEXEMA SIN TRATAR -->%c",c);
+                        printf("\x1b[6;30;42m%c\x1b[0m",c);
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                    }*/
+                    else{
+                        printf("\x1b[6;30;46m%c\x1b[0m",c);
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);
                     }
 
+
                 }
-                else
+                else{
                     token=false;
-                    //printf("%c",c);
+                }
 
                 break;
             case 1: //comentarios de linea
-                    if (c == '\n')
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                    if (c == '\n'){
+                        printf("\n");
                         state=0;
+                    }else{
+                        printf("\x1b[6;30;41m");
+                        printf("%c",c);
+                        printf("\x1b[0m",c);
+                    }
+
                 break;
             case 2: //comentarios de bloque
-                if (c == '*' && (c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '/')
-                    state = 0;
+                iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                if (c == '*'){
+                    if((c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '/')
+                        state = 0;
+
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                }else
+                    printf("\x1b[6;30;41m%c\x1b[0m",c);
+
 
                 break;
             case 3: //comentarios anidados
-                if (c == '/' && (c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '+')
-                    comentariosAnidados++;
 
-                if (c == '+' && (c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '/')
-                    comentariosAnidados--;
+                iosystemNextTailToken(lexycalAnalizer->ioSystem);
+
+                if (c == '/') {
+
+                    if((c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '+')
+                        comentariosAnidados++;
+                    else{
+                        printf("\x1b[6;30;41m%c\x1b[0m",'/');
+                        printf("\x1b[6;30;41m%c\x1b[0m",c);
+                    }
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+
+                }else if (c == '+') {
+
+                    if((c=iosystemNextToken(lexycalAnalizer->ioSystem)) == '/')
+                        comentariosAnidados--;
+                    else{
+                        printf("\x1b[6;30;41m%c\x1b[0m",'+');
+                        printf("\x1b[6;30;41m%c\x1b[0m",c);
+                    }
+
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                }else{
+                    printf("\x1b[6;30;41m%c\x1b[0m",c);
+                }
 
                 if (comentariosAnidados == 0)
                     state = 0;
@@ -132,10 +189,12 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
                 break;
 
             case 4:
-                printf("-");
-                if (c == '\\')
+                printf("\x1b[6;30;41m-\x1b[0m");
+                iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                if (c == '\\'){
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
                     c=iosystemNextToken(lexycalAnalizer->ioSystem);//formzamos un salto do caracter que se encontre despois de '\'
-                else if( c == '"'){
+                }else if( c == '"'){
                     state = 0;
                 }else if( c == '\n'){ //TODO: preguntar a felix caso raro
                     state = 0;
