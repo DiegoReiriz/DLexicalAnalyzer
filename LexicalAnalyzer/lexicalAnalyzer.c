@@ -24,6 +24,36 @@ void fail(LexycalAnalizer *lexycalAnalizer,int charactersFeaded){
 
 }
 
+bool checkIntegerLiteral(LexycalAnalizer *lexycalAnalizer, char first){
+
+    bool result =false;
+    char c=iosystemNextToken(lexycalAnalizer->ioSystem);
+
+
+    if((c == 'b' || c == 'B') && first == 0){ //Literar binario
+
+    }else if ( (c=='x' || c == 'X') && first == 0){ //Literal hexadecimal
+
+    }else{ //literal decimal
+
+    }
+
+    for(;isalnum(c) || c == '_';
+         c=iosystemNextToken(lexycalAnalizer->ioSystem)){
+
+    }
+
+    if( c == ' ' || c == '.' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/' || c == '(' || c == ')' || c == '[' || c == ']')
+        result=true;
+
+    iosystemReturnToken(lexycalAnalizer->ioSystem);
+
+
+    return result;
+
+}
+
+
 bool checkIdentifier(LexycalAnalizer *lexycalAnalizer){
 
     bool result =false;
@@ -62,14 +92,44 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
             return 0;
 
         switch(automata){
-            //TODO: tal vez sea necesario identificar antes os numeros para evvitar problemas de confusións
-            case 0: //identificación de variables
+            //TODO: tal vez sea necesario identificar antes os numeros para evitar problemas de confusións
+            case 0: //integer literals
+                if(isdigit(c)){
+
+                    if ( c != '0'){ //comprobamos enteiro decimal
+                        if(checkIntegerLiteral(lexycalAnalizer,c)){ // o autómataacertou analizando o lexema actual
+                            int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                            while(range--)
+                                printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+
+                            printf("\n");
+
+                            fin = true;
+                        }else{ //O autómata fallou identificando o lexema actual
+                            fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
+                            automata++;
+
+                        }
+                    }
+                }else{
+                    iosystemReturnToken(lexycalAnalizer->ioSystem);
+                    automata++;
+                }
+                break;
+
+            case 1: //floating point literals
+                iosystemReturnToken(lexycalAnalizer->ioSystem);
+                automata++;
+                break;
+
+            case 2: //identificación de variables
 
                 if(isalnum(c) || c == '_'){
                     if(checkIdentifier(lexycalAnalizer)){ // o autómataacertou analizando o lexema actual
-                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//                        TODO:decomentar para registrar o lexema
+//                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
 
                         printf("\n");
 
@@ -86,12 +146,12 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                 break;
 
-            case 1:
+            case 3:
                 iosystemReturnToken(lexycalAnalizer->ioSystem);
                 automata++;
                 break;
 
-            case 2:
+            case 4:
                 iosystemReturnToken(lexycalAnalizer->ioSystem);
                 automata++;
                 break;
