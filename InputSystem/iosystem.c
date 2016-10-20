@@ -75,6 +75,15 @@ char iosystemNextToken(IOSystem *ioSystem){
 
 }
 
+void iosystemReturnToken(IOSystem *ioSystem){
+    ioSystem->head--;
+
+    if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){
+        ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer-1) % BUFFER_PARTS;
+        ioSystem->headPointerBuffer = ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-2]; //situase o puntero antes do EOF do buffer anterior si se foi demasiado para atras
+    }
+}
+
 char iosystemNextTailToken(IOSystem *ioSystem){
     //comprobamos si estamos nun centinela
     if (*ioSystem->tail == EOF){
