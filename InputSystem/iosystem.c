@@ -109,6 +109,7 @@ char iosystemNextTailToken(IOSystem *ioSystem){
     return valor;
 }
 
+//TODO: esta función non furrula sempre
 int iosystemRange(IOSystem ioSystem){
     int range = 0;
     char* pointer = ioSystem.tail;
