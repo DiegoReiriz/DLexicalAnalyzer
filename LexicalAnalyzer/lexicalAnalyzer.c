@@ -34,10 +34,11 @@ bool checkIdentifier(LexycalAnalizer *lexycalAnalizer){
 
     }
 
-    if( c == ' ' || c == '.' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/'){
+    if( c == ' ' || c == '.' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/' || c == '(' || c == ')' || c == '[' || c == ']')
         result=true;
+
         iosystemReturnToken(lexycalAnalizer->ioSystem);
-    }
+
 
     return result;
 
@@ -71,23 +72,27 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                             printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
 
                         printf("\n");
+
+                        fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
                         fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
                         automata++;
                     }
 
                 }else{
+                    iosystemReturnToken(lexycalAnalizer->ioSystem);
                     automata++;
                 }
 
-                fin=true;
                 break;
 
             case 1:
+                iosystemReturnToken(lexycalAnalizer->ioSystem);
                 automata++;
                 break;
 
             case 2:
+                iosystemReturnToken(lexycalAnalizer->ioSystem);
                 automata++;
                 break;
             default:
