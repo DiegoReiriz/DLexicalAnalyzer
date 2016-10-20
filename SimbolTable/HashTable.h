@@ -16,7 +16,7 @@ enum LexicalComponents {RESERVED_WORD,IDENTIFIER};
 typedef struct _Registe{
     Lexeme* lexeme;
     int count;
-    enum LexicalComponents lexicalComponents;
+    enum LexicalComponents lexicalComponent;
 } Register;
 
 

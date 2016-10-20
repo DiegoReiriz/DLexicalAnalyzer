@@ -17,7 +17,7 @@ typedef struct {
 LexycalAnalizer* lexycalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree);
 void lexycalAnalyzerDestroy(LexycalAnalizer* lexycalAnalizaer);
 
-//TODO: refactorizar en modo productor consumidor a función doTheThing();
-void doTheThing(LexycalAnalizer *lexycalAnalizer);
+//TODO: refactorizar en modo productor consumidor a función getLexema();
+int getLexema(LexycalAnalizer *lexycalAnalizer);
 
 #endif //ANALIZADORLEXICO_LEXICALANALYZER_H

@@ -6,16 +6,17 @@
 #include "HashTable.h"
 /* D. J. Bernstein hash function */
 
-Register* createRegister(Lexeme lexeme,enum LexicalComponents lexicalComponents){
+Register* createRegister(Lexeme lexeme,enum LexicalComponents lexicalComponent){
     Register* registe = malloc(sizeof(Register));
 
     registe->lexeme = lexemeDuplicate(lexeme);
-    registe->lexicalComponents = lexicalComponents;
+    registe->lexicalComponent = lexicalComponent;
 
     return registe;
 }
 
 void destroyRegister(Register *registe){
+
     lexemeDestroy(registe->lexeme);
     free(registe);
 }
@@ -245,7 +246,7 @@ void printTree(HashTableTree* hashTableTree){
 
     if(hashTableTree->hasRegister){
         printf("%s",hashTableTree->registe->lexeme->valor);
-        switch (hashTableTree->registe->lexicalComponents){
+        switch (hashTableTree->registe->lexicalComponent){
             case RESERVED_WORD:
                 printf(" - RESERVED WORD");
                 break;

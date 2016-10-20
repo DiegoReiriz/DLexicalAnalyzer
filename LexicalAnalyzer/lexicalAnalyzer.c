@@ -24,40 +24,79 @@ void fail(LexycalAnalizer *lexycalAnalizer,int charactersFeaded){
 
 }
 
-//TODO: refactorizar en modo productor consumidor a función doTheThing();
-void doTheThing(LexycalAnalizer *lexycalAnalizer){
+bool checkIdentifier(LexycalAnalizer *lexycalAnalizer){
+
+    bool result =false;
+    char c=iosystemNextToken(lexycalAnalizer->ioSystem);
+
+    for(;isalnum(c) || c == '_';
+        c=iosystemNextToken(lexycalAnalizer->ioSystem)){
+
+    }
+
+    if( c == ' ' || c == '.' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/'){
+        result=true;
+        iosystemReturnToken(lexycalAnalizer->ioSystem);
+    }
+
+    return result;
+
+}
+
+//TODO: refactorizar en modo productor consumidor a función getLexema();
+int getLexema(LexycalAnalizer *lexycalAnalizer){
 
     //TODO: cambiar EOF por $
     char c=0;
     int automata= 0;//modo normal;
-    int readed=0;
-
+    bool fin = false;
 
 //    bool token=false;
 //    int comentariosAnidados=0;
 
-    while( c != EOF){
+    while( !fin ){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
 
-        switch(automata){
-            case 0:
+        if(c == EOF)
+            return 0;
 
+        switch(automata){
+            //TODO: tal vez sea necesario identificar antes os numeros para evvitar problemas de confusións
+            case 0: //identificación de variables
+
+                if(isalnum(c) || c == '_'){
+                    if(checkIdentifier(lexycalAnalizer)){ // o autómataacertou analizando o lexema actual
+                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                        while(range--)
+                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+
+                        printf("\n");
+                    }else{ //O autómata fallou identificando o lexema actual
+                        fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
+                        automata++;
+                    }
+
+                }else{
+                    automata++;
+                }
+
+                fin=true;
                 break;
 
             case 1:
-
+                automata++;
                 break;
 
             case 2:
-
+                automata++;
                 break;
             default:
-
+                iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                fin=true;
                 break;
         }
-
     }
 
-    readed++;
+    return 1;
 
 }

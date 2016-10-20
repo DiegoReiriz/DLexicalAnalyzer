@@ -14,7 +14,7 @@ Lexeme* lexemeCreate(char* string){
     size_t size = strlen(string);
 
     Lexeme* lexeme = (Lexeme*) malloc(sizeof(Lexeme));
-    lexeme->size=size;
+    lexeme->size= (short) size;
     lexeme->valor = malloc(sizeof(char)*size);
 
     for(int i = 0;i<size;i++)
@@ -25,7 +25,9 @@ Lexeme* lexemeCreate(char* string){
 
 void lexemeDestroy(Lexeme *lexeme){
 
+    free(lexeme->valor);
     free(lexeme);
+
 }
 
 char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
