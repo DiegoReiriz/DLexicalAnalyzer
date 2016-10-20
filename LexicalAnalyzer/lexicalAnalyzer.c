@@ -17,7 +17,10 @@ void lexycalAnalyzerDestroy(LexycalAnalizer* lexycalAnalizaer){
     free(lexycalAnalizaer);
 }
 
-void fail(int charactersFeaded){
+void fail(LexycalAnalizer *lexycalAnalizer,int charactersFeaded){
+
+    while(charactersFeaded--)
+        iosystemReturnToken(lexycalAnalizer->ioSystem);
 
 }
 
@@ -27,7 +30,7 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
     //TODO: cambiar EOF por $
     char c=0;
     int automata= 0;//modo normal;
-
+    int readed=0;
 
 
 //    bool token=false;
@@ -54,5 +57,7 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
         }
 
     }
+
+    readed++;
 
 }
