@@ -104,16 +104,20 @@ void doTheThing(LexycalAnalizer *lexycalAnalizer){
                             comentariosAnidados++;
                             iosystemNextTailToken(lexycalAnalizer->ioSystem);
                             iosystemNextTailToken(lexycalAnalizer->ioSystem);
-                        }else { //ERROR
+                        }else { //ERROR ou máis ben cencontrouse un símbolo de dividir
                             iosystemNextTailToken(lexycalAnalizer->ioSystem);
                             //printf("ERROR-->%c", c);
                         }
 
 
-                    }else if (c=='"'){
+                    }else if (c=='"'){ //reconocimiento de inicio de cadena
                         state = 4;
                         iosystemNextTailToken(lexycalAnalizer->ioSystem);
-                    }/*else if(!token){
+                    }else if (c=='='){ //reconocimiento de = e ==
+                        printf("\x1b[6;30;41m%c\x1b[0m",c);
+                        iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                    }
+                        /*else if(!token){
                         //printf("¤");
 //                        printf("%c",c);
                         printf("\x1b[6;30;42m%c\x1b[0m",c);
