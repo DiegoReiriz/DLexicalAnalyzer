@@ -81,10 +81,10 @@ bool checkFloatLiteral(LexycalAnalizer *lexycalAnalizer, char first) {
         c = iosystemNextToken(lexycalAnalizer->ioSystem);
         while( c >= '0' && c <= '9')
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
-    }else{
+    }/*else{
         result = false;
         return result;
-    }
+    }*/
 
     if(c == 'e' || c =='E' ){
 
