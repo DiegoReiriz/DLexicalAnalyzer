@@ -9,6 +9,7 @@ LexycalAnalizer* lexycalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* has
     LexycalAnalizer* lexycalAnalizaer = malloc(sizeof(LexycalAnalizer));
     lexycalAnalizaer->hashTableTree=hashTableTree;
     lexycalAnalizaer->ioSystem=ioSystem;
+    lexycalAnalizaer->line == 0;
 
     return lexycalAnalizaer;
 }
@@ -49,7 +50,7 @@ bool checkIntegerLiteral(LexycalAnalizer *lexycalAnalizer, char first) {
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
     }
 
-    if (c == '.') { //si se parou o autómata porque se encontrou un punto, o descartamos todo e paramos
+    if (c == '.' || c == 'e' || c == 'E') { //si se parou o autómata porque se encontrou un punto, o descartamos todo e paramos
 
         return result;
     }
@@ -65,46 +66,48 @@ bool checkIntegerLiteral(LexycalAnalizer *lexycalAnalizer, char first) {
 
 }
 
-bool checkFloatLiteral(LexycalAnalizer *lexycalAnalizer, char first) {
+//checkFloatLiteral
+// 1 - lexema correcto
+// 0 - fallo no autómata
+// -1 - fallo no autñomata pero leeuse un punto
 
-    bool result = false;
-    bool point = false;
+int checkFloatLiteral(LexycalAnalizer *lexycalAnalizer, char first) {
+
+    int result = 0;
+
     char c = iosystemNextToken(lexycalAnalizer->ioSystem);
 
-
-    while( c >= '0' && c <= '9')
-         c = iosystemNextToken(lexycalAnalizer->ioSystem);
-
-
-    if ( c == '.'){
-        point = true;
-        c = iosystemNextToken(lexycalAnalizer->ioSystem);
+    if ( first == '.'){
+        result = 0;
         while( c >= '0' && c <= '9')
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
-    }/*else{
-        result = false;
-        return result;
-    }*/
 
-    if(c == 'e' || c =='E' ){
+        if(c == 'e' || c =='E' ){
 
-        c = iosystemNextToken(lexycalAnalizer->ioSystem);
+            c = iosystemNextToken(lexycalAnalizer->ioSystem);
+
+            if(c == '+' || c == '-'){
+                c = iosystemNextToken(lexycalAnalizer->ioSystem);
+                while( c >= '0' && c <= '9')
+                    c = iosystemNextToken(lexycalAnalizer->ioSystem);
+            }else{
+                return result;
+            }
+        }
+    }else if( first  == 'e' || first =='E' ){
 
         if(c == '+' || c == '-'){
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
             while( c >= '0' && c <= '9')
                 c = iosystemNextToken(lexycalAnalizer->ioSystem);
         }else{
-            result = false;
+            result = 0;
             return result;
         }
-    }else if(!point){
-        result = false;
-        return result;
     }
 
     if( c == ' ' || c == ',' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/' || c == '(' || c == ')' || c == '[' || c == ']')
-        result=true;
+        result=1;
 
     iosystemReturnToken(lexycalAnalizer->ioSystem);
 
@@ -243,7 +246,7 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
     while( !fin ){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
 
-        if(c == EOF)
+        if(c == '$')
             return 0;
 
         switch(automata){
@@ -262,7 +265,8 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
-                        fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
+                        //fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
+                        iosystemReturnToken(lexycalAnalizer->ioSystem);//devolvese solo o único elemento que produceu o fallo
                         automata++;
 
                     }
@@ -277,10 +281,11 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
             case 1: //floating point literals
 
-                if(isdigit(c)){
+                if(c == '.' || c == 'e' || c == 'E'){
 
+                    int result = checkFloatLiteral(lexycalAnalizer,c);
 
-                    if(checkFloatLiteral(lexycalAnalizer,c)){ // o autómataacertou analizando o lexema actual
+                    if(result){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
                         printf("Float: ");
                         while(range--)
@@ -290,7 +295,12 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
-                        fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
+                        if (c == '.')//encontrouse un punto e xa se trata
+                            printf("SUPERTOOOKEN: %c\n",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        else
+                            iosystemReturnToken(lexycalAnalizer->ioSystem);
+
+//                        iosystemReturnToken(lexycalAnalizer->ioSystem);
                         automata++;
 
                     }
@@ -316,6 +326,7 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
+                        //nunca se da este caso, solo está por precaución
                         fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
                         automata++;
                     }
@@ -340,6 +351,7 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
+                        //TODO: tratar o error de lecura de strings doutra formas
                         fail(lexycalAnalizer,iosystemRange(*lexycalAnalizer->ioSystem));
                         automata++;
                     }
@@ -444,6 +456,11 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                     }
 
+                }else if (c == ' ' || c == '\t'){
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                }else if (c == '\n'){
+                    lexycalAnalizer->line++;
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
                 }else{
                     printf("TOOOOKEN: %c\n",c);
                     iosystemNextTailToken(lexycalAnalizer->ioSystem);

@@ -24,7 +24,7 @@ void loadReservedWords(HashTableTree *tablaDeSimbolos){
     int i=0;
     int state=0;
     int tipo=0;
-    while( c != EOF ){
+    while( c != '$' ){
 
         c=iosystemNextToken(&test);
 

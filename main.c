@@ -20,10 +20,14 @@ int main() {
 
     LexycalAnalizer* lexycalAnalizer = lexycalAnalyzerInitialize(&input,table);
 
+    int count = 0;
     int i = 1;
-    while(i)
+    while(i){
         i = getLexema(lexycalAnalizer);
+        count++;
+    }
 
+    printf("\n\n TOTAL: %d",count);
 
     lexycalAnalyzerDestroy(lexycalAnalizer);
 

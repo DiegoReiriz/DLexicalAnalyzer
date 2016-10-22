@@ -13,7 +13,7 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     //creación dos sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
         ioSystem->buffers[i] = (char*)malloc(sizeof(char)*BUFFER_SIZE);
-        ioSystem->buffers[i][BUFFER_SIZE - 1] = EOF;
+        ioSystem->buffers[i][BUFFER_SIZE - 1] = '$';
     }
 
     ioSystem->tailPointerBuffer = ioSystem->headPointerBuffer = BUFFER_PARTS-1;
@@ -37,7 +37,7 @@ void iosystemSetFile(IOSystem *ioSystem,char* path){
 char iosystemNextToken(IOSystem *ioSystem){
 
     //comprobamos si estamos nun centinela
-    if (*ioSystem->head == EOF){
+    if (*ioSystem->head == '$'){
 
         if(ioSystem->head == &(ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-1]) ){
 
@@ -54,16 +54,16 @@ char iosystemNextToken(IOSystem *ioSystem){
 
         fclose(fp);
 
-        //forzase un EOF ao final do archivo, porque non todos os archivos teñen EOF
+        //forzase un '$' ao final do archivo, porque non todos os archivos teñen '$'
         if (readed < BUFFER_SIZE-1)
-            ioSystem->buffers[ioSystem->headPointerBuffer][readed] = EOF;
+            ioSystem->buffers[ioSystem->headPointerBuffer][readed] = '$';
 
         //colocamos actual  ao principio do novo buffer
         ioSystem->head = &ioSystem->buffers[ioSystem->headPointerBuffer][0];
 
         }else{
             //printf("FIN");
-            return EOF;
+            return '$';
         }
 
     }
@@ -80,13 +80,13 @@ void iosystemReturnToken(IOSystem *ioSystem){
 
     if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){
         ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer-1) % BUFFER_PARTS;
-        ioSystem->headPointerBuffer = ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-2]; //situase o puntero antes do EOF do buffer anterior si se foi demasiado para atras
+        ioSystem->headPointerBuffer = ioSystem->buffers[ioSystem->headPointerBuffer][BUFFER_SIZE-2]; //situase o puntero antes do '$' do buffer anterior si se foi demasiado para atras
     }
 }
 
 char iosystemNextTailToken(IOSystem *ioSystem){
     //comprobamos si estamos nun centinela
-    if (*ioSystem->tail == EOF){
+    if (*ioSystem->tail == '$'){
 
         if(ioSystem->tail == &(ioSystem->buffers[ioSystem->tailPointerBuffer][BUFFER_SIZE-1]) ){
 
@@ -98,7 +98,7 @@ char iosystemNextTailToken(IOSystem *ioSystem){
 
         }else{
             //printf("FIN");
-            return EOF;
+            return '$';
         }
 
     }
@@ -113,14 +113,18 @@ char iosystemNextTailToken(IOSystem *ioSystem){
 int iosystemRange(IOSystem ioSystem){
     int range = 0;
     char* pointer = ioSystem.tail;
+    int currentBuffer = ioSystem.tailPointerBuffer;
+    /*
+     * Buffer range example
+     * ------** ******** ***-----
+     */
 
     while(pointer != ioSystem.head){
 
-        for(int i = 0; i < BUFFER_PARTS;i++){
-            if(pointer == &ioSystem.buffers[i][BUFFER_SIZE]){
-                pointer = &ioSystem.buffers[(i+1)%BUFFER_PARTS][0];
-                pointer++;
-            }
+        if(pointer == &ioSystem.buffers[currentBuffer][BUFFER_SIZE]){
+            currentBuffer = (currentBuffer +1)%BUFFER_PARTS;
+            pointer = &ioSystem.buffers[(currentBuffer)][0];
+            pointer++;
         }
 
         pointer++;

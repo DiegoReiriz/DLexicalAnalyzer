@@ -12,6 +12,7 @@
 typedef struct {
     IOSystem* ioSystem;
     HashTableTree *hashTableTree;
+    int line;
 } LexycalAnalizer;
 
 LexycalAnalizer* lexycalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree);
