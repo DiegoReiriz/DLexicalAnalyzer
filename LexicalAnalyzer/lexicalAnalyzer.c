@@ -385,9 +385,72 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                 break;
 
             default:
-                printf("TOOOOKEN: %c\n",c);
-                iosystemNextTailToken(lexycalAnalizer->ioSystem);
+
+
+                if(c == '='){
+                    c=iosystemNextToken(lexycalAnalizer->ioSystem);
+                    if( c == '='){ // o autómataacertou analizando o lexema actual
+                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                        printf("SUPER TOOKEN: ");
+                        while(range--)
+                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+
+                        printf("\n");
+
+                        fin = true;
+                    }else{ //O autómata fallou identificando o lexema actual
+                        iosystemReturnToken(lexycalAnalizer->ioSystem);
+
+                        c = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        printf("TOOOOKEN: %c\n",c);
+
+                    }
+
+                }else if(c == '+'){
+                    c=iosystemNextToken(lexycalAnalizer->ioSystem);
+                    if( c == '=' || c == '+'){ // o autómataacertou analizando o lexema actual
+                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                        printf("SUPER TOOKEN: ");
+                        while(range--)
+                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+
+                        printf("\n");
+
+                        fin = true;
+                    }else{ //O autómata fallou identificando o lexema actual
+                        iosystemReturnToken(lexycalAnalizer->ioSystem);
+
+                        c = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        printf("TOOOOKEN: %c\n",c);
+
+                    }
+
+                }else if(c == '-'){
+                    c=iosystemNextToken(lexycalAnalizer->ioSystem);
+                    if( c == '-' || c == '='){ // o autómataacertou analizando o lexema actual
+                        int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                        printf("SUPER TOOKEN: ");
+                        while(range--)
+                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+
+                        printf("\n");
+
+                        fin = true;
+                    }else{ //O autómata fallou identificando o lexema actual
+                        iosystemReturnToken(lexycalAnalizer->ioSystem);
+
+                        c = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        printf("TOOOOKEN: %c\n",c);
+
+                    }
+
+                }else{
+                    printf("TOOOOKEN: %c\n",c);
+                    iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                }
+
                 fin=true;
+
                 break;
         }
     }
