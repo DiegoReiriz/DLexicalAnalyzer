@@ -12,7 +12,7 @@ typedef struct _lexeme{
     short size;
 }Lexeme;
 
-Lexeme* lexemeCreate(char* string);
+Lexeme *lexemeCreate(char *string);
 Lexeme* lexemeDuplicate(Lexeme lexeme);
 void lexemeDestroy(Lexeme *lexeme);
 char lexemeCompare(Lexeme lexeme,Lexeme lexeme2);

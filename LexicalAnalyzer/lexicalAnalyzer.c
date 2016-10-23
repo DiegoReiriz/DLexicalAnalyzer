@@ -238,7 +238,7 @@ int checkComment(LexycalAnalizer *lexycalAnalizer){
 
 }
 
-//TODO: refactorizar en modo productor consumidor a función getLexema();
+
 int getLexema(LexycalAnalizer *lexycalAnalizer){
 
     //TODO: cambiar EOF por $
@@ -262,12 +262,26 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                     if(checkIntegerLiteral(lexycalAnalizer,c)){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("Integer: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
 
-                        printf("\n");
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+//                        printf("Integer: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -293,11 +307,27 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
 
                     if(result){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("Float: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
 
-                        printf("\n");
+                        char* buffer = malloc((sizeof(char)*(range+1)));
+
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+                        //                        printf("Float: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -324,11 +354,26 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                     if(checkIdentifier(lexycalAnalizer)){ // o autómataacertou analizando o lexema actual
 //                        TODO:decomentar para registrar o lexema
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("Identificador: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+//                        printf("Identificador: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -349,11 +394,27 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                 if(c == '"'){
                     if(checkLiteralString(lexycalAnalizer)){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("Literal String: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+
+//                        printf("Literal String: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -374,11 +435,26 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                     int result = checkComment(lexycalAnalizer);
                     if( result == 2){ // o autómata reconeceu un comentario de documentación
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("FOUND A COMMENT: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+//                        printf("FOUND A COMMENT: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else if ( result == 1){
@@ -409,11 +485,26 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                     c=iosystemNextToken(lexycalAnalizer->ioSystem);
                     if( c == '='){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("SUPER TOOKEN: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+
+//                        printf("SUPER TOOKEN: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -428,11 +519,25 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                     c=iosystemNextToken(lexycalAnalizer->ioSystem);
                     if( c == '=' || c == '+'){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("SUPER TOOKEN: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+//                        printf("SUPER TOOKEN: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
@@ -447,11 +552,25 @@ int getLexema(LexycalAnalizer *lexycalAnalizer){
                     c=iosystemNextToken(lexycalAnalizer->ioSystem);
                     if( c == '-' || c == '='){ // o autómataacertou analizando o lexema actual
                         int range = iosystemRange(*lexycalAnalizer->ioSystem);
-                        printf("SUPER TOOKEN: ");
-                        while(range--)
-                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+                        char* buffer = malloc((sizeof(char)*(range+1)));
 
-                        printf("\n");
+                        for (int i = 0; i<range; i++){
+                            buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+                        }
+
+                        buffer[range] = '\0';
+                        printf("\nDEBUG: %s\n",buffer);
+
+                        Lexeme* lexeme = lexemeCreate(buffer);
+
+                        if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
+                            hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+
+//                        printf("SUPER TOOKEN: ");
+//                        while(range--)
+//                            printf("%c",iosystemNextTailToken(lexycalAnalizer->ioSystem));
+//
+//                        printf("\n");
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual

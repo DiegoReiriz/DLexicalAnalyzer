@@ -8,10 +8,12 @@
 #include <stdbool.h>
 #include "lexeme.h"
 
-Lexeme* lexemeCreate(char* string){
+Lexeme *lexemeCreate(char *string) {
 
     //TODO: tal vez a estructura actual lexema teña que estar contida noutra estructura que conteña o tamaño total do lexema
-    size_t size = strlen(string);
+
+//ARREGLO PARA QUE SE COPIE O \0
+    size_t size = strlen(string)+1;
 
     Lexeme* lexeme = (Lexeme*) malloc(sizeof(Lexeme));
     lexeme->size= (short) size;
@@ -54,7 +56,8 @@ char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
 
 Lexeme* lexemeDuplicate(Lexeme lexeme){
     Lexeme* copy = malloc(sizeof(Lexeme));
-    copy->valor = malloc(sizeof(char) * lexeme.size);
+    copy->valor = malloc(sizeof(char) * (lexeme.size+1));
+//    copy->valor[lexeme.size] = '\0';
     copy->size = lexeme.size;
     memcpy(copy->valor,lexeme.valor,lexeme.size);
 
