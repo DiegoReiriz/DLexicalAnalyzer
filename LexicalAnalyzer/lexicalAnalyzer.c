@@ -6,6 +6,7 @@
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
 
+//TODO: falta por indicar o tipo de elementoq que se inserta
 int process(const LexicalAnalyzer *lexycalAnalizer) {
     int range = iosystemRange(*lexycalAnalizer->ioSystem);
 
@@ -16,7 +17,7 @@ int process(const LexicalAnalyzer *lexycalAnalizer) {
     }
 
     buffer[range] = '\0';
-    printf("\nDEBUG: %s\n",buffer);
+
 
     Lexeme* lexeme = lexemeCreate(buffer);
 
@@ -322,9 +323,10 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
-                        if (c == '.')//encontrouse un punto e xa se trata
-                            printf("SUPERTOOOKEN: %c\n",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-                        else
+                        if (c == '.'){//encontrouse un punto e xa se trata
+//                            printf("SUPERTOOOKEN: %c\n",iosystemNextTailToken(lexicalAnalizer->ioSystem));
+                            process(lexicalAnalizer);
+                        }else
                             iosystemReturnToken(lexicalAnalizer->ioSystem);
 
 //                        iosystemReturnToken(lexicalAnalizer->ioSystem);
@@ -417,6 +419,7 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
+                        //TODO: necesario un fail?
                         fail(lexicalAnalizer,iosystemRange(*lexicalAnalizer->ioSystem));
                         automata++;
                     }
@@ -447,8 +450,9 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     }else{ //O autómata fallou identificando o lexema actual
                         iosystemReturnToken(lexicalAnalizer->ioSystem);
 
-                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
-                        printf("TOOOOKEN: %c\n",c);
+//                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
+//                        printf("TOOOOKEN: %c\n",c);
+                        process(lexicalAnalizer);
 
                     }
 
@@ -467,9 +471,9 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     }else{ //O autómata fallou identificando o lexema actual
                         iosystemReturnToken(lexicalAnalizer->ioSystem);
 
-                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
-                        printf("TOOOOKEN: %c\n",c);
-
+//                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
+//                        printf("TOOOOKEN: %c\n",c);
+                        process(lexicalAnalizer);
                     }
 
                 }else if(c == '-'){
@@ -487,8 +491,9 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     }else{ //O autómata fallou identificando o lexema actual
                         iosystemReturnToken(lexicalAnalizer->ioSystem);
 
-                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
-                        printf("TOOOOKEN: %c\n",c);
+//                        c = iosystemNextTailToken(lexicalAnalizer->ioSystem);
+//                        printf("TOOOOKEN: %c\n",c);
+                        process(lexicalAnalizer);
 
                     }
 
@@ -498,8 +503,9 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     lexicalAnalizer->line++;
                     iosystemNextTailToken(lexicalAnalizer->ioSystem);
                 }else{
-                    printf("TOOOOKEN: %c\n",c);
-                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+//                    printf("TOOOOKEN: %c\n",c);
+//                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+                    process(lexicalAnalizer);
                 }
 
                 fin=true;
