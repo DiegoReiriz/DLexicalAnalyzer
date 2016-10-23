@@ -92,7 +92,7 @@ int main() {
 
 //    hashTableDelete(table,*lexeme);
 
-    //hashTablePrint(table);
+    hashTablePrint(table);
     hashTableDestroy(table);
     iosystemDestroyBuffer(&input);
 

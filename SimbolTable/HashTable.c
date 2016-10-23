@@ -6,7 +6,7 @@
 #include "HashTable.h"
 /* D. J. Bernstein hash function */
 
-Register* createRegister(Lexeme lexeme,enum LexicalComponents lexicalComponent){
+Register* createRegister(Lexeme lexeme,int lexicalComponent){
     Register* registe = malloc(sizeof(Register));
 
     registe->lexeme = lexemeDuplicate(lexeme);
@@ -106,7 +106,7 @@ int hash(Lexeme lexeme){
 }
 
 
-void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme,enum LexicalComponents lexicalComponent){
+void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme,int lexicalComponent){
     if(bucket->hasRegister){
 
         switch (lexemeCompare(lexeme,*bucket->registe->lexeme)){
@@ -145,7 +145,7 @@ void insertIntoBucket(HashTableTree *bucket,Lexeme lexeme,enum LexicalComponents
     }
 }
 
-void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme,enum LexicalComponents lexicalComponent){
+void hashTableInsert(HashTableTree *hashTableTree,Lexeme lexeme,int lexicalComponent){
     HashTableTree* bucket = &hashTableTree[hash(lexeme)];
 
     insertIntoBucket(bucket,lexeme,lexicalComponent);
@@ -245,15 +245,10 @@ void printTree(HashTableTree* hashTableTree){
         printTree(hashTableTree->right);
 
     if(hashTableTree->hasRegister){
-        printf("%s",hashTableTree->registe->lexeme->valor);
-        switch (hashTableTree->registe->lexicalComponent){
-            case RESERVED_WORD:
-                printf(" - RESERVED WORD");
-                break;
-            case IDENTIFIER:
-                printf(" - IDENTIFIER");
-                break;
-        }
+        printf("\t%s",hashTableTree->registe->lexeme->valor);
+
+        printf(" - %d",hashTableTree->registe->lexicalComponent);
+
         printf("\n");
     }
 

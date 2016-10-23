@@ -112,8 +112,6 @@ wstring 411
 dstring 412
 size_t 413
 ptrdiff_t 414
-
-/*DELIM*/
 END_OF_FILE 415
 END_OF_LINE 416
 WHITE_SPACE 417
