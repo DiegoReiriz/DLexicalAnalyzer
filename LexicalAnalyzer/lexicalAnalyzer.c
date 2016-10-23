@@ -4,12 +4,13 @@
 
 #include <ctype.h>
 #include "lexicalAnalyzer.h"
+#include "Errors.h"
 
 LexycalAnalizer* lexycalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree){
     LexycalAnalizer* lexycalAnalizaer = malloc(sizeof(LexycalAnalizer));
     lexycalAnalizaer->hashTableTree=hashTableTree;
     lexycalAnalizaer->ioSystem=ioSystem;
-    lexycalAnalizaer->line == 0;
+    lexycalAnalizaer->line = 0;
 
     return lexycalAnalizaer;
 }
@@ -146,11 +147,16 @@ bool checkLiteralString(LexycalAnalizer *lexycalAnalizer){
             c=iosystemNextToken(lexycalAnalizer->ioSystem);
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
     }
+
     if ( c == '"'){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
         result=true;
-    }else
-        printf("ERROR expected \\\":");
+    }else{
+        if( c == '\n')
+            showError('"','\n',lexycalAnalizer->line);
+        else
+            showError('"',c,lexycalAnalizer->line);
+    }
 
     iosystemReturnToken(lexycalAnalizer->ioSystem);
 
