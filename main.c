@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
-#include "LexicalAnalyzer/lexeme.h"
 #include "SimbolTable/HashTable.h"
 #include "SimbolTable/Loader.h"
 #include "LexicalAnalyzer/lexicalAnalyzer.h"
+
 
 int main() {
 //isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
@@ -18,18 +18,18 @@ int main() {
     HashTableTree *table =hashTable();
     loadReservedWords(table);
 
-    LexycalAnalizer* lexycalAnalizer = lexycalAnalyzerInitialize(&input,table);
+    LexicalAnalyzer* lexicalAnalyzer = lexicalAnalyzerInitialize(&input,table);
 
     int count = 0;
     int i = 1;
     while(i){
-        i = getLexema(lexycalAnalizer);
+        i = getLexema(lexicalAnalyzer);
         count++;
     }
 
     printf("\n\n TOTAL: %d",count);
 
-    lexycalAnalyzerDestroy(lexycalAnalizer);
+    lexicalAnalyzerDestroy(lexicalAnalyzer);
 
 //    char c=0;
 //    while( c != '\n'){
