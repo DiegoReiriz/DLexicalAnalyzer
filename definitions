@@ -1,182 +1,182 @@
-abstract
-alias
-align
-asm
-assert
-auto
-body
-bool
-break
-byte
-case
-cast
-catch
-cdouble
-cent
-cfloat
-char
-class
-const
-continue
-creal
-dchar
-debug
-default
-delegate
-deprecated
-do
-double
-else
-enum
-export
-extern
-false
-final
-finally
-float
-for
-foreach
-foreach_reverse
-function
-goto
-idouble
-if
-ifloat
-immutable
-import
-in
-inout
-int
-interface
-invariant
-ireal
-is
-lazy
-long
-macro
-mixin
-module
-new
-nothrow
-null
-out
-override
-package
-pragma
-private
-protected
-public
-pure
-real
-ref
-return
-scope
-shared
-short
-static
-struct
-super
-switch
-synchronized
-template
-this
-throw
-true
-try
-typeid
-typeof
-ubyte
-ucent
-uint
-ulong
-union
-unittest
-ushort
-version
-void
-wchar
-while
-with
-__FILE__
-__FILE_FULL_PATH__
-__MODULE__
-__LINE__
-__FUNCTION__
-__PRETTY_FUNCTION__
-__gshared
-__traits
-__vector
-__parameters
-string
-wstring
-dstring
-size_t
-ptrdiff_t
+abstract 301
+alias 302
+align 303
+asm 304
+assert 305
+auto 306
+body 307
+bool 308
+break 309
+byte 310
+case 311
+cast 312
+catch 313
+cdouble 314
+cent 315
+cfloat 316
+char 317
+class 318
+const 319
+continue 320
+creal 321
+dchar 322
+debug 323
+default 324
+delegate 325
+deprecated 326
+do 327
+double 328
+else 329
+enum 330
+export 331
+extern 332
+false 333
+final 334
+finally 335
+float 336
+for 337
+foreach 338
+foreach_reverse 339
+function 340
+goto 341
+idouble 342
+if 343
+ifloat 344
+immutable 345
+import 346
+in 347
+inout 348
+int 349
+interface 350
+invariant 351
+ireal 352
+is 353
+lazy 354
+long 355
+macro 356
+mixin 357
+module 358
+new 359
+nothrow 360
+null 361
+out 362
+override 363
+package 364
+pragma 365
+private 366
+protected 367
+public 368
+pure 369
+real 370
+ref 371
+return 372
+scope 373
+shared 374
+short 375
+static 376
+struct 377
+super 378
+switch 379
+synchronized 380
+template 381
+this 382
+throw 383
+true 384
+try 385
+typeid 386
+typeof 387
+ubyte 388
+ucent 389
+uint 390
+ulong 391
+union 392
+unittest 393
+ushort 394
+version 395
+void 396
+wchar 397
+while 398
+with 399
+__FILE__ 400
+__FILE_FULL_PATH__ 401
+__MODULE__ 402
+__LINE__ 403
+__FUNCTION__ 404
+__PRETTY_FUNCTION__ 405
+__gshared 406
+__traits 407
+__vector 408
+__parameters 409
+string 410
+wstring 411
+dstring 412
+size_t 413
+ptrdiff_t 414
 
 /*DELIM*/
-END_OF_FILE
-END_OF_LINE
-WHITE_SPACE
-/
-/=
-.
-..
-...
-&
-&=
-&&
-|
-|=
-||
--
--=
---
-+
-+=
-++
-<
-<=
-<<
-<<=
-<>
-<>=
->
->=
->>=
->>>=
->>
->>>
-!
-!=
-!<>
-!<>=
-!<
-!<=
-!>
-!>=
-(
-)
-[
-]
-{
-}
-?
-,
-;
-:
-$
-=
-==
-*
-*=
-%
-%=
-^
-^=
-^^
-^^=
-~
-~=
-@
-=>
-#
+END_OF_FILE 415
+END_OF_LINE 416
+WHITE_SPACE 417
+/ 418
+/= 419
+. 420
+.. 421
+... 422
+& 423
+&= 424
+&& 425
+| 426
+|= 427
+|| 428
+- 429
+-= 430
+-- 431
++ 432
++= 433
+++ 434
+< 435
+<= 436
+<< 437
+<<= 438
+<> 439
+<>= 440
+> 441
+>= 442
+>>= 443
+>>>= 444
+>> 445
+>>> 446
+! 447
+!= 448
+!<> 449
+!<>= 450
+!< 451
+!<= 452
+!> 453
+!>= 454
+( 455
+) 456
+[ 457
+] 458
+{ 459
+} 460
+? 461
+, 462
+; 463
+: 464
+$ 465
+= 466
+== 467
+* 468
+*= 469
+% 470
+%= 471
+^ 472
+^= 473
+^^ 474
+^^= 475
+~ 476
+~= 477
+@ 478
+=> 479
+# 480
