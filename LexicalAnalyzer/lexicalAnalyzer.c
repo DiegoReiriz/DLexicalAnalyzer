@@ -3,15 +3,16 @@
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
 //TODO: comprobar tamaño de lexema
+//TODO: facer unha estructura global
 //TODO: falta por indicar o tipo de elemento que se inserta
 //TODO: distinguir palabras claves, de elelemento separadores como ;
-int process(const LexicalAnalyzer *lexycalAnalizer) {
-    int range = iosystemRange(*lexycalAnalizer->ioSystem);
+int process(const LexicalAnalyzer *lexicalAnalizer) {
+    int range = iosystemRange(*lexicalAnalizer->ioSystem);
 
     char* buffer = malloc((sizeof(char)*(range+1)));
 
     for (int i = 0; i<range; i++){
-        buffer[i] = iosystemNextTailToken(lexycalAnalizer->ioSystem);
+        buffer[i] = iosystemNextTailToken(lexicalAnalizer->ioSystem);
     }
 
     buffer[range] = '\0';
@@ -19,8 +20,8 @@ int process(const LexicalAnalyzer *lexycalAnalizer) {
 
     Lexeme* lexeme = lexemeCreate(buffer);
 
-    if (hashTableGet(lexycalAnalizer->hashTableTree,*lexeme) == NULL)
-        hashTableInsert(lexycalAnalizer->hashTableTree,*lexeme,0);
+    if (hashTableGet(lexicalAnalizer->hashTableTree,*lexeme) == NULL)
+        hashTableInsert(lexicalAnalizer->hashTableTree,*lexeme,0);
 }
 
 LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree){
@@ -176,15 +177,11 @@ bool checkLiteralString(LexicalAnalyzer *lexycalAnalizer){
     if ( c == '"'){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
         result=true;
-    }else{
-        if( c == '\n'){
-            showError('"','\n',lexycalAnalizer->line);
-        }else
-            showError('"',c,lexycalAnalizer->line);
+    }else if( c == '\n'){
+        showError(ERROR_FOUND_NEW_LINE_ON_STRING,lexycalAnalizer->line);
     }
 
     iosystemReturnToken(lexycalAnalizer->ioSystem);
-
 
     return result;
 

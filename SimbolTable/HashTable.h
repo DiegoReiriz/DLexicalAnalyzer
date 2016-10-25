@@ -8,7 +8,7 @@
 
 #define HASH_TABLE_DEFAULT_SIZE 150
 
-
+//TODO: solo meter na tabla de símbolos identificadores!
 
 typedef struct _Registe{
     Lexeme* lexeme;

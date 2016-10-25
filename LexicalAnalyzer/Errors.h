@@ -4,6 +4,10 @@
 #ifndef ANALIZADORLEXICO_ERRORS_H
 #define ANALIZADORLEXICO_ERRORS_H
 
-void showError(char expected, char found, int line);
+enum errors {
+    ERROR_FOUND_NEW_LINE_ON_STRING,
+    ERROR_LEXEME_OVERFLOW};
+
+void showError(enum errors code, int line);
 
 #endif //ANALIZADORLEXICO_ERRORS_H
