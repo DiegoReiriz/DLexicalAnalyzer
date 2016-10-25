@@ -18,6 +18,6 @@ void showError(char expected, char found, int line){
     printf("\n");
 }
 
-//TODO: facer unha funcion descartar para poder tirar lexemas mal formados como 0b101012, habería que tirar todo o lexema hasta engranar en algún punto
+//TODO: facer unha funcion descartar para poder tirar lexemas mal formados como os que excedan o tamaño de lexema, habería que tirar todo o lexema hasta engranar en algún punto
 
 //Funcion con codigo de error indicando o error e donde se produceu
