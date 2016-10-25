@@ -249,6 +249,8 @@ void printTree(HashTableTree* hashTableTree){
 
         printf(" - %d",hashTableTree->registe->lexicalComponent);
 
+        printf(" - %d",hashTableTree->registe->count+1);
+
         printf("\n");
     }
 

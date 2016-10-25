@@ -94,15 +94,19 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
 int checkFloatLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
 
     int result = 0;
+    int count=0;
 
     char c = iosystemNextToken(lexycalAnalizer->ioSystem);
 
     if ( first == '.'){
         result = 0;
-        while( c >= '0' && c <= '9')
+        count = 0;
+        while( c >= '0' && c <= '9'){
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
+            count++;
+        }
 
-        if(c == 'e' || c =='E' ){
+        if((c == 'e' || c =='E') && count ){
 
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
 
@@ -113,7 +117,11 @@ int checkFloatLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
             }else{
                 return result;
             }
+        }else { //retornase un caracter para quedarnos unicamente co punto
+            iosystemReturnToken(lexycalAnalizer->ioSystem);
+            return result;
         }
+
     }else if( first  == 'e' || first =='E' ){
 
         if(c == '+' || c == '-'){

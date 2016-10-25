@@ -20,3 +20,5 @@ void showError(char expected, char found, int line){
 
     printf("\n");
 }
+
+//TODO: facer unha funcion descartar para poder tirar lexemas mal formados como 0b101012, habería que tirar todo o lexema hasta engranar en algún punto

@@ -38,14 +38,13 @@ char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
 
     for(int i = 0;true;i++){
         if (lex->valor[i] == lex2->valor[i]){
-            if (i == lex->size-1 && i == lex2->size-1)
+            if (i == lex->size-1 && i == lex2->size-1) //end of both lexemes
                 return 0;
-            else if (i == lex->size-1)
+            else if (i == lex->size-1) //end of first lexeme
                return -1;
-            else if (i == lex2->size-1)
+            else if (i == lex2->size-1) //end of the second lexeme
                return 1;
-            else
-               return 0;
+
 
         }else{
             return (char) (lex->valor[i] < lex2->valor[i] ? -1 : 1);
