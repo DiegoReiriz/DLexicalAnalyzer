@@ -11,6 +11,7 @@ Register* createRegister(Lexeme lexeme,int lexicalComponent){
 
     registe->lexeme = lexemeDuplicate(lexeme);
     registe->lexicalComponent = lexicalComponent;
+    registe->count = 0;
 
     return registe;
 }
@@ -81,7 +82,6 @@ void destroyTree(HashTableTree *hashTableTree){
 void hashTableDestroy(HashTableTree *hashTableTree){
 
     for (int i = 0; i < HASH_TABLE_DEFAULT_SIZE; i++) {
-        //TODO:liberar cada un dos registros da tabla
         destroyTree(&hashTableTree[i]);
     }
 

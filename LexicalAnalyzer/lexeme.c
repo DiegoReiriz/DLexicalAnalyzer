@@ -10,8 +10,6 @@
 
 Lexeme *lexemeCreate(char *string) {
 
-    //TODO: tal vez a estructura actual lexema teña que estar contida noutra estructura que conteña o tamaño total do lexema
-
 //ARREGLO PARA QUE SE COPIE O \0
     size_t size = strlen(string)+1;
 

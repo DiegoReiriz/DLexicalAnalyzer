@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
-
+//TODO: contar ben os \n
 //TODO: falta por indicar o tipo de elementoq que se inserta
 int process(const LexicalAnalyzer *lexycalAnalizer) {
     int range = iosystemRange(*lexycalAnalizer->ioSystem);
@@ -268,7 +268,6 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
 
 int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
-    //TODO: cambiar EOF por $
     char c=0;
     int automata= 0;//modo normal;
     int lexicalComponent=-1;
@@ -284,7 +283,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
             return 0;
 
         switch(automata){
-            //TODO: tal vez sea necesario identificar antes os numeros para evitar problemas de confusións
             case 0: //integer literals
                 if(isdigit(c)){
 
@@ -353,7 +351,7 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
                 if(isalnum(c) || c == '_'){
                     if(checkIdentifier(lexicalAnalizer)){ // o autómataacertou analizando o lexema actual
-//                        TODO:decomentar para registrar o lexema
+
                         lexicalComponent = process(lexicalAnalizer);
 
 
