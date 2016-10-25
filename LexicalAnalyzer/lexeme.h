@@ -15,4 +15,6 @@ void lexemeDestroy(Lexeme *lexeme);
 char lexemeCompare(Lexeme lexeme,Lexeme lexeme2);
 void lexemePrint(Lexeme lexeme);
 
+//TODO imprimir tabla hash en orden alfabético
+
 #endif //ANALIZADORLEXICO_LEXEM_H

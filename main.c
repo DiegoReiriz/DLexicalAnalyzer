@@ -12,8 +12,8 @@ int main() {
     IOSystem input;
 
     iosystemInitializeBuffer(&input);
-    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
-//    iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/regression.d");
+//    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
+    iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/regression.d");
 
     HashTableTree *table =hashTable();
     loadReservedWords(table);
@@ -28,6 +28,8 @@ int main() {
     }
 
     printf("\n\n TOTAL: %d",count);
+
+    printf("\n\nNumero Total de lineas: %d",lexicalAnalyzer->line);
 
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 

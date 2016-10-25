@@ -2,8 +2,9 @@
 #include <ctype.h>
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
-//TODO: contar ben os \n
-//TODO: falta por indicar o tipo de elementoq que se inserta
+//TODO: comprobar tamaño de lexema
+//TODO: falta por indicar o tipo de elemento que se inserta
+//TODO: distinguir palabras claves, de elelemento separadores como ;
 int process(const LexicalAnalyzer *lexycalAnalizer) {
     int range = iosystemRange(*lexycalAnalizer->ioSystem);
 
@@ -26,7 +27,7 @@ LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* has
     LexicalAnalyzer* lexycalAnalizer = malloc(sizeof(LexicalAnalyzer));
     lexycalAnalizer->hashTableTree=hashTableTree;
     lexycalAnalizer->ioSystem=ioSystem;
-    lexycalAnalizer->line = 0;
+    lexycalAnalizer->line = 1;
 
     return lexycalAnalizer;
 }
@@ -59,7 +60,7 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
 
         c = iosystemNextToken(lexycalAnalizer->ioSystem);
 
-        while ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))
+        while ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
 
     } else { //literal decimal
@@ -176,9 +177,9 @@ bool checkLiteralString(LexicalAnalyzer *lexycalAnalizer){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
         result=true;
     }else{
-        if( c == '\n')
+        if( c == '\n'){
             showError('"','\n',lexycalAnalizer->line);
-        else
+        }else
             showError('"',c,lexycalAnalizer->line);
     }
 
@@ -201,6 +202,7 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
         while( c != '\n')
             c=iosystemNextToken(lexycalAnalizer->ioSystem);
 
+
         iosystemReturnToken(lexycalAnalizer->ioSystem);
         result++;
 
@@ -209,14 +211,21 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
         if (c == '*'){
             c=iosystemNextToken(lexycalAnalizer->ioSystem);
-            if (c != '/')
+            if (c != '/') // ---> /**/
                 result++;
-            else
+            else{
                 end = true;
+            }
         }
 
+        if ( c=='\n')
+            lexycalAnalizer->line++;
 
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
+
+        if ( c=='\n')
+            lexycalAnalizer->line++;
+
         while( !end ){
             if( c == '*'){
                 c=iosystemNextToken(lexycalAnalizer->ioSystem);
@@ -226,6 +235,9 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
                 c=iosystemNextToken(lexycalAnalizer->ioSystem);
             }
 
+            if ( c=='\n')
+                lexycalAnalizer->line++;
+
         }
 
         result++;
@@ -234,6 +246,9 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
 
         int deep = 1;
         c=iosystemNextToken(lexycalAnalizer->ioSystem);
+
+        if ( c=='\n')
+            lexycalAnalizer->line++;
 
         while( deep ){
             if( c == '+'){
@@ -247,6 +262,9 @@ int checkComment(LexicalAnalyzer *lexycalAnalizer){
             }else{
                 c=iosystemNextToken(lexycalAnalizer->ioSystem);
             }
+
+            if ( c=='\n')
+                lexycalAnalizer->line++;
 
         }
 
@@ -436,6 +454,7 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
             default:
 
+                //TODO: os simbolos de un solo caracter non deben consultarse na tabla de símbolos, poden devolverse directamente
 
                 if(c == '='){
                     c=iosystemNextToken(lexicalAnalizer->ioSystem);
