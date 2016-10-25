@@ -1,6 +1,3 @@
-//
-// Created by diegoreiriz on 9/10/16.
-//
 
 #include <stdlib.h>
 #include "iosystem.h"

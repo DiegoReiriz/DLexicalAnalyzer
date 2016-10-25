@@ -1,6 +1,3 @@
-//
-// Created by entakitos on 17/10/16.
-//
 
 #include "Loader.h"
 

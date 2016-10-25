@@ -1,6 +1,3 @@
-//
-// Created by diegoreiriz on 11/10/16.
-//
 
 #ifndef ANALIZADORLEXICO_LEXEM_H
 #define ANALIZADORLEXICO_LEXEM_H

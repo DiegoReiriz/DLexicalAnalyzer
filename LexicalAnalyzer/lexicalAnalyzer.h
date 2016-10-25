@@ -1,6 +1,3 @@
-//
-// Created by entakitos on 18/10/16.
-//
 
 #ifndef ANALIZADORLEXICO_LEXICALANALYZER_H
 #define ANALIZADORLEXICO_LEXICALANALYZER_H

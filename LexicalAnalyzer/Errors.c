@@ -1,6 +1,3 @@
-//
-// Created by diegoreiriz on 23/10/16.
-//
 
 #include "Errors.h"
 
