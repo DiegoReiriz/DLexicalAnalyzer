@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include "HashTable.h"
-/* D. J. Bernstein hash function */
+
 
 Register* createRegister(Lexeme lexeme,int lexicalComponent){
     Register* registe = malloc(sizeof(Register));
@@ -89,14 +89,12 @@ void hashTableDestroy(HashTableTree *hashTableTree){
 
 }
 
-//    while (*cp)
-//        hash = 33 * hash ^ (unsigned char) *cp++;
 int hash(Lexeme lexeme){
     unsigned int hash = 5381;
     int current=0;
 
     while(lexeme.valor[current]){
-
+        /* D. J. Bernstein hash function */
         hash = (33 * hash ^ lexeme.valor[current])% HASH_TABLE_DEFAULT_SIZE;
 
         current++;
