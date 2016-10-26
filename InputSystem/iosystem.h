@@ -30,6 +30,7 @@ char iosystemNextToken(IOSystem *ioSystem);
 void iosystemReturnToken(IOSystem *ioSystem);
 char iosystemNextTailToken(IOSystem *ioSystem);
 void iosystemInitializeBuffer(IOSystem *ioSystem);
+void ioSystemDiscard(IOSystem *ioSystem);
 void iosystemDestroyBuffer(IOSystem *ioSystem);
 int iosystemRange(IOSystem ioSystem);
 

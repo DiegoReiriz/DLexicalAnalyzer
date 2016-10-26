@@ -6,6 +6,8 @@ void showError(enum errors code, int line){
     switch (code){
         case ERROR_FOUND_NEW_LINE_ON_STRING:
             printf("%d: Expected an \" ,but found an \\n",line);
+        case ERROR_LEXEME_OVERFLOW:
+            printf("%d: Lexeme size overflows maximun size of lexeme",line);
         default:
             printf("%d: Unknow Error",line);
     }

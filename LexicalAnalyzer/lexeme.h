@@ -7,6 +7,7 @@
 typedef struct _lexeme{
     char *valor;
     short size;
+    int lexicalComponent; //As an special case for the purpose of the assignment, the lexeme structure contains the lexical component, but that shouldn't be done
 }Lexeme;
 
 Lexeme *lexemeCreate(char *string);

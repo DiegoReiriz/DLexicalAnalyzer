@@ -10,10 +10,12 @@ typedef struct {
     IOSystem* ioSystem;
     HashTableTree *hashTableTree;
     int line;
+    int maximumLexemeSize;
+    int currentLexemeSize;
 } LexicalAnalyzer;
 
 LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree);
 void lexicalAnalyzerDestroy(LexicalAnalyzer* lexycalAnalizaer);
-int getLexema(LexicalAnalyzer *lexicalAnalizer);
+Lexeme*getLexema(LexicalAnalyzer *lexicalAnalizer);
 
 #endif //ANALIZADORLEXICO_LEXICALANALYZER_H

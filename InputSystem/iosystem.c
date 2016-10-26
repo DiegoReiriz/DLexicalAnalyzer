@@ -63,7 +63,9 @@ char iosystemNextToken(IOSystem *ioSystem){
 
         }else{
             //printf("FIN");
+            ioSystem->head++;//ao facer esto podemonos pasar do tamaño de arquivo xa que se sigue avanzando o puntero tras encontrar $
             return '$';
+
         }
 
     }
@@ -130,4 +132,9 @@ int iosystemRange(IOSystem ioSystem){
     }
 
     return range;
+}
+
+void ioSystemDiscard(IOSystem *ioSystem){
+    ioSystem->tail = ioSystem->head;
+    ioSystem->tailPointerBuffer = ioSystem->headPointerBuffer;
 }

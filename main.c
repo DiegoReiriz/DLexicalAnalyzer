@@ -21,11 +21,22 @@ int main() {
     LexicalAnalyzer* lexicalAnalyzer = lexicalAnalyzerInitialize(&input,table);
 
     int count = 0;
-    int i = 1;
-    while(i){
-        i = getLexema(lexicalAnalyzer);
-        count++;
-    }
+//    int i = 1;
+//    while(i){
+//        i = getLexema(lexicalAnalyzer);
+//        count++;
+//    }
+
+    Lexeme* lexeme;
+    int lexicalComponent;
+    do{
+        lexeme=getLexema(lexicalAnalyzer);
+        lexicalComponent = lexeme->lexicalComponent;
+
+        printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->valor,lexeme->lexicalComponent);
+
+        lexemeDestroy(lexeme);
+    }while(lexicalComponent != '$');
 
     printf("\n\n TOTAL: %d",count);
 
