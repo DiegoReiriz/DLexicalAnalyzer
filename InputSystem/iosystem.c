@@ -97,7 +97,6 @@ char iosystemNextTailToken(IOSystem *ioSystem){
             ioSystem->tail = &ioSystem->buffers[ioSystem->tailPointerBuffer][0];
 
         }else{
-            //printf("FIN");
             return '$';
         }
 

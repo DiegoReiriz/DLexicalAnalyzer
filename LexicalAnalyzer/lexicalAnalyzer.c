@@ -441,7 +441,7 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     if( c == '=' ) { // o autómataacertou analizando o lexema actual
                         lexicalComponent = process(lexicalAnalizer, TOKEN_ADDITION_EQUALS);
                     }else if( c == '+'){
-                        lexicalComponent = process(lexicalAnalizer, TOKEN_ADDITION_EQUALS);
+                        lexicalComponent = process(lexicalAnalizer, TOKEN_ADDITION_ADDITION);
                     }else{ //O autómata fallou identificando o lexema actual
                         iosystemReturnToken(lexicalAnalizer->ioSystem);
                         lexicalComponent = process(lexicalAnalizer, '+');
