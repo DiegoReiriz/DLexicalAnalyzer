@@ -308,12 +308,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     if(checkIntegerLiteral(lexicalAnalizer,c)){ // o autómataacertou analizando o lexema actual
                         lexicalComponent = process(lexicalAnalizer,LITERAL_INTEGER);
 
-//                        printf("Integer: ");
-//                        while(range--)
-//                            printf("%c",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-//
-//                        printf("\n");
-
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
                         //fail(lexicalAnalizer,iosystemRange(*lexicalAnalizer->ioSystem));
@@ -339,11 +333,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     if(result){ // o autómataacertou analizando o lexema actual
                         lexicalComponent = process(lexicalAnalizer,LITERAL_FLOAT);
 
-
-                        //                        printf("Float: ");
-//                        while(range--)
-//                            printf("%c",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-//
 //                        printf("\n");
 
                         fin = true;
@@ -373,13 +362,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
                         lexicalComponent = process(lexicalAnalizer,IDENTIFIER);
 
-
-//                        printf("Identificador: ");
-//                        while(range--)
-//                            printf("%c",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-//
-//                        printf("\n");
-
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
                         //nunca se da este caso, solo está por precaución
@@ -400,13 +382,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     if(checkLiteralString(lexicalAnalizer)){ // o autómataacertou analizando o lexema actual
                         lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);
 
-
-//                        printf("Literal String: ");
-//                        while(range--)
-//                            printf("%c",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-//
-//                        printf("\n");
-
                         fin = true;
                     }else{ //O autómata fallou identificando o lexema actual
                         //TODO: tratar o error de lecura de strings doutra formas
@@ -426,12 +401,6 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
                     int result = checkComment(lexicalAnalizer);
                     if( result == 2){ // o autómata reconeceu un comentario de documentación
                         lexicalComponent = process(lexicalAnalizer,DOCUMENTATION_COMMENT);
-
-//                        printf("FOUND A COMMENT: ");
-//                        while(range--)
-//                            printf("%c",iosystemNextTailToken(lexicalAnalizer->ioSystem));
-//
-//                        printf("\n");
 
                         fin = true;
                     }else if ( result == 1){
@@ -458,14 +427,13 @@ int getLexema(LexicalAnalyzer *lexicalAnalizer){
 
             default:
 
-                //TODO: os simbolos de un solo caracter non deben consultarse na tabla de símbolos, poden devolverse directamente
-
                 if(c == '='){
                     c=iosystemNextToken(lexicalAnalizer->ioSystem);
                     if( c == '='){ // o autómataacertou analizando o lexema actual
                         process(lexicalAnalizer,TOKEN_EQUALS_EQUALS);
                     }else{ //O autómata fallou identificando o lexema actual
                         iosystemReturnToken(lexicalAnalizer->ioSystem);
+                        lexicalComponent = process(lexicalAnalizer, '=');
                     }
 
                 }else if(c == '+'){

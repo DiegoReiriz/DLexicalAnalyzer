@@ -7,15 +7,16 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 
-#define BUFFER_SIZE 4097 //1 block 4096 + 1 centinela
 #define BUFFER_PARTS 2
-
 
 typedef struct {
     char* filePath;
     FILE *file;
     int filePosition;
+    int buffersize;
     char **buffers;
     char *tail;
     int tailPointerBuffer;
