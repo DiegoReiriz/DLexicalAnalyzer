@@ -6,7 +6,8 @@
 
 enum errors {
     ERROR_FOUND_NEW_LINE_ON_STRING,
-    ERROR_LEXEME_OVERFLOW};
+    ERROR_LEXEME_OVERFLOW,
+    ERROR_UNKNOW_ELEMENT};
 
 void showError(enum errors code, int line);
 

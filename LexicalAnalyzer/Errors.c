@@ -3,13 +3,20 @@
 
 void showError(enum errors code, int line){
 
+    printf("Error on line %d: ",line);
+
     switch (code){
         case ERROR_FOUND_NEW_LINE_ON_STRING:
-            printf("%d: Expected an \" ,but found an \\n",line);
+            printf("Expected an \" ,but found an \\n");
+            break;
         case ERROR_LEXEME_OVERFLOW:
-            printf("%d: Lexeme size overflows maximun size of lexeme",line);
+            printf("Lexeme size overflows maximum size of lexeme");
+            break;
+        case ERROR_UNKNOW_ELEMENT:
+            printf("Unknown lexical element found");
+            break;
         default:
-            printf("%d: Unknow Error",line);
+            printf("Unknown Error");
     }
 
     printf("\n");
