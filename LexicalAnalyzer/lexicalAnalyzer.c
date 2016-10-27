@@ -68,14 +68,26 @@ void fail(LexicalAnalyzer *lexycalAnalizer,int charactersReaded){
 
 }
 
-bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
+bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer) {
 
     bool result = false;
+
+    //reads the first character of the lexeme
     char c = iosystemNextToken(lexycalAnalizer->ioSystem);
     lexycalAnalizer->currentLexemeSize++;
 
+    //checks if the character is a digits
+    if(!isdigit(c))
+        return result; //if it isn't a digit, the automata fails
 
-    if ((c == 'b' || c == 'B') && first == '0') { //Literar binario
+    char first=c;
+
+    //reads the second character of the lexeme
+    c = iosystemNextToken(lexycalAnalizer->ioSystem);
+    lexycalAnalizer->currentLexemeSize++;
+
+    // if the second character is b or B, and first character was a 0, the lexeme should be a binary number
+    if ((c == 'b' || c == 'B') && first == '0') {
 
         c = iosystemNextToken(lexycalAnalizer->ioSystem);
         lexycalAnalizer->currentLexemeSize++;
@@ -85,7 +97,8 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
             lexycalAnalizer->currentLexemeSize++;
         }
 
-    } else if ((c == 'x' || c == 'X') && first == '0' ) { //Literal hexadecimal
+    // if the second character is x or X, and first character was a 0, the lexeme should be a hexadecimal number
+    } else if ((c == 'x' || c == 'X') && first == '0' ) {
 
         c = iosystemNextToken(lexycalAnalizer->ioSystem);
         lexycalAnalizer->currentLexemeSize++;
@@ -95,7 +108,8 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer, char first) {
             lexycalAnalizer->currentLexemeSize++;
         }
 
-    } else { //literal decimal
+    // if anything
+    } else {
         while ((c >= '0' && c <= '9') || c =='_') {
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
             lexycalAnalizer->currentLexemeSize++;
