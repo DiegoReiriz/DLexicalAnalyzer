@@ -8,7 +8,8 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     // http://stackoverflow.com/questions/3080836/how-to-find-the-filesystem-block-size
     struct stat fi;
     stat("/", &fi);
-    ioSystem->buffersize= (int) fi.st_blksize;
+//    ioSystem->buffersize= (int) fi.st_blksize;
+    ioSystem->buffersize= 8;
 
     //creación dos sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
@@ -121,14 +122,14 @@ int iosystemRange(IOSystem ioSystem){
 
     while(pointer != ioSystem.head){
 
-        if(pointer == &ioSystem.buffers[currentBuffer][ioSystem.buffersize]){
+        if(pointer == &ioSystem.buffers[currentBuffer][ioSystem.buffersize-1]){
             currentBuffer = (currentBuffer +1)%BUFFER_PARTS;
             pointer = &ioSystem.buffers[(currentBuffer)][0];
+//            pointer++;
+        }else{
             pointer++;
+            range++;
         }
-
-        pointer++;
-        range++;
     }
 
     return range;
