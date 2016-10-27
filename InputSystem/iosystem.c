@@ -34,7 +34,7 @@ void iosystemSetFile(IOSystem *ioSystem,char* path){
     ioSystem->filePath = path;
 }
 
-char iosystemNextToken(IOSystem *ioSystem){
+char iosystemNextCharacter(IOSystem *ioSystem){
 
     //comprobamos si estamos nun centinela
     if (*ioSystem->head == '$'){
