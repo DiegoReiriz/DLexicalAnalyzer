@@ -108,7 +108,7 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer) {
             lexycalAnalizer->currentLexemeSize++;
         }
 
-    // if anything
+    // if anything was correct, then is a decimal number
     } else {
         while ((c >= '0' && c <= '9') || c =='_') {
             c = iosystemNextToken(lexycalAnalizer->ioSystem);
@@ -116,12 +116,12 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexycalAnalizer) {
         }
     }
 
+    // if we found, a point, a 'e' or a 'E', it's a  floating point number, so this automata fails
     if (c == '.' || c == 'e' || c == 'E') { //si se parou o autómata porque se encontrou un punto, o descartamos todo e paramos
-
         return result;
     }
 
-
+    // if we found a delimiter of the lexeme,
     if( c == ' ' || c == ',' || c == ';' || c == '=' || c == '*' || c == '+' || c == '-' || c == '/' || c == '(' || c == ')' || c == '[' || c == ']')
         result=true;
 
@@ -372,7 +372,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
             case 0: //integer literals
                 if(isdigit(c)){
 
-                    if(checkIntegerLiteral(lexicalAnalizer,c)){ // o autómataacertou analizando o lexema actual
+                    if(checkIntegerLiteral(lexicalAnalizer)){ // o autómataacertou analizando o lexema actual
                         lexicalComponent = process(lexicalAnalizer,LITERAL_INTEGER);
 
                         fin = true;
