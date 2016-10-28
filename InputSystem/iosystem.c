@@ -10,6 +10,8 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     stat("/", &fi);
     ioSystem->buffersize= (int) fi.st_blksize;
 //    ioSystem->buffersize= 8;
+//    ioSystem->buffersize= 16;
+//    ioSystem->buffersize= 32;
 
     //creación dos sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
@@ -78,7 +80,7 @@ char iosystemNextCharacter(IOSystem *ioSystem){
 
 }
 
-void iosystemReturnToken(IOSystem *ioSystem){
+void iosystemReturnCharacter(IOSystem *ioSystem){
     ioSystem->head--;
 
     if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){

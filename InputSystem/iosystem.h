@@ -27,7 +27,7 @@ typedef struct {
 
 void iosystemSetFile(IOSystem *ioSystem,char* path);
 char iosystemNextCharacter(IOSystem *ioSystem);
-void iosystemReturnToken(IOSystem *ioSystem);
+void iosystemReturnCharacter(IOSystem *ioSystem);
 char iosystemNextTailToken(IOSystem *ioSystem);
 void iosystemInitializeBuffer(IOSystem *ioSystem);
 void ioSystemDiscard(IOSystem *ioSystem);
