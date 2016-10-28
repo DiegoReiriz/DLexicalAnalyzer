@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include "../LexicalAnalyzer/lexeme.h"
 
-#define HASH_TABLE_DEFAULT_SIZE 150
+#define HASH_TABLE_DEFAULT_SIZE 149
 
 typedef struct _Registe{
     Lexeme* lexeme;

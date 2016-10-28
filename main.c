@@ -35,7 +35,7 @@ int main() {
 
     printf("\n\n Nº de lexemas: %d\n",count);
 
-    printf("\n\nNumero Total de lineas: %d",lexicalAnalyzer->line);
+    printf("\n\nNumero Total de lineas: %d\n\n",lexicalAnalyzer->line);
 
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 
