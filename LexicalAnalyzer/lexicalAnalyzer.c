@@ -600,6 +600,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     fin = false;
                 }else{
                     showError(ERROR_UNKNOW_ELEMENT,lexicalAnalizer->line);
+                    //TODO: revisar si o correcto é procesar esto así
                     process(lexicalAnalizer,'0');
                     automata=0;
                     fin = false;

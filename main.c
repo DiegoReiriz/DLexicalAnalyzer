@@ -34,11 +34,11 @@ int main() {
         lexicalComponent = lexeme->lexicalComponent;
 
         printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->valor,lexeme->lexicalComponent);
-
+        count++;
         lexemeDestroy(lexeme);
     }while(lexicalComponent != '$');
 
-    printf("\n\n TOTAL: %d",count);
+    printf("\n\n TOTAL: %d\n",count);
 
     printf("\n\nNumero Total de lineas: %d",lexicalAnalyzer->line);
 

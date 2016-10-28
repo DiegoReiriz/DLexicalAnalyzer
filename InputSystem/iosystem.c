@@ -8,8 +8,8 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     // http://stackoverflow.com/questions/3080836/how-to-find-the-filesystem-block-size
     struct stat fi;
     stat("/", &fi);
-//    ioSystem->buffersize= (int) fi.st_blksize;
-    ioSystem->buffersize= 8;
+    ioSystem->buffersize= (int) fi.st_blksize;
+//    ioSystem->buffersize= 8;
 
     //creación dos sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
