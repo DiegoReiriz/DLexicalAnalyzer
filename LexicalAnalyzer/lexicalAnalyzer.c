@@ -23,7 +23,7 @@ Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 
         buffer[range] = '\0';
 
-        lexicalAnalyzer->currentLexemeSize=-1;
+        lexicalAnalyzer->currentLexemeSize=0;
 
         Lexeme *lexeme = lexemeCreate(buffer);
         lexeme->lexicalComponent = lexicalComponent;
@@ -36,7 +36,7 @@ Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 
         return lexeme;
     }else{//TODO: desfacer recursividad e que devolva -1
-        lexicalAnalyzer->currentLexemeSize=-1;
+        lexicalAnalyzer->currentLexemeSize=0;
 
         //lanzar error lexema demasiado grande
         showError(ERROR_LEXEME_OVERFLOW,lexicalAnalyzer->line);
@@ -254,7 +254,7 @@ bool checkIdentifier(LexicalAnalyzer *lexicalAnalizer){
 
 }
 
-//tries to read a lexeme, that is a string literal.Ex: "dfklgjdklsfgj"
+//tries to read a lexeme, that is a string literal.Ex: "Lorem ipsum dolor sit amet..."
 bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
 
     bool result =false;
@@ -535,8 +535,10 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                         fin = true;//the while loop must end
                     }else if ( result == 1){ //found another kind of comment
                         //process the lexeme but doesn't stores it
-                        process(lexicalAnalizer,-1);
+//                        process(lexicalAnalizer,-1);
 
+                        ioSystemDiscard(lexicalAnalizer->ioSystem);
+                        lexicalAnalizer->currentLexemeSize=0;
                         //return the automata to the first state to try to identify another lexeme
                         automata=0;
 
