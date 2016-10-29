@@ -2,8 +2,8 @@
 #ifndef ANALIZADORLEXICO_LOADER_H
 #define ANALIZADORLEXICO_LOADER_H
 
-#include "HashTable.h"
+#include "SymbolTable.h"
 
-void loadReservedWords(HashTableTree *tablaDeSimbolos);
+void loadReservedWords(SymbolTable *tablaDeSimbolos);
 
 #endif //ANALIZADORLEXICO_LOADER_H

@@ -2,7 +2,7 @@
 #include "Loader.h"
 #include "../LexicalAnalyzer/Errors.h"
 
-void loadReservedWords(HashTableTree *tablaDeSimbolos){
+void loadReservedWords(SymbolTable *tablaDeSimbolos){
 
     FILE* file = fopen ("./keywords", "r");
 
@@ -15,11 +15,11 @@ void loadReservedWords(HashTableTree *tablaDeSimbolos){
     char buffer[50];
 
     fscanf (file, "%s %d\n",buffer,&lexicalComponent);
-    hashTableInsert(tablaDeSimbolos, *lexemeCreate(buffer), lexicalComponent);
+    symbolTableInsert(tablaDeSimbolos, *lexemeCreate(buffer), lexicalComponent);
     while (!feof (file))
     {
         fscanf (file, "%s %d",buffer,&lexicalComponent);
-        hashTableInsert(tablaDeSimbolos, *lexemeCreate(buffer), lexicalComponent);
+        symbolTableInsert(tablaDeSimbolos, *lexemeCreate(buffer), lexicalComponent);
     }
 
     fclose (file);

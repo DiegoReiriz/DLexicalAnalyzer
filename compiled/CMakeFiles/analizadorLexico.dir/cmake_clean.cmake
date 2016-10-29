@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/analizadorLexico.dir/main.c.o"
   "CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o"
-  "CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o"
+  "CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o"
   "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o"
   "CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o"
   "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o"

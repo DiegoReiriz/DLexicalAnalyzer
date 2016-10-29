@@ -105,28 +105,28 @@ CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides: CMakeFiles/an
 CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides.build: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
 
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o: CMakeFiles/analizadorLexico.dir/flags.make
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o: ../SimbolTable/HashTable.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.c
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: CMakeFiles/analizadorLexico.dir/flags.make
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: ../SimbolTable/SymbolTable.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.c > CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.i
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c > CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.s
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.requires:
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires:
 
-.PHONY : CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.requires
+.PHONY : CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.provides: CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.requires
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.provides.build
-.PHONY : CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.provides
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.provides: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.provides.build
+.PHONY : CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.provides
 
-CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.provides.build: CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o
+CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.provides.build: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o
 
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o: CMakeFiles/analizadorLexico.dir/flags.make
@@ -229,7 +229,7 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o.provides.build: CMake
 analizadorLexico_OBJECTS = \
 "CMakeFiles/analizadorLexico.dir/main.c.o" \
 "CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o" \
-"CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o" \
+"CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o" \
 "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o" \
 "CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o" \
 "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o" \
@@ -240,7 +240,7 @@ analizadorLexico_EXTERNAL_OBJECTS =
 
 analizadorLexico: CMakeFiles/analizadorLexico.dir/main.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
-analizadorLexico: CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o
+analizadorLexico: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o
@@ -257,7 +257,7 @@ CMakeFiles/analizadorLexico.dir/build: analizadorLexico
 
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/main.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.requires
-CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o.requires
+CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o.requires

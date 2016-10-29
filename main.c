@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
-#include "SimbolTable/HashTable.h"
+#include "SimbolTable/SymbolTable.h"
 #include "SimbolTable/Loader.h"
 #include "LexicalAnalyzer/lexicalAnalyzer.h"
 
@@ -14,7 +14,7 @@ int main() {
     iosystemInitializeBuffer(&input);
     iosystemSetFile(&input,"./regression.d");
 
-    HashTableTree *table =hashTable();
+    SymbolTable *table = symbolTableCreate();
     loadReservedWords(table);
 
     LexicalAnalyzer* lexicalAnalyzer = lexicalAnalyzerInitialize(&input,table);
@@ -27,7 +27,7 @@ int main() {
         lexeme=getLexema(lexicalAnalyzer);
         lexicalComponent = lexeme->lexicalComponent;
 
-        printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->valor,lexeme->lexicalComponent);
+        printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->value,lexeme->lexicalComponent);
         count++;
         lexemeDestroy(lexeme);
     }while(lexicalComponent != '$');
@@ -38,8 +38,8 @@ int main() {
 
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 
-    hashTablePrint(table);
-    hashTableDestroy(table);
+    symbolTablePrint(table);
+    symbolTableDestroy(table);
     iosystemDestroyBuffer(&input);
 
     return 0;

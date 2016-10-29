@@ -9,47 +9,58 @@
 
 Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 
+    // checks if lexeme size is too large
     if(lexicalAnalyzer->currentLexemeSize <= lexicalAnalyzer->maximumLexemeSize){
 
+        //gets the distance between the tail and head pointer
         int range = iosystemRange(*lexicalAnalyzer->ioSystem);
 
+        //creates a buffer to store the lexeme
         char *buffer = malloc((sizeof(char) * (range + 1)));
 
+        //stores the lexeme into the buffer
         for (int i = 0; i < range; i++) {
-            buffer[i] = iosystemNextTailToken(lexicalAnalyzer->ioSystem);
+            buffer[i] = iosystemNextTailCharacter(lexicalAnalyzer->ioSystem);
         }
 
+        //puts a \0 at the end of the buffer because is how C treats Strings
         buffer[range] = '\0';
 
+        //resets lexeme size
         lexicalAnalyzer->currentLexemeSize=0;
 
+        //creates the lexeme
         Lexeme *lexeme = lexemeCreate(buffer);
         lexeme->lexicalComponent = lexicalComponent;
 
+        //if current lexeme is an identifier
         if( lexicalComponent == IDENTIFIER){
-            //TODO: cambiar por unha única función analizar da tabla de símbolos
-            if (hashTableGet(lexicalAnalyzer->hashTableTree, *lexeme) == NULL)
-                hashTableInsert(lexicalAnalyzer->hashTableTree, *lexeme, IDENTIFIER);
+
+            //the symbol table must analyze the lexeme
+            lexeme->lexicalComponent = symbolTableAnalyze(lexicalAnalyzer->hashTableTree,lexeme);
+
         }
 
+        //return a lexical component for the lexeme
         return lexeme;
-    }else{//TODO: desfacer recursividad e que devolva -1
+    }else{
+        //resets lexema size
         lexicalAnalyzer->currentLexemeSize=0;
 
-        //lanzar error lexema demasiado grande
+        //shows an error, because the lexeme is too large
         showError(ERROR_LEXEME_OVERFLOW,lexicalAnalyzer->line);
 
-        //reset
+        //discards current lexeme
         ioSystemDiscard(lexicalAnalyzer->ioSystem);
 
-        //viva la recursividad
+        //tries to obtain a new lexeme
         return getLexema(lexicalAnalyzer);
     }
 }
 
 
 //creates the structure lexicalAnalyzer with default values
-LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree){
+LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,SymbolTable* hashTableTree){
     LexicalAnalyzer* lexycalAnalizer = malloc(sizeof(LexicalAnalyzer));
     lexycalAnalizer->hashTableTree=hashTableTree;
     lexycalAnalizer->ioSystem=ioSystem;
@@ -69,7 +80,7 @@ void lexicalAnalyzerDestroy(LexicalAnalyzer* lexycalAnalizaer){
 void fail(LexicalAnalyzer *lexicalAnalizer,int charactersReaded){
 
     while(charactersReaded--) {
-        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }
 
@@ -124,7 +135,7 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) 
         result=true;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -188,7 +199,7 @@ int checkFloatLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) {
                 return result;
             }
         }else { //if the last character isn't 'e' or 'E' then returns the las character to the ioSystem
-            iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+            ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize--;
             return result;
         }
@@ -222,7 +233,7 @@ int checkFloatLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) {
         result=1;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -249,7 +260,7 @@ bool checkIdentifier(LexicalAnalyzer *lexicalAnalizer){
         result=true;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -287,11 +298,11 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
     //if last character that reads is a '\n' or a '$', throws an error
     }else if( c == '\n'){
         showError(ERROR_FOUND_NEW_LINE_ON_STRING,lexicalAnalizer->line);
-        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }else if( c == '$'){
         showError(ERROR_PREMATURE_EOF_STRING,lexicalAnalizer->line);
-        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }
 
@@ -300,6 +311,7 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
 }
 
 //checks if the current lexeme is any kind of comment
+//-2 - PREMATURE EOF in a documentation comment
 //-1 - PREMATURE EOF
 //0 - error
 //1 - comment
@@ -326,7 +338,7 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
         }
 
         //return to the ioSystem the last character readed, '\n' or '$'
-        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
 
         if (c == '$'){
@@ -447,6 +459,7 @@ enum automatas {
     CHECK_COMMENT,
     CHECK_OTHER};
 
+//chooses the automata that should process the lexeme
 int calculateAutomata(char c){
     if(isdigit(c)) {
         return CHECK_LITERAL_INTEGER;
@@ -488,7 +501,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     lexicalComponent = process(lexicalAnalizer,LITERAL_INTEGER); //process the lexeme founded as a literal integer
                     fin = true;//the while loop must end
                 }else{ //the automata fails
-                    iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
                 }
 
@@ -505,7 +518,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                         lexicalComponent = process(lexicalAnalizer, c); //process the lexeme founded as a point
                         fin=true;//the while loop must end
                     }else {
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                         lexicalAnalizer->currentLexemeSize--;
                     }
                 }
@@ -518,7 +531,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     lexicalComponent = process(lexicalAnalizer,IDENTIFIER); //process the lexeme founded as an Identifier
                     fin = true;//the while loop must end
                 }else{ //the automata failed
-                    iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
                 }
 
@@ -531,7 +544,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     fin = true;//the while loop must end
                 }else{ //automata failed
                     //TODO: check this, maybe needs better treatment
-                    iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
                     lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);//process the lexeme until the error as a literal String
                     fin = true;//the while loop must end
@@ -552,15 +565,14 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                         lexicalAnalizer->currentLexemeSize=0;
                     }else if ( foo == -1) { //found an error in a comment
 
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
                         //discards the lexeme of the comment
                         ioSystemDiscard(lexicalAnalizer->ioSystem);
                         lexicalAnalizer->currentLexemeSize = 0;
                     }
                     else if ( foo == -2){ //found an error in a documentation comment
 
-printf("\n\nDENTRO\n\n");
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
                         //discards the lexeme of the comment
                         lexicalComponent=process(lexicalAnalizer,DOCUMENTATION_COMMENT);
                         fin=true;
@@ -569,7 +581,7 @@ printf("\n\nDENTRO\n\n");
                     }else{ //the automata failed
 
                         //returns last character to ioSystem, now there is only an '/' in the ioSystem
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                         lexicalAnalizer->currentLexemeSize--;
 
                         //if the comment fails here, then c is an '/'
@@ -586,7 +598,7 @@ printf("\n\nDENTRO\n\n");
                     if( c == '='){ // readed ==
                         lexicalComponent = process(lexicalAnalizer,TOKEN_EQUALS_EQUALS);//process lexeme as an '=='
                     }else{ // readed =
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
                         lexicalAnalizer->currentLexemeSize--;
                         lexicalComponent = process(lexicalAnalizer, '='); //process lexeme as an '='
                     }
@@ -598,7 +610,7 @@ printf("\n\nDENTRO\n\n");
                     }else if( c == '+'){ //readed ++
                         lexicalComponent = process(lexicalAnalizer, TOKEN_ADDITION_ADDITION);//process lexeme as a '++'
                     }else{ //readed +
-                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
                         lexicalAnalizer->currentLexemeSize--;
                         lexicalComponent = process(lexicalAnalizer, '+');//process lexeme as a '+'
                     }
@@ -609,19 +621,20 @@ printf("\n\nDENTRO\n\n");
                     lexicalComponent = process(lexicalAnalizer, c);//process lexeme as one of the elements from above
                     fin=true;//the while loop must end
                 }else if (c == ' ' || c == '\t'){
-                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+                    //discards spaces and tabs
+                    iosystemNextTailCharacter(lexicalAnalizer->ioSystem);
                     lexicalAnalizer->currentLexemeSize--;
                     fin = false;
                 }else if (c == '\n'){
                     lexicalAnalizer->line++;
                     //discards the '\n'
-                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+                    iosystemNextTailCharacter(lexicalAnalizer->ioSystem);
                     lexicalAnalizer->currentLexemeSize--;
                     fin = false;
                 }else{
+                    //discards an unknow lexeme
                     showError(ERROR_UNKNOW_ELEMENT,lexicalAnalizer->line);
-                    //TODO: revisar si o correcto é procesar esto así
-                    process(lexicalAnalizer,'0');
+                    ioSystemDiscard(lexicalAnalizer->ioSystem);
                     fin = false;
                 }
 

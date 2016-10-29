@@ -231,33 +231,6 @@ LexicalAnalyzer/lexicalAnalyzer.c.s:
 	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.s
 .PHONY : LexicalAnalyzer/lexicalAnalyzer.c.s
 
-SimbolTable/HashTable.o: SimbolTable/HashTable.c.o
-
-.PHONY : SimbolTable/HashTable.o
-
-# target to build an object file
-SimbolTable/HashTable.c.o:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o
-.PHONY : SimbolTable/HashTable.c.o
-
-SimbolTable/HashTable.i: SimbolTable/HashTable.c.i
-
-.PHONY : SimbolTable/HashTable.i
-
-# target to preprocess a source file
-SimbolTable/HashTable.c.i:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.i
-.PHONY : SimbolTable/HashTable.c.i
-
-SimbolTable/HashTable.s: SimbolTable/HashTable.c.s
-
-.PHONY : SimbolTable/HashTable.s
-
-# target to generate assembly for a file
-SimbolTable/HashTable.c.s:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.s
-.PHONY : SimbolTable/HashTable.c.s
-
 SimbolTable/Loader.o: SimbolTable/Loader.c.o
 
 .PHONY : SimbolTable/Loader.o
@@ -284,6 +257,33 @@ SimbolTable/Loader.s: SimbolTable/Loader.c.s
 SimbolTable/Loader.c.s:
 	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.s
 .PHONY : SimbolTable/Loader.c.s
+
+SimbolTable/SymbolTable.o: SimbolTable/SymbolTable.c.o
+
+.PHONY : SimbolTable/SymbolTable.o
+
+# target to build an object file
+SimbolTable/SymbolTable.c.o:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o
+.PHONY : SimbolTable/SymbolTable.c.o
+
+SimbolTable/SymbolTable.i: SimbolTable/SymbolTable.c.i
+
+.PHONY : SimbolTable/SymbolTable.i
+
+# target to preprocess a source file
+SimbolTable/SymbolTable.c.i:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i
+.PHONY : SimbolTable/SymbolTable.c.i
+
+SimbolTable/SymbolTable.s: SimbolTable/SymbolTable.c.s
+
+.PHONY : SimbolTable/SymbolTable.s
+
+# target to generate assembly for a file
+SimbolTable/SymbolTable.c.s:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s
+.PHONY : SimbolTable/SymbolTable.c.s
 
 main.o: main.c.o
 
@@ -333,12 +333,12 @@ help:
 	@echo "... LexicalAnalyzer/lexicalAnalyzer.o"
 	@echo "... LexicalAnalyzer/lexicalAnalyzer.i"
 	@echo "... LexicalAnalyzer/lexicalAnalyzer.s"
-	@echo "... SimbolTable/HashTable.o"
-	@echo "... SimbolTable/HashTable.i"
-	@echo "... SimbolTable/HashTable.s"
 	@echo "... SimbolTable/Loader.o"
 	@echo "... SimbolTable/Loader.i"
 	@echo "... SimbolTable/Loader.s"
+	@echo "... SimbolTable/SymbolTable.o"
+	@echo "... SimbolTable/SymbolTable.i"
+	@echo "... SimbolTable/SymbolTable.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -86,7 +86,7 @@ char iosystemNextCharacter(IOSystem *ioSystem){
 
 }
 
-void iosystemReturnCharacter(IOSystem *ioSystem){
+void ioSystemReturnCharacter(IOSystem *ioSystem){
     ioSystem->head--;
 
     if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){
@@ -95,7 +95,7 @@ void iosystemReturnCharacter(IOSystem *ioSystem){
     }
 }
 
-char iosystemNextTailToken(IOSystem *ioSystem){
+char iosystemNextTailCharacter(IOSystem *ioSystem){
     //comprobamos si estamos nun centinela
     if (*ioSystem->tail == '$'){
 
