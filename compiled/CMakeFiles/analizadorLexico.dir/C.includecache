@@ -53,8 +53,6 @@ Errors.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 definitions.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
-../InputSystem/iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
 ../InputSystem/iosystem.h

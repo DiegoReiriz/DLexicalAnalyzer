@@ -5,6 +5,8 @@
 #ifndef ANALIZADORLEXICO_DEFINES_H
 #define ANALIZADORLEXICO_DEFINES_H
 
+
+//Lexical components definitions
 #define LITERAL_STRING 500
 #define LITERAL_INTEGER 501
 #define LITERAL_FLOAT 502

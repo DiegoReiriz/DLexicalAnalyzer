@@ -1,9 +1,12 @@
 
 #include "Errors.h"
 
+//this function takes an error code and a line as arguments
+// to print a error message
+
 void showError(enum errors code, int line){
 
-    printf("Error on line %d: ",line);
+    printf("\033[0;31mError on line %d: ",line);
 
     switch (code){
         case ERROR_FOUND_NEW_LINE_ON_STRING:
@@ -19,10 +22,6 @@ void showError(enum errors code, int line){
             printf("Unknown Error");
     }
 
-    printf("\n");
+    printf("\033[0m\n");
 
 }
-
-//TODO: facer unha funcion descartar para poder tirar lexemas mal formados como os que excedan o tamaño de lexema, habería que tirar todo o lexema hasta engranar en algún punto
-
-//Funcion con codigo de error indicando o error e donde se produceu
