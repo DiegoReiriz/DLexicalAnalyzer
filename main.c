@@ -6,21 +6,20 @@
 
 
 int main() {
-//isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
 
-    //ejemplo de uso do módulo de entrada
+    //Creates and initialize input system
     IOSystem input;
-
     iosystemInitializeBuffer(&input);
     iosystemSetFile(&input,"./regression.d");
 
+    //creates symbol table and loads all keywords
     SymbolTable *table = symbolTableCreate();
     loadReservedWords(table);
 
+    //creates a lexical analyzer, with the input system and symbol table created before
     LexicalAnalyzer* lexicalAnalyzer = lexicalAnalyzerInitialize(&input,table);
 
-    int count = 0;
-
+    // gets lexemes from lexycal analizer, unit found a $ - EOF
     Lexeme* lexeme;
     int lexicalComponent;
     do{
@@ -28,18 +27,19 @@ int main() {
         lexicalComponent = lexeme->lexicalComponent;
 
         printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->value,lexeme->lexicalComponent);
-        count++;
         lexemeDestroy(lexeme);
     }while(lexicalComponent != '$');
 
-    printf("\n\n Nº de lexemas: %d\n",count);
-
-    printf("\n\nNumero Total de lineas: %d\n\n",lexicalAnalyzer->line);
-
+    //destroys the lexical analyzer
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 
+    //prints the symbol table
     symbolTablePrint(table);
+
+    //destroys the symbol table
     symbolTableDestroy(table);
+
+    //destroys imput system
     iosystemDestroyBuffer(&input);
 
     return 0;
