@@ -267,7 +267,7 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
     lexicalAnalizer->currentLexemeSize++;
 
     //reads characters while they are different from '"' and  '\n'
-    while( c != '"' && c != '\n'){
+    while( c != '"' && c != '\n' && c != '$'){
 
         //if the automata founds a '\', then it skips the next character
         if ( c == '\\') {
@@ -280,13 +280,17 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
         lexicalAnalizer->currentLexemeSize++;
     }
 
-    //if last character that reads is an '"', everything is ok
+    //if last character that reads is a '"', everything is ok
     if ( c == '"'){
         result=true;
 
-    //if last character that reads is an '\n', throws an error
+    //if last character that reads is a '\n' or a '$', throws an error
     }else if( c == '\n'){
         showError(ERROR_FOUND_NEW_LINE_ON_STRING,lexicalAnalizer->line);
+        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+        lexicalAnalizer->currentLexemeSize--;
+    }else if( c == '$'){
+        showError(ERROR_PREMATURE_EOF_STRING,lexicalAnalizer->line);
         iosystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }
@@ -296,6 +300,11 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
 }
 
 //checks if the current lexeme is any kind of comment
+//-1 - PREMATURE EOF
+//0 - error
+//1 - comment
+//2 - documentation comment
+
 int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
     int result =0;
@@ -306,21 +315,25 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
     lexicalAnalizer->currentLexemeSize++;
 
     //if it's a second slash
-    if( c == '/' ){
+    if( c == '/' ) {
 
         //reads characters unit '\n'
-        c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
+        c = iosystemNextCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize++;
-        while( c != '\n') {
+        while (c != '\n' && c != '$') {
             c = iosystemNextCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize++;
         }
 
-        //return to the ioSystem the last character readed, '\n'
+        //return to the ioSystem the last character readed, '\n' or '$'
         iosystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
 
-        result++; //result can be 1, it means that this comment isn't a valid lexeme
+        if (c == '$'){
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = -1;
+        }else
+            result++; //result can be 1, it means that this comment isn't a valid lexeme
 
     //if it's an '*'
     }else if ( c == '*' ){
@@ -335,24 +348,20 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
             c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize++;
 
-            //if it's an slash,
             if (c != '/')  //documentation comment found
                 result++;
             else //  found this lexeme ---> /**/
                 end = true;
 
-
         }
 
         if ( c=='\n')
             lexicalAnalizer->line++;
-
-        //reads another character
-        c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
-        lexicalAnalizer->currentLexemeSize++;
-
-        if ( c=='\n')
-            lexicalAnalizer->line++;
+        else if (c == '$'){//found a premature EOF
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = result?-2:-1;
+            return result;
+        }
 
         //while not if founded the chain "*/", it doesn't end
         while( !end ){
@@ -368,7 +377,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
             if ( c=='\n')
                 lexicalAnalizer->line++;
-
+            else if (c == '$'){ //found a premature EOF
+                showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+                result = result?-2:-1;
+                return result;
+            }
         }
 
         result++; //result can be 1 or 2 in this step. if it is 2, it means that a documentation comment was found
@@ -384,7 +397,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
         if ( c=='\n')
             lexicalAnalizer->line++;
-
+        else if (c == '$'){ //found a premature EOF
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = -1;
+            return result;
+        }
         //while deep it's positive
         while( deep ){
             // if the automata founds the chain "+/", reads a character and deep increments
@@ -407,7 +424,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
             if ( c=='\n')
                 lexicalAnalizer->line++;
-
+            else if (c == '$'){ //found a premature EOF
+                showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+                result = -1;
+                return result;
+            }
         }
 
         result++; //result can be 1, it means that this comment isn't a valid lexeme
@@ -512,6 +533,8 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     //TODO: check this, maybe needs better treatment
                     iosystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
+                    lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);//process the lexeme until the error as a literal String
+                    fin = true;//the while loop must end
                 }
 
                 break;
@@ -527,6 +550,21 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                         //discards the lexeme of the comment
                         ioSystemDiscard(lexicalAnalizer->ioSystem);
                         lexicalAnalizer->currentLexemeSize=0;
+                    }else if ( foo == -1) { //found an error in a comment
+
+                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        //discards the lexeme of the comment
+                        ioSystemDiscard(lexicalAnalizer->ioSystem);
+                        lexicalAnalizer->currentLexemeSize = 0;
+                    }
+                    else if ( foo == -2){ //found an error in a documentation comment
+
+printf("\n\nDENTRO\n\n");
+                        iosystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        //discards the lexeme of the comment
+                        lexicalComponent=process(lexicalAnalizer,DOCUMENTATION_COMMENT);
+                        fin=true;
+
 
                     }else{ //the automata failed
 

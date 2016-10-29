@@ -1,9 +1,15 @@
 
 #include "Loader.h"
+#include "../LexicalAnalyzer/Errors.h"
 
 void loadReservedWords(HashTableTree *tablaDeSimbolos){
 
     FILE* file = fopen ("./keywords", "r");
+
+    if (file == NULL){
+        showError(ERROR_FILE_KEYWORDS,-1);
+        return;
+    }
 
     int lexicalComponent = 0;
     char buffer[50];

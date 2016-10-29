@@ -9,6 +9,8 @@
 /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c
 iosystem.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
+../LexicalAnalyzer/Errors.h
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
 stdbool.h
@@ -79,6 +81,8 @@ stdbool.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c
 Loader.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
+../LexicalAnalyzer/Errors.h
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
 HashTable.h

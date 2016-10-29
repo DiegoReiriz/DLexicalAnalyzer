@@ -4,6 +4,7 @@
 CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c
  /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
+ /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
@@ -23,6 +24,7 @@ CMakeFiles/analizadorLexico.dir/SimbolTable/HashTable.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.c
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.h
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o
+ /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/HashTable.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c

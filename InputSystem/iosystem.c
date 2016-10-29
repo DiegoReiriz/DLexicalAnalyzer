@@ -1,4 +1,5 @@
 #include "iosystem.h"
+#include "../LexicalAnalyzer/Errors.h"
 
 void iosystemInitializeBuffer(IOSystem *ioSystem){
 
@@ -50,6 +51,11 @@ char iosystemNextCharacter(IOSystem *ioSystem){
         //cargamos datos no novo buffer
         FILE *fp;
         fp = fopen(ioSystem->filePath, "r");
+
+        if (fp == NULL){
+            showError(ERROR_FILE_REGRESSION_D,-1);
+            return '$';
+        }
 
         fseek(fp,ioSystem->filePosition,0);
         size_t readed=fread(ioSystem->buffers[ioSystem->headPointerBuffer], 1, (size_t) (ioSystem->buffersize - 1), fp);
