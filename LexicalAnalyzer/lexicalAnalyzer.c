@@ -3,7 +3,6 @@
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
 #include "definitions.h"
-#include "../InputSystem/iosystem.h"
 
 //TODO: facer unha estructura global
 //TODO: distinguir palabras claves, de elelemento separadores como ; ¿DONE?

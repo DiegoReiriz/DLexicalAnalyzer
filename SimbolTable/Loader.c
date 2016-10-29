@@ -3,11 +3,8 @@
 
 void loadReservedWords(HashTableTree *tablaDeSimbolos){
 
-//    iosystemSetFile(&test,"/home/entakitos/repositorios/DLexicalAnalyzer/definitions");
-//    iosystemSetFile(&test,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions");
+    FILE* file = fopen ("./keywords", "r");
 
-    FILE* file = fopen ("/home/diegoreiriz/ClionProjects/analizadorLexico/definitions", "r");
-//    FILE* file = fopen ("/home/entakitos/repositorios/DLexicalAnalyzer/definitions", "r");
     int lexicalComponent = 0;
     char buffer[50];
 
