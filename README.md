@@ -1,17 +1,9 @@
-# D Lexycal Analizer
+# D Lexical Analizer
 
-## A Lexycal Analyzer made for de D Language as an asingment of the Compilers&Interpreters subject 
+## HOW TO USE IT
 
-![compilers](http://cf.chucklesnetwork.com/items/7/6/0/2/5/original/yo-dawg-i-herd-u-liek-compilers-so-i-wrote-a-compiler-to-compile.jpg)
+1. Open a terminal
+2. Go to the directory where is located **ejecutar.bash**
+3. To run the program type
 
-<sub>Sorry, but everything is better with a meme in it. Also, now you have the right mood to read this ;)</sub>
-
-## Modules of the application
-
-[TOC]
-
-### Input System
-
-### Lexycal Analyzer
-
-### Symbol Table
+    bash ejecutar.bash
