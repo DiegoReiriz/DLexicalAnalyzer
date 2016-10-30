@@ -3,29 +3,29 @@
 
 void iosystemInitializeBuffer(IOSystem *ioSystem){
 
-    //creación de punteros aos sub-buffers
+    //creation of pointers to sub-buffers
     ioSystem->buffers = (char **) malloc(sizeof(char*) * BUFFER_PARTS);
 
+    // obtains the file system block size
     // http://stackoverflow.com/questions/3080836/how-to-find-the-filesystem-block-size
     struct stat fi;
     stat("/", &fi);
     ioSystem->buffersize= (int) fi.st_blksize;
-//    ioSystem->buffersize= 8;
-//    ioSystem->buffersize= 16;
-//    ioSystem->buffersize= 32;
 
-    //creación dos sub-buffers
+    //cration of sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
         ioSystem->buffers[i] = (char*)malloc(sizeof(char)*ioSystem->buffersize);
         ioSystem->buffers[i][ioSystem->buffersize - 1] = '$';
     }
 
+    //initialization of pointers
     ioSystem->tailPointerBuffer = ioSystem->headPointerBuffer = BUFFER_PARTS-1;
     ioSystem->tail = ioSystem->head = &(ioSystem->buffers[ioSystem->headPointerBuffer][ioSystem->buffersize-1]);
     ioSystem->filePosition = 0;
 
 }
 
+//destroys the buffers of an ioSystem
 void iosystemDestroyBuffer(IOSystem *ioSystem){
 
     for(int i = 0; i <= BUFFER_PARTS;i++)
@@ -34,91 +34,109 @@ void iosystemDestroyBuffer(IOSystem *ioSystem){
     free(ioSystem->buffers);
 }
 
+//sets the file that the ioSystem must read
 void iosystemSetFile(IOSystem *ioSystem,char* path){
     ioSystem->filePath = path;
 }
 
+//gets de character under the current position of the head pointer and moves the pointer forward
 char iosystemNextCharacter(IOSystem *ioSystem){
 
-    //comprobamos si estamos nun centinela
+    //checks if current position is EOF
     if (*ioSystem->head == '$'){
 
+        //checks if is the file EOF or buffer's end
         if(ioSystem->head == &(ioSystem->buffers[ioSystem->headPointerBuffer][ioSystem->buffersize-1]) ){
 
-        //cambiamos de buffer
-        ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer + 1) % BUFFER_PARTS;
+            //changes current buffer to next buffer
+            ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer + 1) % BUFFER_PARTS;
 
-        //cargamos datos no novo buffer
-        FILE *fp;
-        fp = fopen(ioSystem->filePath, "r");
+            //opens the file
+            FILE *fp;
+            fp = fopen(ioSystem->filePath, "r");
 
-        if (fp == NULL){
-            showError(ERROR_FILE_REGRESSION_D,-1);
-            return '$';
-        }
+            if (fp == NULL){
+                showError(ERROR_FILE_REGRESSION_D,-1);
+                return '$';
+            }
 
-        fseek(fp,ioSystem->filePosition,0);
-        size_t readed=fread(ioSystem->buffers[ioSystem->headPointerBuffer], 1, (size_t) (ioSystem->buffersize - 1), fp);
-        ioSystem->filePosition+=readed;
+            //goes to last read position
+            fseek(fp,ioSystem->filePosition,0);
 
-        fclose(fp);
+            //tries to read the size of a buffer from the file
+            size_t readed=fread(ioSystem->buffers[ioSystem->headPointerBuffer], 1, (size_t) (ioSystem->buffersize - 1), fp);
 
-        //forzase un '$' ao final do archivo, porque non todos os archivos teñen '$'
-        if (readed < ioSystem->buffersize-1)
-            ioSystem->buffers[ioSystem->headPointerBuffer][readed] = '$';
+            //updates the number of characters that have been read
+            ioSystem->filePosition+=readed;
 
-        //colocamos actual  ao principio do novo buffer
-        ioSystem->head = &ioSystem->buffers[ioSystem->headPointerBuffer][0];
+            //closes the file
+            fclose(fp);
 
-        }else{
-            //printf("FIN");
-            ioSystem->head++;//ao facer esto podemonos pasar do tamaño de arquivo xa que se sigue avanzando o puntero tras encontrar $
-            return '$';
+            //if readed is smaller than the buffer size, the a EOF must be put at the end of the characters tha have been read
+            if (readed < ioSystem->buffersize-1)
+                ioSystem->buffers[ioSystem->headPointerBuffer][readed] = '$';
+
+            //moves the head pointer to the start of the new buffer
+            ioSystem->head = &ioSystem->buffers[ioSystem->headPointerBuffer][0];
+
+        }else{//a EOF was found in the middle of a buffer
+            ioSystem->head++;
+            return '$';//returns the EOF
 
         }
 
     }
 
-    char valor = (*ioSystem->head);
-    ioSystem->head++;
+    //gets the value under the pointer
+    char value = (*ioSystem->head);
+    ioSystem->head++;//moves the pointer one position forward
 
-    return valor;
+    return value;//returns the value
 
 }
 
+//returns a character to the ioSystem
 void ioSystemReturnCharacter(IOSystem *ioSystem){
-    ioSystem->head--;
+    ioSystem->head--;//makes the head go backwards 1 position
 
+    //if head is behind the first buffer position
     if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){
+        //changes the current buffer to the buffer before it
         ioSystem->headPointerBuffer = (ioSystem->headPointerBuffer-1) % BUFFER_PARTS;
-        ioSystem->headPointerBuffer = ioSystem->buffers[ioSystem->headPointerBuffer][ioSystem->buffersize-2]; //situase o puntero antes do '$' do buffer anterior si se foi demasiado para atras
+        //points the pointer to the last position before the eof in the buffer
+        ioSystem->headPointerBuffer = ioSystem->buffers[ioSystem->headPointerBuffer][ioSystem->buffersize-2];
     }
 }
 
+//gets the character under the tail pointer and moves the pointer forward
 char iosystemNextTailCharacter(IOSystem *ioSystem){
-    //comprobamos si estamos nun centinela
+
+    //check if current position is an EOF
     if (*ioSystem->tail == '$'){
 
+        //checks if it's the end of the buffer
         if(ioSystem->tail == &(ioSystem->buffers[ioSystem->tailPointerBuffer][ioSystem->buffersize-1]) ){
 
-            //cambiamos de buffer
+            //changes to next buffer
             ioSystem->tailPointerBuffer = (ioSystem->tailPointerBuffer + 1) % BUFFER_PARTS;
 
-            //colocamos actual  ao principio do novo buffer
+            //points to the start of the buffer
             ioSystem->tail = &ioSystem->buffers[ioSystem->tailPointerBuffer][0];
 
-        }else{
-            return '$';
+        }else{//the EOF is in the middle of a buffer
+            return '$'; // returns the EOF
         }
 
     }
 
-    char valor = (*ioSystem->tail);
-    ioSystem->tail++;
+    //get the value under the pointer
+    char value = (*ioSystem->tail);
+    ioSystem->tail++; //moves the pointer forward
 
-    return valor;
+    return value;//returns the value
 }
 
+//calculates the distance between pointers
 int iosystemRange(IOSystem ioSystem){
     int range = 0;
     char* pointer = ioSystem.tail;
@@ -128,12 +146,12 @@ int iosystemRange(IOSystem ioSystem){
      * ------** ******** ***-----
      */
 
+    // moves the pointer from tail to head buffer and counts the number of characters
     while(pointer != ioSystem.head){
 
         if(pointer == &ioSystem.buffers[currentBuffer][ioSystem.buffersize-1]){
             currentBuffer = (currentBuffer +1)%BUFFER_PARTS;
             pointer = &ioSystem.buffers[(currentBuffer)][0];
-//            pointer++;
         }else{
             pointer++;
             range++;
@@ -143,6 +161,7 @@ int iosystemRange(IOSystem ioSystem){
     return range;
 }
 
+//moves the tail pointer to the head pointer
 void ioSystemDiscard(IOSystem *ioSystem){
     ioSystem->tail = ioSystem->head;
     ioSystem->tailPointerBuffer = ioSystem->headPointerBuffer;
