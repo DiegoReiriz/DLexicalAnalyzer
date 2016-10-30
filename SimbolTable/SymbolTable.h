@@ -3,8 +3,10 @@
 #define ANALIZADORLEXICO_HASHTABLE_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "../LexicalAnalyzer/lexeme.h"
+#include "../LexicalAnalyzer/definitions.h"
 
 #define SYMBOL_TABLE_DEFAULT_SIZE 149
 

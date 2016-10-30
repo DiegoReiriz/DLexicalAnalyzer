@@ -1,11 +1,5 @@
 
-#include <ctype.h>
 #include "lexicalAnalyzer.h"
-#include "Errors.h"
-#include "definitions.h"
-
-//TODO: facer unha estructura global
-//TODO: distinguir palabras claves, de elelemento separadores como ; ¿DONE?
 
 Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 

@@ -2,7 +2,10 @@
 #ifndef ANALIZADORLEXICO_LEXEM_H
 #define ANALIZADORLEXICO_LEXEM_H
 
-//IT WORKS
+#include <stdlib.h>
+#include <stdio.h>
+#include <memory.h>
+#include <stdbool.h>
 
 typedef struct _lexeme{
     char *value;

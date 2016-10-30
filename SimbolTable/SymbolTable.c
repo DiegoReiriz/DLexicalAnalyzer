@@ -1,7 +1,5 @@
 
-#include <stdlib.h>
 #include "SymbolTable.h"
-#include "../LexicalAnalyzer/definitions.h"
 
 //creates a register
 Register* createRegister(Lexeme lexeme,int lexicalComponent){
@@ -276,8 +274,6 @@ void printTree(SymbolTable* symbolTable){
 
         printf(" - %d",symbolTable->registe->lexicalComponent);
 
-        printf(" - %d",symbolTable->registe->count+1);
-
         printf("\n");
     }
 
@@ -295,7 +291,10 @@ void symbolTablePrint(SymbolTable *symbolTable){
         printf("BUCKET %d\n",i);
         printf("==========\n");
         printTree(&symbolTable[i]);
+        printf("\n");
     }
+
+
 
 }
 

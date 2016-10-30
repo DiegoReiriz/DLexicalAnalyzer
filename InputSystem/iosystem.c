@@ -1,5 +1,5 @@
 #include "iosystem.h"
-#include "../LexicalAnalyzer/Errors.h"
+
 
 void iosystemInitializeBuffer(IOSystem *ioSystem){
 

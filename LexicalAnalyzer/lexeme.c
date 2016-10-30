@@ -1,9 +1,4 @@
 
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <memory.h>
-#include <stdbool.h>
 #include "lexeme.h"
 
 //creates a lexeme from a string

@@ -20,6 +20,7 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o: ../LexicalA
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o: ../SimbolTable/SymbolTable.h
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../LexicalAnalyzer/Errors.h
+CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../LexicalAnalyzer/definitions.h
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../LexicalAnalyzer/lexeme.h
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../SimbolTable/Loader.c
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../SimbolTable/Loader.h
@@ -31,6 +32,8 @@ CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: ../SimbolTable/Symb
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: ../SimbolTable/SymbolTable.h
 
 CMakeFiles/analizadorLexico.dir/main.c.o: ../InputSystem/iosystem.h
+CMakeFiles/analizadorLexico.dir/main.c.o: ../LexicalAnalyzer/Errors.h
+CMakeFiles/analizadorLexico.dir/main.c.o: ../LexicalAnalyzer/definitions.h
 CMakeFiles/analizadorLexico.dir/main.c.o: ../LexicalAnalyzer/lexeme.h
 CMakeFiles/analizadorLexico.dir/main.c.o: ../LexicalAnalyzer/lexicalAnalyzer.h
 CMakeFiles/analizadorLexico.dir/main.c.o: ../SimbolTable/Loader.h

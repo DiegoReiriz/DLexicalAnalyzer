@@ -5,6 +5,9 @@
 #include "../InputSystem/iosystem.h"
 #include "../SimbolTable/SymbolTable.h"
 #include <stdlib.h>
+#include <ctype.h>
+#include "Errors.h"
+#include "definitions.h"
 
 typedef struct {
     IOSystem* ioSystem;

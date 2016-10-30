@@ -34,7 +34,7 @@ int main() {
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 
     //prints the symbol table
-    symbolTablePrint(table);
+    printf("\n");symbolTablePrint(table);
 
     //destroys the symbol table
     symbolTableDestroy(table);

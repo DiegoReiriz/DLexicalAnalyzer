@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include "../LexicalAnalyzer/Errors.h"
 
 #define BUFFER_PARTS 2
 

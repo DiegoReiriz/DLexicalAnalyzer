@@ -1,6 +1,5 @@
 
 #include "Loader.h"
-#include "../LexicalAnalyzer/Errors.h"
 
 void loadReservedWords(SymbolTable *tablaDeSimbolos){
 

@@ -21,6 +21,7 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
+ /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
@@ -32,6 +33,8 @@ CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
 CMakeFiles/analizadorLexico.dir/main.c.o
  /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
+ /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
+ /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
  /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
