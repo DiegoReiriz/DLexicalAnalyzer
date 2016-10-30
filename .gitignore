@@ -35,3 +35,5 @@
 # Idea files
 .idea/
 
+# compiled
+.compiled/
