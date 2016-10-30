@@ -28,6 +28,7 @@ int main() {
 
         printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->value,lexeme->lexicalComponent);
         lexemeDestroy(lexeme);
+
     }while(lexicalComponent != '$');
 
     //destroys the lexical analyzer

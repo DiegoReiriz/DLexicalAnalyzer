@@ -13,7 +13,7 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     ioSystem->buffersize= (int) fi.st_blksize;
 
     //cration of sub-buffers
-    for(int i = 0; i <= BUFFER_PARTS;i++){
+    for(int i = 0; i < BUFFER_PARTS;i++){
         ioSystem->buffers[i] = (char*)malloc(sizeof(char)*ioSystem->buffersize);
         ioSystem->buffers[i][ioSystem->buffersize - 1] = '$';
     }
@@ -28,7 +28,7 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
 //destroys the buffers of an ioSystem
 void iosystemDestroyBuffer(IOSystem *ioSystem){
 
-    for(int i = 0; i <= BUFFER_PARTS;i++)
+    for(int i = 0; i < BUFFER_PARTS;i++)
         free(ioSystem->buffers[i]);
 
     free(ioSystem->buffers);
@@ -144,6 +144,7 @@ int iosystemRange(IOSystem ioSystem){
     /*
      * Buffer range example
      * ------** ******** ***-----
+     * where * are elements that we need to count
      */
 
     // moves the pointer from tail to head buffer and counts the number of characters
@@ -157,6 +158,7 @@ int iosystemRange(IOSystem ioSystem){
             range++;
         }
     }
+
 
     return range;
 }

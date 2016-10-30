@@ -35,6 +35,8 @@ Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 
         }
 
+        free(buffer);
+
         //return a lexical component for the lexeme
         return lexeme;
     }else{

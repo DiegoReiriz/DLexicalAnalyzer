@@ -5,6 +5,6 @@
 #include "SymbolTable.h"
 #include "../LexicalAnalyzer/Errors.h"
 
-void loadReservedWords(SymbolTable *tablaDeSimbolos);
+void loadReservedWords(SymbolTable *symbolTable);
 
 #endif //ANALIZADORLEXICO_LOADER_H

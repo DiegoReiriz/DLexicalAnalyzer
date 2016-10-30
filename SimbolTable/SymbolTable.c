@@ -34,32 +34,26 @@ bool removeNode(SymbolTable **bucket){
     //if the current node has a register
     if((*bucket)->hasRegister){
 
-        //removes 1 element from the count
-        if((*bucket)->registe->count > 0)
-            (*bucket)->registe->count--;
+        //destroys the register inside the node
+        destroyRegister((*bucket)->registe);
 
-        //if the count is 0, then destroy the node
-        else {
+        (*bucket)->hasRegister=false;
 
-            //destroys the register inside the node
-            destroyRegister((*bucket)->registe);
-            (*bucket)->hasRegister=false;
 
-            //moves upward, one of his child nodes
-            if ((*bucket)->hasLeft){
-                *bucket = (*bucket)->left;
-                return false;
-            }else if ((*bucket)->hashRight){
-                *bucket = (*bucket)->right;
-                return false;
-            }else{
-                return true;
-            }
+        //moves upward, one of his child nodes
+        if ((*bucket)->hasLeft){
+            *bucket = (*bucket)->left;
+            return false;
+        }else if ((*bucket)->hashRight){
+            *bucket = (*bucket)->right;
+            return false;
+        }else{
+            return true;
         }
 
     //if current node doesn't has a register, the memory can be free
     }else{
-        free(bucket);
+        free(*bucket);
     }
 }
 
@@ -77,15 +71,20 @@ SymbolTable* symbolTableCreate(){
 //destroys all node from a tree
 void destroyTree(SymbolTable *symbolTable){
 
-    if(symbolTable->hasLeft)
+    if(symbolTable->hasLeft) {
         destroyTree(symbolTable->left);
+        free(symbolTable->left);
+    }
 
-    if(symbolTable->hashRight)
+    if(symbolTable->hashRight) {
         destroyTree(symbolTable->right);
+        free(symbolTable->right);
+    }
 
-    if(symbolTable->hasRegister)
+    if(symbolTable->hasRegister){
         destroyRegister(symbolTable->registe);
 
+    }
 }
 
 //destroys all the symbol table
@@ -235,6 +234,7 @@ bool deleteLexeme(SymbolTable *symbolTable, Lexeme lexeme){
             case 0:
                 // founds the node with the lexeme and deletes 1 apparition of the lexeme
                 // if the number of apparitions is 0, then the node is also removed
+
                 return removeNode(&symbolTable);
 
                 break;

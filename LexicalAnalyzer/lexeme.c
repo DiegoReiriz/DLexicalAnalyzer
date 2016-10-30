@@ -13,6 +13,7 @@ Lexeme *lexemeCreate(char *string) {
     for(int i = 0;i<size;i++)
         lexeme->value[i] = string[i];
 
+
     return lexeme;
 }
 
