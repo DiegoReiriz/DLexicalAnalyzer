@@ -3,53 +3,64 @@
 #include "lexicalAnalyzer.h"
 #include "Errors.h"
 #include "definitions.h"
-#include "../InputSystem/iosystem.h"
 
-//TODO: comprobar tamaño de lexema
 //TODO: facer unha estructura global
 //TODO: distinguir palabras claves, de elelemento separadores como ; ¿DONE?
 
 Lexeme* process(LexicalAnalyzer *lexicalAnalyzer,int lexicalComponent) {
 
+    // checks if lexeme size is too large
     if(lexicalAnalyzer->currentLexemeSize <= lexicalAnalyzer->maximumLexemeSize){
 
+        //gets the distance between the tail and head pointer
         int range = iosystemRange(*lexicalAnalyzer->ioSystem);
 
+        //creates a buffer to store the lexeme
         char *buffer = malloc((sizeof(char) * (range + 1)));
 
+        //stores the lexeme into the buffer
         for (int i = 0; i < range; i++) {
-            buffer[i] = iosystemNextTailToken(lexicalAnalyzer->ioSystem);
+            buffer[i] = iosystemNextTailCharacter(lexicalAnalyzer->ioSystem);
         }
 
+        //puts a \0 at the end of the buffer because is how C treats Strings
         buffer[range] = '\0';
 
-        lexicalAnalyzer->currentLexemeSize=-1;
+        //resets lexeme size
+        lexicalAnalyzer->currentLexemeSize=0;
 
+        //creates the lexeme
         Lexeme *lexeme = lexemeCreate(buffer);
         lexeme->lexicalComponent = lexicalComponent;
 
+        //if current lexeme is an identifier
         if( lexicalComponent == IDENTIFIER){
-            //TODO: cambiar por unha única función analizar da tabla de símbolos
-            if (hashTableGet(lexicalAnalyzer->hashTableTree, *lexeme) == NULL)
-                hashTableInsert(lexicalAnalyzer->hashTableTree, *lexeme, IDENTIFIER);
+
+            //the symbol table must analyze the lexeme
+            lexeme->lexicalComponent = symbolTableAnalyze(lexicalAnalyzer->hashTableTree,lexeme);
+
         }
 
+        //return a lexical component for the lexeme
         return lexeme;
-    }else{//TODO: desfacer recursividad e que devolva -1
-        lexicalAnalyzer->currentLexemeSize=-1;
+    }else{
+        //resets lexema size
+        lexicalAnalyzer->currentLexemeSize=0;
 
-        //lanzar error lexema demasiado grande
+        //shows an error, because the lexeme is too large
         showError(ERROR_LEXEME_OVERFLOW,lexicalAnalyzer->line);
 
-        //reset
+        //discards current lexeme
         ioSystemDiscard(lexicalAnalyzer->ioSystem);
 
-        //viva la recursividad
+        //tries to obtain a new lexeme
         return getLexema(lexicalAnalyzer);
     }
 }
 
-LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* hashTableTree){
+
+//creates the structure lexicalAnalyzer with default values
+LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,SymbolTable* hashTableTree){
     LexicalAnalyzer* lexycalAnalizer = malloc(sizeof(LexicalAnalyzer));
     lexycalAnalizer->hashTableTree=hashTableTree;
     lexycalAnalizer->ioSystem=ioSystem;
@@ -60,19 +71,22 @@ LexicalAnalyzer* lexicalAnalyzerInitialize(IOSystem* ioSystem,HashTableTree* has
     return lexycalAnalizer;
 }
 
+//destroys the structure
 void lexicalAnalyzerDestroy(LexicalAnalyzer* lexycalAnalizaer){
     free(lexycalAnalizaer);
 }
 
+//returns all readed characters to the ioSystem
 void fail(LexicalAnalyzer *lexicalAnalizer,int charactersReaded){
 
     while(charactersReaded--) {
-        iosystemReturnToken(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }
 
 }
 
+//it tries to identify a literal integer
 bool checkIntegerLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) {
 
     bool result = false;
@@ -121,7 +135,7 @@ bool checkIntegerLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) 
         result=true;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnToken(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -185,7 +199,7 @@ int checkFloatLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) {
                 return result;
             }
         }else { //if the last character isn't 'e' or 'E' then returns the las character to the ioSystem
-            iosystemReturnToken(lexicalAnalizer->ioSystem);
+            ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize--;
             return result;
         }
@@ -219,7 +233,7 @@ int checkFloatLiteral(LexicalAnalyzer *lexicalAnalizer, char firstCharacter) {
         result=1;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnToken(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -246,7 +260,7 @@ bool checkIdentifier(LexicalAnalyzer *lexicalAnalizer){
         result=true;
 
     //the automata returns the last character, because it isn't part of the current lexeme
-    iosystemReturnToken(lexicalAnalizer->ioSystem);
+    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
     lexicalAnalizer->currentLexemeSize--;
 
     //returns ok
@@ -254,7 +268,7 @@ bool checkIdentifier(LexicalAnalyzer *lexicalAnalizer){
 
 }
 
-//tries to read a lexeme, that is a string literal.Ex: "dfklgjdklsfgj"
+//tries to read a lexeme, that is a string literal.Ex: "Lorem ipsum dolor sit amet..."
 bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
 
     bool result =false;
@@ -264,7 +278,7 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
     lexicalAnalizer->currentLexemeSize++;
 
     //reads characters while they are different from '"' and  '\n'
-    while( c != '"' && c != '\n'){
+    while( c != '"' && c != '\n' && c != '$'){
 
         //if the automata founds a '\', then it skips the next character
         if ( c == '\\') {
@@ -277,14 +291,18 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
         lexicalAnalizer->currentLexemeSize++;
     }
 
-    //if last character that reads is an '"', everything is ok
+    //if last character that reads is a '"', everything is ok
     if ( c == '"'){
         result=true;
 
-    //if last character that reads is an '\n', throws an error
+    //if last character that reads is a '\n' or a '$', throws an error
     }else if( c == '\n'){
         showError(ERROR_FOUND_NEW_LINE_ON_STRING,lexicalAnalizer->line);
-        iosystemReturnToken(lexicalAnalizer->ioSystem);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
+        lexicalAnalizer->currentLexemeSize--;
+    }else if( c == '$'){
+        showError(ERROR_PREMATURE_EOF_STRING,lexicalAnalizer->line);
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
     }
 
@@ -293,6 +311,12 @@ bool checkLiteralString(LexicalAnalyzer *lexicalAnalizer){
 }
 
 //checks if the current lexeme is any kind of comment
+//-2 - PREMATURE EOF in a documentation comment
+//-1 - PREMATURE EOF
+//0 - error
+//1 - comment
+//2 - documentation comment
+
 int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
     int result =0;
@@ -303,21 +327,25 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
     lexicalAnalizer->currentLexemeSize++;
 
     //if it's a second slash
-    if( c == '/' ){
+    if( c == '/' ) {
 
         //reads characters unit '\n'
-        c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
+        c = iosystemNextCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize++;
-        while( c != '\n') {
+        while (c != '\n' && c != '$') {
             c = iosystemNextCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize++;
         }
 
-        //return to the ioSystem the last character readed, '\n'
-        iosystemReturnToken(lexicalAnalizer->ioSystem);
+        //return to the ioSystem the last character readed, '\n' or '$'
+        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize--;
 
-        result++; //result can be 1, it means that this comment isn't a valid lexeme
+        if (c == '$'){
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = -1;
+        }else
+            result++; //result can be 1, it means that this comment isn't a valid lexeme
 
     //if it's an '*'
     }else if ( c == '*' ){
@@ -332,24 +360,20 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
             c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
             lexicalAnalizer->currentLexemeSize++;
 
-            //if it's an slash,
             if (c != '/')  //documentation comment found
                 result++;
             else //  found this lexeme ---> /**/
                 end = true;
 
-
         }
 
         if ( c=='\n')
             lexicalAnalizer->line++;
-
-        //reads another character
-        c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
-        lexicalAnalizer->currentLexemeSize++;
-
-        if ( c=='\n')
-            lexicalAnalizer->line++;
+        else if (c == '$'){//found a premature EOF
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = result?-2:-1;
+            return result;
+        }
 
         //while not if founded the chain "*/", it doesn't end
         while( !end ){
@@ -365,7 +389,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
             if ( c=='\n')
                 lexicalAnalizer->line++;
-
+            else if (c == '$'){ //found a premature EOF
+                showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+                result = result?-2:-1;
+                return result;
+            }
         }
 
         result++; //result can be 1 or 2 in this step. if it is 2, it means that a documentation comment was found
@@ -381,7 +409,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
         if ( c=='\n')
             lexicalAnalizer->line++;
-
+        else if (c == '$'){ //found a premature EOF
+            showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+            result = -1;
+            return result;
+        }
         //while deep it's positive
         while( deep ){
             // if the automata founds the chain "+/", reads a character and deep increments
@@ -404,7 +436,11 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
             if ( c=='\n')
                 lexicalAnalizer->line++;
-
+            else if (c == '$'){ //found a premature EOF
+                showError(ERROR_PREMATURE_EOF_COMMENT,lexicalAnalizer->line);
+                result = -1;
+                return result;
+            }
         }
 
         result++; //result can be 1, it means that this comment isn't a valid lexeme
@@ -415,14 +451,40 @@ int checkComment(LexicalAnalyzer *lexicalAnalizer){
 
 }
 
+enum automatas {
+    CHECK_LITERAL_INTEGER,
+    CHECK_LITERAL_FLOAT,
+    CHECK_LITERAL_STRING,
+    CHECK_IDENTIFIER,
+    CHECK_COMMENT,
+    CHECK_OTHER};
+
+//chooses the automata that should process the lexeme
+int calculateAutomata(char c){
+    if(isdigit(c)) {
+        return CHECK_LITERAL_INTEGER;
+    }else if(c == '.' || c == 'e' || c == 'E'){
+        return CHECK_LITERAL_FLOAT;
+    }else if(isalnum(c) || c == '_'){
+        return CHECK_IDENTIFIER;
+    }else if(c == '"'){
+        return CHECK_LITERAL_STRING;
+    }else if(c == '/'){
+        return CHECK_COMMENT;
+    }else{
+        return CHECK_OTHER;
+    }
+
+}
 
 Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
 
-    int automata= 0;//modo normal;
+    int automata= 0;
     Lexeme* lexicalComponent;
     bool fin = false;
 
     char c;
+    int foo;
 
     //while a lexeme isn't found
     while( !fin ){
@@ -431,126 +493,101 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
         c= iosystemNextCharacter(lexicalAnalizer->ioSystem);
         lexicalAnalizer->currentLexemeSize++;
 
+        automata = calculateAutomata(c);
+
         switch(automata){
-            case 0: //integer literals
-                if(isdigit(c)){
+            case CHECK_LITERAL_INTEGER: //integer literals
+                if(checkIntegerLiteral(lexicalAnalizer,c)){ // the automata founds an integer literal
+                    lexicalComponent = process(lexicalAnalizer,LITERAL_INTEGER); //process the lexeme founded as a literal integer
+                    fin = true;//the while loop must end
+                }else{ //the automata fails
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                    lexicalAnalizer->currentLexemeSize--;
+                }
 
-                    if(checkIntegerLiteral(lexicalAnalizer,c)){ // the automata founds an integer literal
-                        lexicalComponent = process(lexicalAnalizer,LITERAL_INTEGER); //process the lexeme founded as a literal integer
-                        fin = true;//the while loop must end
-                    }else{ //the automata fails
-                        iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                break;
+
+            case CHECK_LITERAL_FLOAT: //floating point literals
+
+                //tries to found a floating point literal
+                if(checkFloatLiteral(lexicalAnalizer,c)){ // ok
+                    lexicalComponent = process(lexicalAnalizer,LITERAL_FLOAT); //process the lexeme founded as a literal float
+                    fin = true;//the while loop must end
+                }else{ //the automata faled
+                    if (c == '.'){//but c variable is a point
+                        lexicalComponent = process(lexicalAnalizer, c); //process the lexeme founded as a point
+                        fin=true;//the while loop must end
+                    }else {
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                         lexicalAnalizer->currentLexemeSize--;
-                        automata++;//tries the next automata
                     }
-
-                }else{
-                    iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                    lexicalAnalizer->currentLexemeSize--;
-                    automata++;//tries the next automata
                 }
 
                 break;
 
-            case 1: //floating point literals
+            case CHECK_IDENTIFIER: //Variables identification
 
-                //check if current character ir 'e','E' or '.'
-                if(c == '.' || c == 'e' || c == 'E'){
-
-                    //tries to found a floating point literal
-                    int result = checkFloatLiteral(lexicalAnalizer,c);
-
-                    if(result){ // ok
-                        lexicalComponent = process(lexicalAnalizer,LITERAL_FLOAT); //process the lexeme founded as a literal float
-                        fin = true;//the while loop must end
-                    }else{ //the automata faled
-                        if (c == '.'){//but c variable is a point
-                            lexicalComponent = process(lexicalAnalizer, c); //process the lexeme founded as a point
-                            fin=true;//the while loop must end
-                        }else {
-                            iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                            lexicalAnalizer->currentLexemeSize--;
-                        }
-
-                        automata++;//tries the next automata
-
-                    }
-
-                }else{
-                    iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                if(checkIdentifier(lexicalAnalizer)){ //automata founds a correct identifier
+                    lexicalComponent = process(lexicalAnalizer,IDENTIFIER); //process the lexeme founded as an Identifier
+                    fin = true;//the while loop must end
+                }else{ //the automata failed
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
-                    automata++;//tries the next automata
                 }
 
                 break;
 
-            case 2: //Variables identification
+            case CHECK_LITERAL_STRING: // check literal string
 
-                if(isalnum(c) || c == '_'){ //if first character readed is a valid character for an identifier
-                    if(checkIdentifier(lexicalAnalizer)){ //automata founds a correct identifier
-                        lexicalComponent = process(lexicalAnalizer,IDENTIFIER); //process the lexeme founded as an Identifier
-                        fin = true;//the while loop must end
-                    }else{ //the automata failed
-                        iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                        lexicalAnalizer->currentLexemeSize--;
-                        automata++;//tries the next automata
-                    }
-
-                }else{
-                    iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                if(checkLiteralString(lexicalAnalizer)){ // automata founds a right lexeme
+                    lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);//process the lexeme founded as a literal String
+                    fin = true;//the while loop must end
+                }else{ //automata failed
+                    //TODO: check this, maybe needs better treatment
+                    ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
                     lexicalAnalizer->currentLexemeSize--;
-                    automata++;//tries the next automata
+                    lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);//process the lexeme until the error as a literal String
+                    fin = true;//the while loop must end
                 }
 
                 break;
 
-            case 3: // check literal string
+            case CHECK_COMMENT: // detect comments
 
-                if(c == '"'){
-                    if(checkLiteralString(lexicalAnalizer)){ // automata founds a right lexeme
-                        lexicalComponent = process(lexicalAnalizer,LITERAL_STRING);//process the lexeme founded as a literal String
-                        fin = true;//the while loop must end
-                    }else{ //automata failed
-                        //TODO: check this, maybe needs better treatment
-                        iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                        lexicalAnalizer->currentLexemeSize--;
-                        automata++;//tries the next automata
-                    }
-
-                }else{
-                    iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                    lexicalAnalizer->currentLexemeSize--;
-                    automata++;//tries the next automata
-                }
-
-                break;
-
-            case 4: // detect comments
-                if(c == '/'){
-                    //tries to detect a comment
-                    int result = checkComment(lexicalAnalizer);
-                    if( result == 2){ // founds a documentation comment
+                    foo = checkComment(lexicalAnalizer);
+                    if( foo == 2){ // founds a documentation comment
                         lexicalComponent = process(lexicalAnalizer,DOCUMENTATION_COMMENT);
-
                         fin = true;//the while loop must end
-                    }else if ( result == 1){ //found another kind of comment
-                        //process the lexeme but doesn't stores it
-                        process(lexicalAnalizer,-1);
 
-                        //return the automata to the first state to try to identify another lexeme
-                        automata=0;
+                    }else if ( foo == 1){ //found another kind of comment
+                        //discards the lexeme of the comment
+                        ioSystemDiscard(lexicalAnalizer->ioSystem);
+                        lexicalAnalizer->currentLexemeSize=0;
+                    }else if ( foo == -1) { //found an error in a comment
+
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        //discards the lexeme of the comment
+                        ioSystemDiscard(lexicalAnalizer->ioSystem);
+                        lexicalAnalizer->currentLexemeSize = 0;
+                    }
+                    else if ( foo == -2){ //found an error in a documentation comment
+
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);
+                        //discards the lexeme of the comment
+                        lexicalComponent=process(lexicalAnalizer,DOCUMENTATION_COMMENT);
+                        fin=true;
+
 
                     }else{ //the automata failed
-                        //returns readed character to ioSystem
-                        fail(lexicalAnalizer,iosystemRange(*lexicalAnalizer->ioSystem));
-                        automata++;
-                    }
 
-                }else{
-                    iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
-                    lexicalAnalizer->currentLexemeSize--;
-                    automata++;//tries the next automata
-                }
+                        //returns last character to ioSystem, now there is only an '/' in the ioSystem
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the last character read to the ioSystem
+                        lexicalAnalizer->currentLexemeSize--;
+
+                        //if the comment fails here, then c is an '/'
+                        lexicalComponent = process(lexicalAnalizer, '/');//process lexeme as one of the elements from above
+                        fin=true;//the while loop must end
+                    }
 
                 break;
 
@@ -561,7 +598,7 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     if( c == '='){ // readed ==
                         lexicalComponent = process(lexicalAnalizer,TOKEN_EQUALS_EQUALS);//process lexeme as an '=='
                     }else{ // readed =
-                        iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the second character
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
                         lexicalAnalizer->currentLexemeSize--;
                         lexicalComponent = process(lexicalAnalizer, '='); //process lexeme as an '='
                     }
@@ -573,33 +610,31 @@ Lexeme* getLexema(LexicalAnalyzer *lexicalAnalizer){
                     }else if( c == '+'){ //readed ++
                         lexicalComponent = process(lexicalAnalizer, TOKEN_ADDITION_ADDITION);//process lexeme as a '++'
                     }else{ //readed +
-                        iosystemReturnToken(lexicalAnalizer->ioSystem);//returns the second character
+                        ioSystemReturnCharacter(lexicalAnalizer->ioSystem);//returns the second character
                         lexicalAnalizer->currentLexemeSize--;
                         lexicalComponent = process(lexicalAnalizer, '+');//process lexeme as a '+'
                     }
+
                     fin=true;//the while loop must end
 
                 }else if( c == '-' || c == '*' || c == '/' || c == '.' || c == ',' || c == ';' || c == '{' || c == '}' || c == '[' || c == ']' || c == '(' || c == ')' || c == '<' || c == '>' || c == '$'){
-
                     lexicalComponent = process(lexicalAnalizer, c);//process lexeme as one of the elements from above
                     fin=true;//the while loop must end
                 }else if (c == ' ' || c == '\t'){
-                    //resets the while
-                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+                    //discards spaces and tabs
+                    iosystemNextTailCharacter(lexicalAnalizer->ioSystem);
                     lexicalAnalizer->currentLexemeSize--;
-                    automata=0;
                     fin = false;
                 }else if (c == '\n'){
-                    //resets the while
                     lexicalAnalizer->line++;
-                    iosystemNextTailToken(lexicalAnalizer->ioSystem);
+                    //discards the '\n'
+                    iosystemNextTailCharacter(lexicalAnalizer->ioSystem);
                     lexicalAnalizer->currentLexemeSize--;
-                    automata=0;
                     fin = false;
                 }else{
+                    //discards an unknow lexeme
                     showError(ERROR_UNKNOW_ELEMENT,lexicalAnalizer->line);
-                    process(lexicalAnalizer,'0');
-                    automata=0;
+                    ioSystemDiscard(lexicalAnalizer->ioSystem);
                     fin = false;
                 }
 

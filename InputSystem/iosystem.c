@@ -1,4 +1,5 @@
 #include "iosystem.h"
+#include "../LexicalAnalyzer/Errors.h"
 
 void iosystemInitializeBuffer(IOSystem *ioSystem){
 
@@ -8,8 +9,10 @@ void iosystemInitializeBuffer(IOSystem *ioSystem){
     // http://stackoverflow.com/questions/3080836/how-to-find-the-filesystem-block-size
     struct stat fi;
     stat("/", &fi);
-//    ioSystem->buffersize= (int) fi.st_blksize;
-    ioSystem->buffersize= 8;
+    ioSystem->buffersize= (int) fi.st_blksize;
+//    ioSystem->buffersize= 8;
+//    ioSystem->buffersize= 16;
+//    ioSystem->buffersize= 32;
 
     //creación dos sub-buffers
     for(int i = 0; i <= BUFFER_PARTS;i++){
@@ -49,6 +52,11 @@ char iosystemNextCharacter(IOSystem *ioSystem){
         FILE *fp;
         fp = fopen(ioSystem->filePath, "r");
 
+        if (fp == NULL){
+            showError(ERROR_FILE_REGRESSION_D,-1);
+            return '$';
+        }
+
         fseek(fp,ioSystem->filePosition,0);
         size_t readed=fread(ioSystem->buffers[ioSystem->headPointerBuffer], 1, (size_t) (ioSystem->buffersize - 1), fp);
         ioSystem->filePosition+=readed;
@@ -78,7 +86,7 @@ char iosystemNextCharacter(IOSystem *ioSystem){
 
 }
 
-void iosystemReturnToken(IOSystem *ioSystem){
+void ioSystemReturnCharacter(IOSystem *ioSystem){
     ioSystem->head--;
 
     if(&ioSystem->head < &ioSystem->buffers[ioSystem->headPointerBuffer]){
@@ -87,7 +95,7 @@ void iosystemReturnToken(IOSystem *ioSystem){
     }
 }
 
-char iosystemNextTailToken(IOSystem *ioSystem){
+char iosystemNextTailCharacter(IOSystem *ioSystem){
     //comprobamos si estamos nun centinela
     if (*ioSystem->tail == '$'){
 

@@ -6,34 +6,41 @@
 #include <stdbool.h>
 #include "lexeme.h"
 
+//creates a lexeme from a string
 Lexeme *lexemeCreate(char *string) {
-
-//ARREGLO PARA QUE SE COPIE O \0
     size_t size = strlen(string)+1;
 
     Lexeme* lexeme = (Lexeme*) malloc(sizeof(Lexeme));
     lexeme->size= (short) size;
-    lexeme->valor = malloc(sizeof(char)*size);
+    lexeme->value = malloc(sizeof(char)*size);
 
+    //copies the string char by char
     for(int i = 0;i<size;i++)
-        lexeme->valor[i] = string[i];
+        lexeme->value[i] = string[i];
 
     return lexeme;
 }
 
+//destroy a lexeme
 void lexemeDestroy(Lexeme *lexeme){
 
-    free(lexeme->valor);
+    free(lexeme->value);
     free(lexeme);
 
 }
 
+//compares 2 lexemes
+//Returns:
+// -1 -> first lexeme is smaller than the second
+// 0 -> equals lexemes
+// 1 -> first lexeme is bigger than the second
 char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
     Lexeme* lex = &lexeme;
     Lexeme* lex2 = &lexeme2;
 
     for(int i = 0;true;i++){
-        if (lex->valor[i] == lex2->valor[i]){
+        //compares characters one by one
+        if (lex->value[i] == lex2->value[i]){
             if (i == lex->size-1 && i == lex2->size-1) //end of both lexemes
                 return 0;
             else if (i == lex->size-1) //end of first lexeme
@@ -43,25 +50,18 @@ char lexemeCompare(Lexeme lexeme,Lexeme lexeme2){
 
 
         }else{
-            return (char) (lex->valor[i] < lex2->valor[i] ? -1 : 1);
+            return (char) (lex->value[i] < lex2->value[i] ? -1 : 1);
         }
     }
 
 }
 
+//duplicates an existing lexeme
 Lexeme* lexemeDuplicate(Lexeme lexeme){
     Lexeme* copy = malloc(sizeof(Lexeme));
-    copy->valor = malloc(sizeof(char) * (lexeme.size+1));
-//    copy->valor[lexeme.size] = '\0';
+    copy->value = malloc(sizeof(char) * (lexeme.size+1));
     copy->size = lexeme.size;
-    memcpy(copy->valor,lexeme.valor,lexeme.size);
+    memcpy(copy->value, lexeme.value, (size_t) lexeme.size);
 
     return copy;
-}
-
-void lexemePrint(Lexeme lexeme){
-
-    printf("%s ",lexeme.valor);
-
-
 }

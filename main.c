@@ -1,112 +1,45 @@
 #include <stdlib.h>
 #include "InputSystem/iosystem.h"
-#include "SimbolTable/HashTable.h"
+#include "SimbolTable/SymbolTable.h"
 #include "SimbolTable/Loader.h"
 #include "LexicalAnalyzer/lexicalAnalyzer.h"
 
 
 int main() {
-//isalpha(), isdigit(), isalnum(), atoi(), atof(), getc(), strcpy()
 
-    //ejemplo de uso do módulo de entrada
+    //Creates and initialize input system
     IOSystem input;
-
     iosystemInitializeBuffer(&input);
-    iosystemSetFile(&input,"/home/entakitos/repositorios/DLexicalAnalyzer/regression.d");
-//    iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/regression.d");
+    iosystemSetFile(&input,"./regression.d");
 
-    HashTableTree *table =hashTable();
+    //creates symbol table and loads all keywords
+    SymbolTable *table = symbolTableCreate();
     loadReservedWords(table);
 
+    //creates a lexical analyzer, with the input system and symbol table created before
     LexicalAnalyzer* lexicalAnalyzer = lexicalAnalyzerInitialize(&input,table);
 
-    int count = 0;
-//    int i = 1;
-//    while(i){
-//        i = getLexema(lexicalAnalyzer);
-//        count++;
-//    }
-
+    // gets lexemes from lexycal analizer, unit found a $ - EOF
     Lexeme* lexeme;
     int lexicalComponent;
     do{
         lexeme=getLexema(lexicalAnalyzer);
         lexicalComponent = lexeme->lexicalComponent;
 
-        printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->valor,lexeme->lexicalComponent);
-
+        printf("LEXEME:\t%20s\t\t,LEXICAL COMPONENT: %d\n",lexeme->value,lexeme->lexicalComponent);
         lexemeDestroy(lexeme);
     }while(lexicalComponent != '$');
 
-    printf("\n\n TOTAL: %d",count);
-
-    printf("\n\nNumero Total de lineas: %d",lexicalAnalyzer->line);
-
+    //destroys the lexical analyzer
     lexicalAnalyzerDestroy(lexicalAnalyzer);
 
-//    char c=0;
-//    while( c != '\n'){
-//        c=iosystemNextToken(&input);
-//        printf("%c",c);
-//    }
-//
-//    printf("\n");
-//    int range = iosystemRange(input);
-//    while(range){
-//        c=iosystemNextTailToken(&input);
-//        printf("%c",c);
-//
-//        range--;
-//    }
-//    printf("\n");
-//    iosystemSetFile(&input,"/home/diegoreiriz/Descargas/regression.d");
-//
-//    char c=0;
-//    while( c != EOF ){
-//        c=iosystemNextToken(&input);
-//        printf("%c",c);
-//    }
+    //prints the symbol table
+    symbolTablePrint(table);
 
-    //iosystemSetFile(&input,"/home/diegoreiriz/ClionProjects/analizadorLexico/definitions.h");
-//    iosystemSetFile(&input,"/home/entakitos/Descargas/regression.d");
+    //destroys the symbol table
+    symbolTableDestroy(table);
 
-//    printf("Rango entre punteros: %d\n",iosystemRange(input));
-
-
-
-//    char *a = "churrascos";
-//    char *b = "charmander";
-//
-//    Lexeme *lexeme = lexemeCreate(a);
-//    Lexeme *lexeme2 = lexemeCreate(b);
-//
-//    printf("hash para %s %d\n",a,hash(*lexeme));
-//    printf("hash para %s %d\n",b,hash(*lexeme2));
-
-//    hashTableInsert(table,*lexeme);
-//    hashTableInsert(table,*lexeme);
-//    hashTableInsert(table,*lexeme2);
-//
-//
-//
-//    Register* registe = hashTableGet(table,*lexeme);
-//
-//    printf("Registro recuperado: ");
-//    lexemePrint(*registe->lexeme);
-//    printf(", Con valor de contador: %d\n",registe->count);
-
-//    hashTableDelete(table,*lexeme);
-
-//    printf("Registro recuperado: ");
-//    lexemePrint(*registe->lexeme);
-//    printf(", Con valor de contador: %d",registe->count);
-//
-//    printf("\n");
-
-//    hashTableDelete(table,*lexeme);
-
-    hashTablePrint(table);
-    hashTableDestroy(table);
+    //destroys imput system
     iosystemDestroyBuffer(&input);
 
     return 0;
