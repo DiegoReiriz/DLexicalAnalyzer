@@ -28,7 +28,7 @@ HexadecimalInteger		((0x)|(0X))[0-9a-fA-F]*
 Integer				{DecimalInteger}|{BinaryInteger}|{HexadecimalInteger}
 
 /* Falta contemplar o exponente e*/
-Float				{Digit}+\.{Digit}+
+Float				{Digit}+\.{Digit}+(e[+-]{Digit}+){0,1}
 
 String				["].*["]
 
@@ -106,7 +106,7 @@ String				["].*["]
 #	printf("\033[44m");ECHO;printf("\033[0m");
 
 
-.		/*TRAGA TODO*/
+.	/*TRAGA TODO*/
 
 
 %%
