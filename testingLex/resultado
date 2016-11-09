@@ -1,0 +1,47 @@
+[1;93mimport[0m [1;93mstd[0m[44m.[0m[1;93mstdio[0m[44m;[0m
+[1;93mimport[0m [1;93mstd[0m[44m.[0m[1;93malgorithm[0m[44m.[0m[1;93miteration[0m[44m;[0m
+[1;93mimport[0m [1;93mstd[0m[44m.[0m[1;93mexception[0m[44m;[0m
+
+
+[1;93mdouble[0m [1;93mbeta1[0m[44m([0m[1;93mdouble[0m[44m[[0m[44m][0m [1;93mx[0m[44m,[0m [1;93mdouble[0m[44m[[0m[44m][0m [1;93my[0m[44m,[0m [1;93mdouble[0m [1;93mx_bar[0m[44m,[0m [1;93mdouble[0m [1;93my_bar[0m[44m)[0m
+[44m{[0m
+    [44m/[0m[44m*[0m[44m*[0m
+        [1;93mCalculates[0m [1;93mthe[0m [1;93mslope[0m [1;93mparameter[0m [1;93mfor[0m [1;93mthe[0m [1;93mlinear[0m [1;93mregression[0m [1;93mof[0m [1;93my[0m [1;93mwrt[0m [1;93mx[0m
+    [44m*[0m[44m/[0m
+    [1;93menforce[0m[44m([0m[1;93mx[0m[44m.[0m[1;93mlength[0m[44m==[0m[1;93my[0m[44m.[0m[1;93mlength[0m[44m,[0m [42m"x and y should be the same length!"[0m[44m)[0m[44m;[0m
+    [1;93mdouble[0m [1;93mnum[0m[44m=[0m[1;91m0[0m[44m,[0m [1;93mdenom[0m[44m=[0m[1;91m0[0m[44m;[0m
+    [1;93mint[0m [1;93mwhilectr[0m [44m=[0m [1;91m0[0m[44m;[0m
+    [1;93mwhile[0m [44m([0m[1;93mwhilectr[0m [44m<[0m [1;93mx[0m[44m.[0m[1;93mlength[0m[44m)[0m
+    [44m{[0m
+        [1;93mnum[0m [44m+=[0m [44m([0m[1;93mx[0m[44m[[0m[1;93mwhilectr[0m[44m][0m [44m-[0m [1;93mx_bar[0m[44m)[0m [44m*[0m [44m([0m[1;93my[0m[44m[[0m[1;93mwhilectr[0m[44m][0m [44m-[0m [1;93my_bar[0m[44m)[0m[44m;[0m
+        [1;93mwhilectr[0m[44m++[0m[44m;[0m
+    [44m}[0m
+    [1;93mforeach[0m [44m([0m[1;93mxval[0m[44m;[0m [1;93mx[0m[44m)[0m
+        [1;93mdenom[0m [44m+=[0m [44m([0m[44m([0m[1;93mxval[0m[44m-[0m[1;93mx_bar[0m[44m)[0m[44m*[0m[44m([0m[1;93mxval[0m[44m-[0m[1;93mx_bar[0m[44m)[0m[44m)[0m[44m;[0m
+    [1;93mreturn[0m [1;93mnum[0m [44m/[0m [1;93mdenom[0m[44m;[0m
+[44m}[0m
+
+[1;93mvoid[0m [1;93mmain[0m[44m([0m[44m)[0m
+[44m{[0m
+    [44m/[0m[44m+[0m
+        [1;93mEverything[0m [1;93mis[0m [1;93mdone[0m[44m,[0m [1;93mso[0m [1;93msit[0m [1;93mback[0m [1;93mand[0m [1;93menjoy[0m[44m![0m
+        [44m/[0m[44m+[0m
+            [1;93mNested[0m [1;93mcomments[0m [1;93mshould[0m [1;93mbe[0m [1;93msupported[0m[44m,[0m [1;93mno[0m [1;93mmatter[0m [1;93mwhat[0m[1;93ms[0m [1;93minside[0m [41m/*//*/[0m
+        [44m+[0m[44m/[0m
+    [44m+[0m[44m/[0m
+    [1;93mdouble[0m[44m[[0m[44m][0m [1;93mx[0m [44m=[0m [44m[[0m[1;91m0b1[0m[44m,[0m [1;91m2[0m[44m,[0m [1;91m3[0m[44m,[0m [1;91m4[0m[44m,[0m [1;91m5[0m[44m,[0m [1;95m6.5[0m[44m,[0m [1;91m7[0m[44m,[0m [1;95m7.5[0m[44m,[0m [1;91m8_000[0m[44m/[0m[1;95m1.0[0m[1;93me[0m[44m+[0m[1;91m03[0m[44m,[0m [1;95m8.5[0m[44m][0m[44m;[0m
+    [1;93mdouble[0m[44m[[0m[44m][0m [1;93my[0m [44m=[0m [44m[[0m[1;91m1[0m[44m,[0m [1;91m2[0m[44m,[0m [1;91m3[0m[44m,[0m [1;95m3.2[0m[44m,[0m [1;95m3.4[0m[44m,[0m [1;91m40[0m[1;93me[0m[44m-[0m[1;91m1[0m[44m,[0m [1;95m4.2[0m[44m,[0m [1;95m4.3[0m[44m,[0m [1;95m4.35[0m[44m,[0m [1;95m4.37[0m[44m][0m[44m;[0m
+    [1;93mdouble[0m [1;93mx_bar[0m[44m,[0m [1;93my_bar[0m[44m,[0m [1;93mb1[0m[44m,[0m [1;91m_0[0m[44m;[0m
+    [41m//Mean and regression parameters calculation
+[0m    [1;93mx_bar[0m [44m=[0m [1;93msum[0m[44m([0m[1;93mx[0m[44m)[0m[44m/[0m[44m([0m[1;93mcast[0m[44m([0m[1;93mdouble[0m[44m)[0m[1;93mx[0m[44m.[0m[1;93mlength[0m[44m)[0m[44m;[0m
+    [1;93my_bar[0m [44m=[0m [1;93msum[0m[44m([0m[1;93my[0m[44m)[0m[44m/[0m[44m([0m[1;93mcast[0m[44m([0m[1;93mdouble[0m[44m)[0m[1;93my[0m[44m.[0m[1;93mlength[0m[44m)[0m[44m;[0m
+    [1;93mb1[0m [44m=[0m [1;93mbeta1[0m[44m([0m[1;93mx[0m[44m,[0m [1;93my[0m[44m,[0m [1;93mx_bar[0m[44m,[0m [1;93my_bar[0m[44m)[0m[44m;[0m
+    [1;91m_0[0m [44m=[0m [1;93my_bar[0m [44m-[0m [44m([0m[1;93mb1[0m[44m*[0m[1;93mx_bar[0m[44m)[0m[44m;[0m
+    [41m/**/ /* Print result */ /**/[0m
+    [1;93mwritefln[0m[44m([0m[42m"\"Slope\": %f"[0m[44m,[0m [1;93mb1[0m[44m)[0m[44m;[0m
+    [1;93mwritefln[0m[44m([0m[42m"\"Intercept\": %f"[0m[44m,[0m [1;91m_0[0m[44m)[0m[44m;[0m
+    [41m///Parsing tests. Comment to compile
+[0m    [1;93ma[0m [44m=[0m [44m/[0m[44m+[0m [41m// +/ 1;
+[0m    [1;93ma[0m [44m=[0m [44m/[0m[44m+[0m [42m"+/" +/ 1"[0m[44m;[0m
+    [1;93ma[0m [44m=[0m [44m/[0m[44m+[0m [41m/* +/ */[0m [1;91m3[0m[44m;[0m
+[44m}[0m
