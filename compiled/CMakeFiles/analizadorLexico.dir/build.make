@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diegoreiriz/ClionProjects/analizadorLexico
+CMAKE_SOURCE_DIR = /home/entakitos/repositorios/DLexicalAnalyzer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diegoreiriz/ClionProjects/analizadorLexico/compiled
+CMAKE_BINARY_DIR = /home/entakitos/repositorios/DLexicalAnalyzer/compiled
 
 # Include any dependencies generated for this target.
 include CMakeFiles/analizadorLexico.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/analizadorLexico.dir/flags.make
 
 CMakeFiles/analizadorLexico.dir/main.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/analizadorLexico.dir/main.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/main.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/analizadorLexico.dir/main.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/main.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/main.c
 
 CMakeFiles/analizadorLexico.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/main.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/main.c > CMakeFiles/analizadorLexico.dir/main.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/main.c > CMakeFiles/analizadorLexico.dir/main.c.i
 
 CMakeFiles/analizadorLexico.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/main.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/main.c -o CMakeFiles/analizadorLexico.dir/main.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/main.c -o CMakeFiles/analizadorLexico.dir/main.c.s
 
 CMakeFiles/analizadorLexico.dir/main.c.o.requires:
 
@@ -81,42 +81,18 @@ CMakeFiles/analizadorLexico.dir/main.c.o.provides: CMakeFiles/analizadorLexico.d
 CMakeFiles/analizadorLexico.dir/main.c.o.provides.build: CMakeFiles/analizadorLexico.dir/main.c.o
 
 
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o: CMakeFiles/analizadorLexico.dir/flags.make
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o: ../InputSystem/iosystem.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c
-
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c > CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.i
-
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c -o CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.s
-
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.requires:
-
-.PHONY : CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.requires
-
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.requires
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides.build
-.PHONY : CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides
-
-CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.provides.build: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
-
-
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o: ../SimbolTable/SymbolTable.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.c
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c > CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.c > CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.i
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.s
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires:
 
@@ -131,16 +107,16 @@ CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.provides.build: CMak
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o: ../LexicalAnalyzer/lexeme.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.c
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.i
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.s
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o.requires:
 
@@ -155,16 +131,16 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o.provides.build: CMake
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o: ../SimbolTable/Loader.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.c
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c > CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.c > CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.i
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.c -o CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.s
 
 CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o.requires:
 
@@ -179,16 +155,16 @@ CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o.provides.build: CMakeFile
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o: ../LexicalAnalyzer/lexicalAnalyzer.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.c
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.i
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.s
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o.requires:
 
@@ -203,16 +179,16 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o.provides.bui
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o: CMakeFiles/analizadorLexico.dir/flags.make
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o: ../LexicalAnalyzer/Errors.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o   -c /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.c
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.i
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.s
 
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o.requires:
 
@@ -225,29 +201,53 @@ CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o.provides: CMakeFiles/
 CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o.provides.build: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o
 
 
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o: CMakeFiles/analizadorLexico.dir/flags.make
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o: ../LexicalAnalyzer/lex.yy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o   -c /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.c
+
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.c > CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.i
+
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.c -o CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.s
+
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.requires:
+
+.PHONY : CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.requires
+
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.provides: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.requires
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.provides.build
+.PHONY : CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.provides
+
+CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.provides.build: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o
+
+
 # Object files for target analizadorLexico
 analizadorLexico_OBJECTS = \
 "CMakeFiles/analizadorLexico.dir/main.c.o" \
-"CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o" \
 "CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o" \
 "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o" \
 "CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o" \
 "CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o" \
-"CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o"
+"CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o" \
+"CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o"
 
 # External object files for target analizadorLexico
 analizadorLexico_EXTERNAL_OBJECTS =
 
 analizadorLexico: CMakeFiles/analizadorLexico.dir/main.c.o
-analizadorLexico: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o
+analizadorLexico: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o
 analizadorLexico: CMakeFiles/analizadorLexico.dir/build.make
 analizadorLexico: CMakeFiles/analizadorLexico.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable analizadorLexico"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable analizadorLexico"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/analizadorLexico.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -256,12 +256,12 @@ CMakeFiles/analizadorLexico.dir/build: analizadorLexico
 .PHONY : CMakeFiles/analizadorLexico.dir/build
 
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/main.c.o.requires
-CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/SimbolTable/SymbolTable.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o.requires
 CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o.requires
+CMakeFiles/analizadorLexico.dir/requires: CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o.requires
 
 .PHONY : CMakeFiles/analizadorLexico.dir/requires
 
@@ -270,6 +270,6 @@ CMakeFiles/analizadorLexico.dir/clean:
 .PHONY : CMakeFiles/analizadorLexico.dir/clean
 
 CMakeFiles/analizadorLexico.dir/depend:
-	cd /home/diegoreiriz/ClionProjects/analizadorLexico/compiled && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/diegoreiriz/ClionProjects/analizadorLexico /home/diegoreiriz/ClionProjects/analizadorLexico /home/diegoreiriz/ClionProjects/analizadorLexico/compiled /home/diegoreiriz/ClionProjects/analizadorLexico/compiled /home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/entakitos/repositorios/DLexicalAnalyzer/compiled && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/entakitos/repositorios/DLexicalAnalyzer /home/entakitos/repositorios/DLexicalAnalyzer /home/entakitos/repositorios/DLexicalAnalyzer/compiled /home/entakitos/repositorios/DLexicalAnalyzer/compiled /home/entakitos/repositorios/DLexicalAnalyzer/compiled/CMakeFiles/analizadorLexico.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/analizadorLexico.dir/depend
 

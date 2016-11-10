@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "../LexicalAnalyzer/definitions.h"
+#include "./LexicalAnalyzer/definitions.h"
 
 int numeroLineas=0;
 int anidamiento=0;

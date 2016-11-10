@@ -546,7 +546,7 @@ char *yytext;
 #line 1 "dlang.l"
 #line 2 "dlang.l"
 #include <stdio.h>
-#include "../LexicalAnalyzer/definitions.h"
+#include "definitions.h"
 
 int numeroLineas=0;
 int anidamiento=0;
@@ -2043,5 +2043,7 @@ void yyfree (void * ptr )
 
 #line 117 "dlang.l"
 
-
+int yywrap(){
+	return -1;
+}
 

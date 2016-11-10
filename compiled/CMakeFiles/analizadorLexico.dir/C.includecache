@@ -6,37 +6,53 @@
 
 #IncludeRegexTransform: 
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c
-iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.c
+Errors.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
-stdbool.h
--
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.h
 stdio.h
+-
+
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/definitions.h
+
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.c
+stdio.h
+-
+string.h
+-
+errno.h
 -
 stdlib.h
 -
-sys/stat.h
+inttypes.h
 -
-../LexicalAnalyzer/Errors.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
-
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c
-Errors.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
-
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 stdio.h
 -
+definitions.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/definitions.h
+unistd.h
+-
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.h
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+inttypes.h
+-
+unistd.h
+-
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.c
 lexeme.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.h
 stdlib.h
 -
 stdio.h
@@ -46,39 +62,39 @@ memory.h
 stdbool.h
 -
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.c
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.c
 lexicalAnalyzer.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
-../InputSystem/iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.h
 ../SimbolTable/SymbolTable.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.h
 stdlib.h
 -
 ctype.h
 -
 Errors.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.h
 definitions.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/definitions.h
+lex.yy.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lex.yy.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.c
 Loader.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.h
 SymbolTable.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.h
 ../LexicalAnalyzer/Errors.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/Errors.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.c
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.c
 SymbolTable.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.h
 stdio.h
 -
 stdlib.h
@@ -86,19 +102,17 @@ stdlib.h
 stdbool.h
 -
 ../LexicalAnalyzer/lexeme.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexeme.h
 ../LexicalAnalyzer/definitions.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/definitions.h
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/main.c
+/home/entakitos/repositorios/DLexicalAnalyzer/main.c
 stdlib.h
 -
-InputSystem/iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
 SimbolTable/SymbolTable.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/SymbolTable.h
 SimbolTable/Loader.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.h
+/home/entakitos/repositorios/DLexicalAnalyzer/SimbolTable/Loader.h
 LexicalAnalyzer/lexicalAnalyzer.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
+/home/entakitos/repositorios/DLexicalAnalyzer/LexicalAnalyzer/lexicalAnalyzer.h
 
