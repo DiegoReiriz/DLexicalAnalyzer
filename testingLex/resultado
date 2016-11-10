@@ -5,9 +5,9 @@
 
 [1;93mdouble[0m [1;93mbeta1[0m[44m([0m[1;93mdouble[0m[44m[[0m[44m][0m [1;93mx[0m[44m,[0m [1;93mdouble[0m[44m[[0m[44m][0m [1;93my[0m[44m,[0m [1;93mdouble[0m [1;93mx_bar[0m[44m,[0m [1;93mdouble[0m [1;93my_bar[0m[44m)[0m
 [44m{[0m
-    [44m/[0m[44m*[0m[44m*[0m
-        [1;93mCalculates[0m [1;93mthe[0m [1;93mslope[0m [1;93mparameter[0m [1;93mfor[0m [1;93mthe[0m [1;93mlinear[0m [1;93mregression[0m [1;93mof[0m [1;93my[0m [1;93mwrt[0m [1;93mx[0m
-    [44m*[0m[44m/[0m
+    [41m/**
+        Calculates the slope parameter for the linear regression of 'y' wrt 'x'
+    */[0m
     [1;93menforce[0m[44m([0m[1;93mx[0m[44m.[0m[1;93mlength[0m[44m==[0m[1;93my[0m[44m.[0m[1;93mlength[0m[44m,[0m [42m"x and y should be the same length!"[0m[44m)[0m[44m;[0m
     [1;93mdouble[0m [1;93mnum[0m[44m=[0m[1;91m0[0m[44m,[0m [1;93mdenom[0m[44m=[0m[1;91m0[0m[44m;[0m
     [1;93mint[0m [1;93mwhilectr[0m [44m=[0m [1;91m0[0m[44m;[0m
@@ -37,7 +37,7 @@
     [1;93my_bar[0m [44m=[0m [1;93msum[0m[44m([0m[1;93my[0m[44m)[0m[44m/[0m[44m([0m[1;93mcast[0m[44m([0m[1;93mdouble[0m[44m)[0m[1;93my[0m[44m.[0m[1;93mlength[0m[44m)[0m[44m;[0m
     [1;93mb1[0m [44m=[0m [1;93mbeta1[0m[44m([0m[1;93mx[0m[44m,[0m [1;93my[0m[44m,[0m [1;93mx_bar[0m[44m,[0m [1;93my_bar[0m[44m)[0m[44m;[0m
     [1;91m_0[0m [44m=[0m [1;93my_bar[0m [44m-[0m [44m([0m[1;93mb1[0m[44m*[0m[1;93mx_bar[0m[44m)[0m[44m;[0m
-    [41m/**/ /* Print result */ /**/[0m
+    [41m/**/[0m [41m/* Print result */[0m [41m/**/[0m
     [1;93mwritefln[0m[44m([0m[42m"\"Slope\": %f"[0m[44m,[0m [1;93mb1[0m[44m)[0m[44m;[0m
     [1;93mwritefln[0m[44m([0m[42m"\"Intercept\": %f"[0m[44m,[0m [1;91m_0[0m[44m)[0m[44m;[0m
     [41m///Parsing tests. Comment to compile

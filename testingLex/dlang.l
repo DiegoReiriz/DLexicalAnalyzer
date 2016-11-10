@@ -1,20 +1,22 @@
 %{
 #include <stdio.h>
+
+int numeroLineas=0;
 %}
 
 Character			[a-zA-Z]
 
 Digit				[0-9]
 
-BlockComment			\/\*.**\*\/
+BlockCommentStart		\/\*
+
+BlockCommentEnd			\*\/
 
 LineComment			\/\/.*[\n\r]
 
-NestingBlockCommentCharacters	({Character}*)
+NestingBlockCommentStart	\/\+
 
-NestingBlockComment		\/\+{NestingBlockCommentCharacters}\+\/
-
-Comment				{BlockComment}|{LineComment}|{NestingBlockComment}
+NestingBlockCommentEnd		\+\/
 
 /*comprobar que funciona*/
 Identifier			({Character}|[_])+({Character}|[_]|[0-9])*
@@ -32,14 +34,25 @@ Float				{Digit}+\.{Digit}+(e[+-]{Digit}+){0,1}
 
 String				["].*["]
 
-%%
+/*=========*/
+/* ESTADOS */
+/*=========*/
+%x comentarioBloque
+%x comentarioAnidado
+%x comentarioDocumentacion
 
-{Comment}		printf("\033[41m");ECHO;printf("\033[0m");	
-{Integer}		printf("\033[1;91m");ECHO;printf("\033[0m");
-{Float}			printf("\033[1;95m");ECHO;printf("\033[0m");
-{String}		printf("\033[42m");ECHO;printf("\033[0m");
-{Identifier}		printf("\033[1;93m");ECHO;printf("\033[0m");
-[ \n\t\r]		ECHO;
+%%
+{BlockCommentStart}			printf("\033[41m");ECHO;BEGIN(comentarioBloque);
+<comentarioBloque>{BlockCommentEnd}	ECHO;printf("\033[0m");BEGIN(INITIAL);
+<comentarioBloque>[\n]			numeroLineas++;ECHO;
+<comentarioBloque>[^\n]			ECHO;
+{LineComment}				printf("\033[41m");ECHO;printf("\033[0m");	
+{Integer}				printf("\033[1;91m");ECHO;printf("\033[0m");
+{Float}					printf("\033[1;95m");ECHO;printf("\033[0m");
+{String}				printf("\033[42m");ECHO;printf("\033[0m");
+{Identifier}				printf("\033[1;93m");ECHO;printf("\033[0m");
+[ \t\r]					ECHO;
+[\n]					numeroLineas++;ECHO;
 
 \/	|
 \/=	|
