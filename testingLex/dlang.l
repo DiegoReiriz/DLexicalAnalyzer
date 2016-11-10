@@ -11,6 +11,8 @@ Digit				[0-9]
 
 BlockCommentStart		\/\*
 
+DocumentationCommentStart	{BlockCommentStart}\*[^/]
+
 BlockCommentEnd			\*\/
 
 LineComment			\/\/.*[\n\r]
@@ -43,6 +45,13 @@ String				["].*["]
 %x comentarioDocumentacion
 
 %%
+
+{DocumentationCommentStart}                     printf("\033[41m");yymore();;BEGIN(comentarioDocumentacion);
+<comentarioDocumentacion>{BlockCommentEnd}      ECHO;printf("\033[0m");BEGIN(INITIAL);
+<comentarioDocumentacion>[\n]                   numeroLineas++;yymore();
+<comentarioDocumentacion>[^\n]                  yymore();
+
+
 {BlockCommentStart}				printf("\033[41m");ECHO;BEGIN(comentarioBloque);
 <comentarioBloque>{BlockCommentEnd}		ECHO;printf("\033[0m");BEGIN(INITIAL);
 <comentarioBloque>[\n]				numeroLineas++;ECHO;
@@ -55,7 +64,7 @@ String				["].*["]
 							BEGIN(comentarioAnidado);
 						}
 
-<comentarioAnidado>{NestingBlockCommentStart}	ECHO;anidamiento++;printf("\nANIDAMIENTO++\n");
+<comentarioAnidado>{NestingBlockCommentStart}	ECHO;anidamiento++;
 
 <comentarioAnidado>{NestingBlockCommentEnd}	{
 							ECHO;	
