@@ -1,0 +1,14 @@
+Nesta práctica eliminase:
+ - o sistema de entrada
+ - o autómata do análisis léxico
+
+llerse ben o manual
+
+que pasa comentarios multilineas -- problemas ao saber o numero de linea actual
+que pasa con comentarios anidados 
+
+introducir todos os archvios incluidos os que flex toma como base para generar o *.yy.c
+.c
+.h
+README
+makefile
