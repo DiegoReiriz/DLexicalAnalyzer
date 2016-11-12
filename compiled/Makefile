@@ -123,33 +123,6 @@ analizadorLexico/fast:
 	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/build
 .PHONY : analizadorLexico/fast
 
-InputSystem/iosystem.o: InputSystem/iosystem.c.o
-
-.PHONY : InputSystem/iosystem.o
-
-# target to build an object file
-InputSystem/iosystem.c.o:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o
-.PHONY : InputSystem/iosystem.c.o
-
-InputSystem/iosystem.i: InputSystem/iosystem.c.i
-
-.PHONY : InputSystem/iosystem.i
-
-# target to preprocess a source file
-InputSystem/iosystem.c.i:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.i
-.PHONY : InputSystem/iosystem.c.i
-
-InputSystem/iosystem.s: InputSystem/iosystem.c.s
-
-.PHONY : InputSystem/iosystem.s
-
-# target to generate assembly for a file
-InputSystem/iosystem.c.s:
-	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.s
-.PHONY : InputSystem/iosystem.c.s
-
 LexicalAnalyzer/Errors.o: LexicalAnalyzer/Errors.c.o
 
 .PHONY : LexicalAnalyzer/Errors.o
@@ -176,6 +149,33 @@ LexicalAnalyzer/Errors.s: LexicalAnalyzer/Errors.c.s
 LexicalAnalyzer/Errors.c.s:
 	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.s
 .PHONY : LexicalAnalyzer/Errors.c.s
+
+LexicalAnalyzer/lex.yy.o: LexicalAnalyzer/lex.yy.c.o
+
+.PHONY : LexicalAnalyzer/lex.yy.o
+
+# target to build an object file
+LexicalAnalyzer/lex.yy.c.o:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o
+.PHONY : LexicalAnalyzer/lex.yy.c.o
+
+LexicalAnalyzer/lex.yy.i: LexicalAnalyzer/lex.yy.c.i
+
+.PHONY : LexicalAnalyzer/lex.yy.i
+
+# target to preprocess a source file
+LexicalAnalyzer/lex.yy.c.i:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.i
+.PHONY : LexicalAnalyzer/lex.yy.c.i
+
+LexicalAnalyzer/lex.yy.s: LexicalAnalyzer/lex.yy.c.s
+
+.PHONY : LexicalAnalyzer/lex.yy.s
+
+# target to generate assembly for a file
+LexicalAnalyzer/lex.yy.c.s:
+	$(MAKE) -f CMakeFiles/analizadorLexico.dir/build.make CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.s
+.PHONY : LexicalAnalyzer/lex.yy.c.s
 
 LexicalAnalyzer/lexeme.o: LexicalAnalyzer/lexeme.c.o
 
@@ -321,12 +321,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... analizadorLexico"
-	@echo "... InputSystem/iosystem.o"
-	@echo "... InputSystem/iosystem.i"
-	@echo "... InputSystem/iosystem.s"
 	@echo "... LexicalAnalyzer/Errors.o"
 	@echo "... LexicalAnalyzer/Errors.i"
 	@echo "... LexicalAnalyzer/Errors.s"
+	@echo "... LexicalAnalyzer/lex.yy.o"
+	@echo "... LexicalAnalyzer/lex.yy.i"
+	@echo "... LexicalAnalyzer/lex.yy.s"
 	@echo "... LexicalAnalyzer/lexeme.o"
 	@echo "... LexicalAnalyzer/lexeme.i"
 	@echo "... LexicalAnalyzer/lexeme.s"

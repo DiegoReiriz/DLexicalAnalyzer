@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/InputSystem/iosystem.c.o"
   "/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/Errors.c.o"
+  "/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lex.yy.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lex.yy.c.o"
   "/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexeme.c.o"
   "/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/LexicalAnalyzer/lexicalAnalyzer.c.o"
   "/home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c" "/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir/SimbolTable/Loader.c.o"

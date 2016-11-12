@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.c
-iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
-
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
-stdbool.h
--
-stdio.h
--
-stdlib.h
--
-sys/stat.h
--
-../LexicalAnalyzer/Errors.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
-
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.c
 Errors.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
@@ -31,6 +15,40 @@ stdio.h
 -
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lex.yy.c
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+inttypes.h
+-
+stdio.h
+-
+Errors.h
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
+definitions.h
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+unistd.h
+-
+
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lex.yy.h
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+inttypes.h
+-
+unistd.h
+-
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexeme.c
 lexeme.h
@@ -51,8 +69,6 @@ lexicalAnalyzer.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lexicalAnalyzer.h
-../InputSystem/iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
 ../SimbolTable/SymbolTable.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
 stdlib.h
@@ -63,6 +79,8 @@ Errors.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/Errors.h
 definitions.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/definitions.h
+lex.yy.h
+/home/diegoreiriz/ClionProjects/analizadorLexico/LexicalAnalyzer/lex.yy.h
 
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/Loader.c
 Loader.h
@@ -93,8 +111,6 @@ stdbool.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/main.c
 stdlib.h
 -
-InputSystem/iosystem.h
-/home/diegoreiriz/ClionProjects/analizadorLexico/InputSystem/iosystem.h
 SimbolTable/SymbolTable.h
 /home/diegoreiriz/ClionProjects/analizadorLexico/SimbolTable/SymbolTable.h
 SimbolTable/Loader.h

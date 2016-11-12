@@ -8,7 +8,8 @@ double beta1(double[] x, double[] y, double x_bar, double y_bar)
     /**
         Calculates the slope parameter for the linear regression of 'y' wrt 'x'
     */
-    enforce(x.length==y.length, "x and y should be the same length!");
+    enforce(x.length==y.length, "x and y should 
+be the same length!");
     double num=0, denom=0;
     int whilectr = 0;
     while (whilectr < x.length)
