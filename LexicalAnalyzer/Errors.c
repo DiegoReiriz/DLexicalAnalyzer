@@ -17,7 +17,7 @@ void showError(enum errors code, int line){
             printf("Couldn't open file \"regression.d\"");
             break;
         case ERROR_FOUND_NEW_LINE_ON_STRING:
-            printf("Expected an \" ,but found an \\n");
+            printf("Expected a \" ,but found a \\n");
             break;
         case ERROR_LEXEME_OVERFLOW:
             printf("Lexeme size overflows maximum size of lexeme");

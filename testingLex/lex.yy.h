@@ -220,7 +220,7 @@ extern char *yytext;
 #define comentarioBloque 1
 #define comentarioAnidado 2
 #define comentarioDocumentacion 3
-#define errorString 4
+#define string 4
 
 #endif
 
@@ -264,6 +264,8 @@ char *yyget_text (void );
 int yyget_lineno (void );
 
 void yyset_lineno (int _line_number  );
+
+int yywrap();
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -329,7 +331,7 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 124 "dlang.l"
+#line 128 "dlang.l"
 
 
 #line 336 "lex.yy.h"
