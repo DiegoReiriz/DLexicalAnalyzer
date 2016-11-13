@@ -265,8 +265,6 @@ int yyget_lineno (void );
 
 void yyset_lineno (int _line_number  );
 
-int yywrap();
-
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
  */
@@ -331,7 +329,7 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 128 "dlang.l"
+#line 130 "dlang.l"
 
 
 #line 336 "lex.yy.h"

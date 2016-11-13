@@ -12,6 +12,7 @@ Digit				        [0-9]
 
 BlockCommentStart		    \/\*
 
+DocumentationCommentStartNL	{BlockCommentStart}\*\n
 DocumentationCommentStart	{BlockCommentStart}\*[^/]
 
 BlockCommentEnd			    \*\/
@@ -46,6 +47,7 @@ StringStart			        ["]
 
 %%
 
+{DocumentationCommentStartNL}                   numeroLineas++;yymore();BEGIN(comentarioDocumentacion);
 {DocumentationCommentStart}                     yymore();BEGIN(comentarioDocumentacion);
 <comentarioDocumentacion>{BlockCommentEnd}      BEGIN(INITIAL);return(DOCUMENTATION_COMMENT);
 <comentarioDocumentacion>[\n]                   numeroLineas++;yymore();

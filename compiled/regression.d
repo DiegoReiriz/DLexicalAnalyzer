@@ -6,4 +6,4 @@ import std.exception;
 double beta1(double[] x, double[] y, double x_bar, double y_bar)
 {
     /**
-        Cal
+        C
