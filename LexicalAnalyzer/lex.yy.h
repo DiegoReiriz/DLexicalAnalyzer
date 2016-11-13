@@ -217,9 +217,9 @@ extern char *yytext;
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
-#define comentarioBloque 1
-#define comentarioAnidado 2
-#define comentarioDocumentacion 3
+#define blockComment 1
+#define nestedComment 2
+#define docuentationComment 3
 #define string 4
 
 #endif
@@ -266,7 +266,6 @@ int yyget_lineno (void );
 void yyset_lineno (int _line_number  );
 
 int yywrap();
-
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
  */

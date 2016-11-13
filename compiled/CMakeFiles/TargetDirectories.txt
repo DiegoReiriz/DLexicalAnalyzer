@@ -1,3 +1,0 @@
-/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/edit_cache.dir
-/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/rebuild_cache.dir
-/home/diegoreiriz/ClionProjects/analizadorLexico/compiled/CMakeFiles/analizadorLexico.dir

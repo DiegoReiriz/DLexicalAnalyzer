@@ -11,7 +11,7 @@ LexicalAnalyzer* lexicalAnalyzerInitialize(SymbolTable* hashTableTree,char *path
     LexicalAnalyzer* lexycalAnalizer = malloc(sizeof(LexicalAnalyzer));
     lexycalAnalizer->hashTableTree=hashTableTree;
     lexycalAnalizer->line = 1;
-    lexycalAnalizer->maximumLexemeSize = 100;//TODO: maximum lexeme size
+    lexycalAnalizer->maximumLexemeSize = 100;
     lexycalAnalizer->currentLexemeSize = 0;
     yyin = fopen(path,"r");
 
@@ -20,6 +20,8 @@ LexicalAnalyzer* lexicalAnalyzerInitialize(SymbolTable* hashTableTree,char *path
 
 //destroys the structure
 void lexicalAnalyzerDestroy(LexicalAnalyzer* lexycalAnalizaer){
+    fclose(yyin);               //close flex file
+    yylex_destroy();            //destroys flex
     free(lexycalAnalizaer);
 }
 

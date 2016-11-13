@@ -566,9 +566,9 @@ int anidamiento=0;
 #line 567 "lex.yy.c"
 
 #define INITIAL 0
-#define comentarioBloque 1
-#define comentarioAnidado 2
-#define comentarioDocumentacion 3
+#define blockComment 1
+#define nestedComment 2
+#define docuentationComment 3
 #define string 4
 
 #ifndef YY_NO_UNISTD_H
@@ -855,13 +855,13 @@ case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
 #line 50 "dlang.l"
-numeroLineas++;yymore();BEGIN(comentarioDocumentacion);
+numeroLineas++;yymore();BEGIN(docuentationComment);
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
 #line 51 "dlang.l"
-yymore();BEGIN(comentarioDocumentacion);
+yymore();BEGIN(docuentationComment);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -874,7 +874,7 @@ YY_RULE_SETUP
 #line 53 "dlang.l"
 numeroLineas++;yymore();
 	YY_BREAK
-case YY_STATE_EOF(comentarioDocumentacion):
+case YY_STATE_EOF(docuentationComment):
 #line 54 "dlang.l"
 showError(ERROR_PREMATURE_EOF_COMMENT,numeroLineas);return 0;
 	YY_BREAK
@@ -886,7 +886,7 @@ yymore();
 case 6:
 YY_RULE_SETUP
 #line 58 "dlang.l"
-BEGIN(comentarioBloque);
+BEGIN(blockComment);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
@@ -899,7 +899,7 @@ YY_RULE_SETUP
 #line 60 "dlang.l"
 numeroLineas++;
 	YY_BREAK
-case YY_STATE_EOF(comentarioBloque):
+case YY_STATE_EOF(blockComment):
 #line 61 "dlang.l"
 showError(ERROR_PREMATURE_EOF_COMMENT,numeroLineas);return 0;
 	YY_BREAK
@@ -911,7 +911,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 64 "dlang.l"
-anidamiento=1;BEGIN(comentarioAnidado);
+anidamiento=1;BEGIN(nestedComment);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -922,11 +922,11 @@ case 12:
 YY_RULE_SETUP
 #line 68 "dlang.l"
 {
-							                        anidamiento--;
-							                        if( anidamiento == 0 ){
-								                        BEGIN(INITIAL);
-							                        }
-						                        }
+							                        						anidamiento--;
+							                        						if( anidamiento == 0 ){
+								                        						BEGIN(INITIAL);
+							                        						}
+						                        						}
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
@@ -934,7 +934,7 @@ YY_RULE_SETUP
 #line 75 "dlang.l"
 numeroLineas++;
 	YY_BREAK
-case YY_STATE_EOF(comentarioAnidado):
+case YY_STATE_EOF(nestedComment):
 #line 76 "dlang.l"
 showError(ERROR_PREMATURE_EOF_COMMENT,numeroLineas);return 0;
 	YY_BREAK

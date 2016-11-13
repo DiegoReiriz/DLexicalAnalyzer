@@ -14,3 +14,11 @@ If you want to use this script to execute the program, you need to have installe
 3. To run the program type
 
     bash ejecutar.bash
+
+## HOW TO CHECK MEMORY LEAKS
+
+1. Open a terminal
+2. Go to the directory where is located **depuracion.bash**
+3. To run the program type
+
+    bash depuracion.bash

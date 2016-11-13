@@ -37,3 +37,7 @@
 
 # compiled
 .compiled/
+./compiled
+./notas
+.testingLex
+./testingLex
