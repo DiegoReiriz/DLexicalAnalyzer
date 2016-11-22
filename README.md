@@ -6,6 +6,7 @@ If you want to use this script to execute the program, you need to have installe
 
 1. **make** - sudo apt-get install make
 2. **cmake** - sudo apt-get install cmake
+3. **flex** - sudo apt-get install flex
 
 ## HOW TO USE IT
 
